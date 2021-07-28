@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace ProjectOne.Models.Contracts
+﻿namespace ProjectOne.Models.Contracts
 {
     public interface IBoard : IName, ITasks
     {
-        IList<IBoardItem> BoardItems { get; }
+
+        //ToDo: Extend?
     }
 }

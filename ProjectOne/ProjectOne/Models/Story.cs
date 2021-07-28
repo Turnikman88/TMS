@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using ProjectOne.Models.Contracts;
 
 namespace ProjectOne.Models
 {
-    class Story
+    public class Story : BoardItem, IStory
     {
     }
 }

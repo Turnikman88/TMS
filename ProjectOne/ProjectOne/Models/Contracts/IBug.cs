@@ -1,8 +1,6 @@
 ﻿using ProjectOne.Models.Enums;
 using ProjectOne.Models.Enums.Bug;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace ProjectOne.Models.Contracts
 {
@@ -11,5 +9,7 @@ namespace ProjectOne.Models.Contracts
         Priority Priority { get; }
         Severity Severity { get; }
         Status Status { get; }
+        List<string> Steps { get; }
+        IMember Assignee { get; }
     }
 }

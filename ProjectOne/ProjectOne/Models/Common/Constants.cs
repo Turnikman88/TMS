@@ -2,6 +2,10 @@
 {
     public class Constants
     {
+        public const string TerminationCommand = "exit";
+        public const string EmptyCommandError = "Command cannot be empty.";
+
+
         public const string STRING_LENGHT_ERR = "{0} must be between {1} and {2} symbols long!";
 
 
@@ -23,6 +27,10 @@
 
         public const int DESCRIPTION_MIN_SYMBOLS = 10;
         public const int DESCRIPTION_MAX_SYMBOLS = 500;
+
+        public const int RATING_MIN_VALUE = 0;
+        public const int RATING_MAX_VALUE = 101;
+        public static string RATING_OUTOFRANGE_ERR = $"Rating must be between {RATING_MIN_VALUE} and {RATING_MAX_VALUE}";
 
     }
 }

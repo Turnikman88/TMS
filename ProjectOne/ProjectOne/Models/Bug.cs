@@ -9,10 +9,50 @@ namespace ProjectOne.Models
 {
     public class Bug : BoardItem, IBug
     {
-        public Priority Priority => throw new NotImplementedException();
+        private Priority priority;
+        private Severity severity;
+        private Status status;
+        private IList<string> steps;
+         
+        public Bug(string title, string description)
+            :base(title, description)
+        {
+            this.Priority = Priority.Low;
+        }
+        public Priority Priority
+        {
+            get => this.priority;
+            private set
+            {
+                this.priority = value;
+            }
+        }
 
-        public Severity Severity => throw new NotImplementedException();
 
-        public Status Status => throw new NotImplementedException();
+        public Severity Severity
+        {
+            get => this.severity;
+            private set
+            {
+                this.severity = value;
+            }
+        }
+
+        public Status Status
+        {
+            get => this.status;
+            private set
+            {
+                this.status = value;
+            }
+        }
+
+        public List<string> Steps
+        {
+            get => new List<string>(this.steps);
+        }
+
+        public IMember Assignee { get; } //ToDo: later
+        
     }
 }

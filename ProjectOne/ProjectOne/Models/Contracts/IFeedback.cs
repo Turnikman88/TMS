@@ -1,10 +1,14 @@
-﻿using System;
+﻿using ProjectOne.Models.Enums.Feedback;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace ProjectOne.Models.Contracts
 {
-    interface IFeedback
+    public interface IFeedback
     {
+        int Rating { get; }
+        Status Status { get; }
+
     }
 }

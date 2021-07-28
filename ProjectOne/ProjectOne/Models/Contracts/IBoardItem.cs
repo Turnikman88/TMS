@@ -4,5 +4,7 @@
     {
         string Title { get; }
         string Description { get; }
+        void AdvanceStatus();
+        void RevertStatus();
     }
 }

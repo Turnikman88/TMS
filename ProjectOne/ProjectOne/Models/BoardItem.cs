@@ -22,7 +22,7 @@ namespace ProjectOne.Models
 
             private set
             {
-                Validator.ValidateStringLenght(value.Length, Constants.TITLE_MIN_SYMBOLS, Constants.TITLE_MAX_SYMBOLS, string.Format(Constants.STRING_LENGHT_ERR, nameof(Title), Constants.TITLE_MIN_SYMBOLS, Constants.TITLE_MAX_SYMBOLS));
+                Validator.ValidateRange(value.Length, Constants.TITLE_MIN_SYMBOLS, Constants.TITLE_MAX_SYMBOLS, string.Format(Constants.STRING_LENGHT_ERR, nameof(Title), Constants.TITLE_MIN_SYMBOLS, Constants.TITLE_MAX_SYMBOLS));
             }
         }
 
@@ -32,7 +32,7 @@ namespace ProjectOne.Models
 
             private set
             {
-                Validator.ValidateStringLenght(value.Length, Constants.DESCRIPTION_MIN_SYMBOLS, Constants.DESCRIPTION_MAX_SYMBOLS, string.Format(Constants.STRING_LENGHT_ERR, nameof(Description), Constants.DESCRIPTION_MIN_SYMBOLS, Constants.DESCRIPTION_MAX_SYMBOLS));
+                Validator.ValidateRange(value.Length, Constants.DESCRIPTION_MIN_SYMBOLS, Constants.DESCRIPTION_MAX_SYMBOLS, string.Format(Constants.STRING_LENGHT_ERR, nameof(Description), Constants.DESCRIPTION_MIN_SYMBOLS, Constants.DESCRIPTION_MAX_SYMBOLS));
             }
         }
 
@@ -47,5 +47,14 @@ namespace ProjectOne.Models
             this.comments.Add(comment);
         }
 
+        public void AdvanceStatus()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void RevertStatus()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

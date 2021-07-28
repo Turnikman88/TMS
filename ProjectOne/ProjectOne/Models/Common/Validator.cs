@@ -6,11 +6,11 @@ namespace ProjectOne.Models.Common
 {
     public class Validator
     {
-        public static void ValidateStringLenght(int value, int min, int max, string message)
+        public static void ValidateRange(int value, int min, int max, string message)
         {
             if (value < min || value > max)
             {
-                throw new ArgumentException(message);
+                throw new UserInputException(message);
             }
         }
 
@@ -23,7 +23,7 @@ namespace ProjectOne.Models.Common
         {
             if(obj is null)
             {
-                throw new ArgumentException(message);
+                throw new UserInputException(message);
             }
         }
     }

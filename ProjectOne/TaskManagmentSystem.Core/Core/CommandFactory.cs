@@ -54,14 +54,17 @@ namespace TaskManagmentSystem.Core
                 case "showboardactivity":
                     command = new ShowBoardActivityCommand(commandParameters, repository);
                     break;
-                case "createbug":
-                    command = new CreateBugCommand(commandParameters, repository);
+                case "create":
+                    command = new CreateCommand(commandParameters, repository);
                     break;
-                case "createstory":
-                    command = new CreateStoryCommand(commandParameters, repository);
+                case "change":
+                    command = new ChangeCommand(commandParameters, repository);
                     break;
-                case "createfeedback":
-                    command = new CreateFeedbackCommand(commandParameters, repository);
+                case "assign":
+                    command = new AssignCommand(commandParameters, repository);
+                    break;
+                case "addcomment":
+                    command = new AddCommentToTask(commandParameters, repository);
                     break;
 
             }

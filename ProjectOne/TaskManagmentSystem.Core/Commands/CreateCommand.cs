@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 using TaskManagmentSystem.Core.Contracts;
 
 namespace TaskManagmentSystem.Core.Commands
 {
-    public class CreateFeedbackCommand : BaseCommand
+    public class CreateCommand : BaseCommand
     {
-        public CreateFeedbackCommand(IList<string> commandParameters, IRepository repository)
+        public CreateCommand(IList<string> commandParameters, IRepository repository)
             : base(commandParameters, repository)
-
         {
 
         }

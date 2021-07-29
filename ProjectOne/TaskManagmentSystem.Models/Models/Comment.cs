@@ -1,7 +1,7 @@
 ﻿using TaskManagmentSystem.Models.Common;
 using TaskManagmentSystem.Models.Contracts;
 
-namespace ProjectOne.Models
+namespace TaskManagmentSystem.Models
 {
     public class Comment : IComment
     {

@@ -4,8 +4,8 @@ namespace TaskManagmentSystem.Models.Contracts
 {
     public interface IMember : IName
     {
-        public IList<ITasks> Tasks { get; }
-        public IList<IEventLog> EventLogs { get; }
+        IList<ITasks> Tasks { get; }
+        IList<IEventLog> EventLogs { get; }
         void AddTask(ITasks task);
     }
 }

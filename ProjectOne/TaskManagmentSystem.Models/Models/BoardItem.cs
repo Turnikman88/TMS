@@ -1,5 +1,6 @@
 ﻿using ProjectOne.Models.Common;
 using ProjectOne.Models.Contracts;
+using ProjectOne.Models.Enums.Bug;
 using System.Collections.Generic;
 
 namespace ProjectOne.Models
@@ -47,14 +48,8 @@ namespace ProjectOne.Models
             this.comments.Add(comment);
         }
 
-        public void AdvanceStatus()
-        {
-            throw new System.NotImplementedException();
-        }
+        public abstract void AdvanceStatus();
 
-        public void RevertStatus()
-        {
-            throw new System.NotImplementedException();
-        }
+        public abstract void RevertStatus();
     }
 }

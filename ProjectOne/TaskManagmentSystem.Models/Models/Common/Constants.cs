@@ -32,5 +32,8 @@
         public const int RATING_MAX_VALUE = 101;
         public static string RATING_OUTOFRANGE_ERR = $"Rating must be between {RATING_MIN_VALUE} and {RATING_MAX_VALUE}";
 
+        public const string STATUS_ADVANCE_ERROR = "Status cannot be Advanced! Current status {0}!";
+        public const string STATUS_REVERT_ERROR = "Status cannot be Reverted! Current status {0}!";
+
     }
 }

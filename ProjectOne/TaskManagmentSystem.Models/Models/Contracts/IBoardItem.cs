@@ -1,4 +1,4 @@
-﻿namespace ProjectOne.Models.Contracts
+﻿namespace TaskManagmentSystem.Models.Contracts
 {
     public interface IBoardItem  //ToDO: Maybe we need to add something
     {

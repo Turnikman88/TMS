@@ -1,10 +1,10 @@
-﻿using ProjectOne.Models.Enums;
-using ProjectOne.Models.Enums.Story;
+﻿using TaskManagmentSystem.Models.Enums;
+using TaskManagmentSystem.Models.Enums.Story;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace ProjectOne.Models.Contracts
+namespace TaskManagmentSystem.Models.Contracts
 {
     public interface IStory
     {

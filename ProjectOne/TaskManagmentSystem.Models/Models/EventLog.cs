@@ -1,9 +1,9 @@
-﻿using ProjectOne.Models.Contracts;
+﻿using TaskManagmentSystem.Models.Contracts;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace ProjectOne.Models
+namespace TaskManagmentSystem.Models
 {
     public class EventLog : IEventLog
     //ToDo: Implement later!

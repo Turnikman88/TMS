@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ProjectOne.Models.Common
+namespace TaskManagmentSystem.Models.Common
 {
     public class UserInputException : ApplicationException
     {

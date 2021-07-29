@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace ProjectOne.Models.Contracts
+namespace TaskManagmentSystem.Models.Contracts
 {
     public interface IMember : IName
     {

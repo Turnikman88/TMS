@@ -1,9 +1,9 @@
-﻿using ProjectOne.Models.Enums.Feedback;
+﻿using TaskManagmentSystem.Models.Enums.Feedback;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace ProjectOne.Models.Contracts
+namespace TaskManagmentSystem.Models.Contracts
 {
     public interface IFeedback
     {

@@ -1,8 +1,8 @@
-﻿using ProjectOne.Models.Enums;
-using ProjectOne.Models.Enums.Bug;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using TaskManagmentSystem.Models.Enums;
+using TaskManagmentSystem.Models.Enums.Bug;
 
-namespace ProjectOne.Models.Contracts
+namespace TaskManagmentSystem.Models.Contracts
 {
     public interface IBug : IBoardItem
     {

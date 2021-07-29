@@ -1,12 +1,12 @@
-﻿using ProjectOne.Models.Common;
-using ProjectOne.Models.Contracts;
-using ProjectOne.Models.Enums;
-using ProjectOne.Models.Enums.Bug;
+﻿using TaskManagmentSystem.Models.Common;
+using TaskManagmentSystem.Models.Contracts;
+using TaskManagmentSystem.Models.Enums;
+using TaskManagmentSystem.Models.Enums.Bug;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace ProjectOne.Models
+namespace TaskManagmentSystem.Models
 {
     public class Bug : BoardItem, IBug
     {

@@ -1,8 +1,8 @@
-﻿using ProjectOne.Models.Common;
-using ProjectOne.Models.Contracts;
+﻿using TaskManagmentSystem.Models.Common;
+using TaskManagmentSystem.Models.Contracts;
 using System.Collections.Generic;
 
-namespace ProjectOne.Models
+namespace TaskManagmentSystem.Models
 {
     public class Team : ITeam
     {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ProjectOne.Models.Enums.Story
+namespace TaskManagmentSystem.Models.Enums.Story
 {
     public enum Size
     {

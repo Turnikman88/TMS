@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ProjectOne.Models.Contracts
+namespace TaskManagmentSystem.Models.Contracts
 {
     public interface IName
     {

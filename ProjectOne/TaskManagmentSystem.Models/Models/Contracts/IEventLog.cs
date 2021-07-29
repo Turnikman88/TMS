@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ProjectOne.Models.Contracts
+namespace TaskManagmentSystem.Models.Contracts
 {
     public interface IEventLog
     {

@@ -1,9 +1,9 @@
-﻿using ProjectOne.Models.Common;
-using ProjectOne.Models.Contracts;
-using ProjectOne.Models.Enums.Bug;
+﻿using TaskManagmentSystem.Models.Common;
+using TaskManagmentSystem.Models.Contracts;
+using TaskManagmentSystem.Models.Enums.Bug;
 using System.Collections.Generic;
 
-namespace ProjectOne.Models
+namespace TaskManagmentSystem.Models
 {
     public abstract class BoardItem : IBoardItem, ICommentable, IActivityLog
     {

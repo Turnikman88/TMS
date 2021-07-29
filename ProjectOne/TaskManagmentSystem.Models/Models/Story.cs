@@ -1,9 +1,9 @@
-﻿using ProjectOne.Models.Common;
-using ProjectOne.Models.Contracts;
-using ProjectOne.Models.Enums;
-using ProjectOne.Models.Enums.Story;
+﻿using TaskManagmentSystem.Models.Common;
+using TaskManagmentSystem.Models.Contracts;
+using TaskManagmentSystem.Models.Enums;
+using TaskManagmentSystem.Models.Enums.Story;
 
-namespace ProjectOne.Models
+namespace TaskManagmentSystem.Models
 {
     public class Story : BoardItem, IStory
     {

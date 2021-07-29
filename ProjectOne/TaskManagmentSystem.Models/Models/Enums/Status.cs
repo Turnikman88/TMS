@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ProjectOne.Models.Enums.Bug
+namespace TaskManagmentSystem.Models.Enums.Bug
 {
     public enum Status
     {
@@ -10,7 +10,7 @@ namespace ProjectOne.Models.Enums.Bug
         Fixed
     }
 }
-namespace ProjectOne.Models.Enums.Story
+namespace TaskManagmentSystem.Models.Enums.Story
 {
     public enum Status
     {
@@ -19,7 +19,7 @@ namespace ProjectOne.Models.Enums.Story
         Done
     }
 }
-namespace ProjectOne.Models.Enums.Feedback
+namespace TaskManagmentSystem.Models.Enums.Feedback
 {
     public enum Status
     {

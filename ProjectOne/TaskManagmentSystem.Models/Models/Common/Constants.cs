@@ -1,4 +1,4 @@
-﻿namespace ProjectOne.Models.Common
+﻿namespace TaskManagmentSystem.Models.Common
 {
     public class Constants
     {

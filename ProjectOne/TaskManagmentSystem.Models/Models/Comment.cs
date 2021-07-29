@@ -1,5 +1,5 @@
-﻿using ProjectOne.Models.Common;
-using ProjectOne.Models.Contracts;
+﻿using TaskManagmentSystem.Models.Common;
+using TaskManagmentSystem.Models.Contracts;
 
 namespace ProjectOne.Models
 {

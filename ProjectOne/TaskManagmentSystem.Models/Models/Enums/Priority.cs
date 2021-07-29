@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ProjectOne.Models.Enums
+namespace TaskManagmentSystem.Models.Enums
 {
     public enum Priority
     {

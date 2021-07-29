@@ -1,11 +1,11 @@
-﻿using ProjectOne.Models.Common;
-using ProjectOne.Models.Contracts;
-using ProjectOne.Models.Enums.Feedback;
+﻿using TaskManagmentSystem.Models.Common;
+using TaskManagmentSystem.Models.Contracts;
+using TaskManagmentSystem.Models.Enums.Feedback;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace ProjectOne.Models
+namespace TaskManagmentSystem.Models
 {
     public class Feedback : BoardItem, IFeedback
     {

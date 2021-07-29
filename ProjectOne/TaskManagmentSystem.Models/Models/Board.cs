@@ -18,8 +18,7 @@ namespace TaskManagmentSystem.Models
             {
                 Validator.ValidateObjectIsNotNULL(value, string.Format(Constants.ITEM_NULL_ERR, nameof(Board)));
                 Validator.ValidateNameUniqueness(value);
-                Validator.ValidateRange(value.Length, Constants.BOARD_NAME_MIN_SYMBOLS, Constants.BOARD_NAME_MAX_SYMBOLS,
-                    string.Format(Constants.STRING_LENGHT_ERR, nameof(Team), Constants.BOARD_NAME_MIN_SYMBOLS, Constants.BOARD_NAME_MAX_SYMBOLS));
+                Validator.ValidateRange(value.Length, Constants.BOARD_NAME_MIN_SYMBOLS, Constants.BOARD_NAME_MAX_SYMBOLS, string.Format(Constants.STRING_LENGHT_ERR, nameof(Team), Constants.BOARD_NAME_MIN_SYMBOLS, Constants.BOARD_NAME_MAX_SYMBOLS));
                 this.name = value;
             }
         }

@@ -22,8 +22,7 @@ namespace TaskManagmentSystem.Models
 
             private set
             {
-                Validator.ValidateRange(value.Length, Constants.TITLE_MIN_SYMBOLS, Constants.TITLE_MAX_SYMBOLS,
-                    string.Format(Constants.STRING_LENGHT_ERR, nameof(Title), Constants.TITLE_MIN_SYMBOLS, Constants.TITLE_MAX_SYMBOLS));
+                Validator.ValidateRange(value.Length, Constants.TITLE_MIN_SYMBOLS, Constants.TITLE_MAX_SYMBOLS, string.Format(Constants.STRING_LENGHT_ERR, nameof(Title), Constants.TITLE_MIN_SYMBOLS, Constants.TITLE_MAX_SYMBOLS));
                 this.title = value;
             }
         }
@@ -34,8 +33,7 @@ namespace TaskManagmentSystem.Models
 
             private set
             {
-                Validator.ValidateRange(value.Length, Constants.DESCRIPTION_MIN_SYMBOLS, Constants.DESCRIPTION_MAX_SYMBOLS, 
-                    string.Format(Constants.STRING_LENGHT_ERR, nameof(Description), Constants.DESCRIPTION_MIN_SYMBOLS, Constants.DESCRIPTION_MAX_SYMBOLS));
+                Validator.ValidateRange(value.Length, Constants.DESCRIPTION_MIN_SYMBOLS, Constants.DESCRIPTION_MAX_SYMBOLS, string.Format(Constants.STRING_LENGHT_ERR, nameof(Description), Constants.DESCRIPTION_MIN_SYMBOLS, Constants.DESCRIPTION_MAX_SYMBOLS));
                 this.description = value;
             }
         }

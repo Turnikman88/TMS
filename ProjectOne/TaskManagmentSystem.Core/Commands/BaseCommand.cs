@@ -1,4 +1,5 @@
 ﻿using ProjectOne.Commands.Contracts;
+using System;
 using System.Collections.Generic;
 using TaskManagmentSystem.Core.Contracts;
 using TaskManagmentSystem.Models.Common;
@@ -23,13 +24,14 @@ namespace TaskManagmentSystem.Core.Commands
 
         public abstract string Execute();
 
-        /*protected int ParseIntParameter(string value)
+        protected int ParseIntParameter(string value)
         {
             if (int.TryParse(value, out int result))
             {
                 return result;
             }
-            
-        }*/
+            throw new UserInputException(Constants.PARSE_INT_ERR);
+        }
+        //maybe some Enum parser
     }
 }

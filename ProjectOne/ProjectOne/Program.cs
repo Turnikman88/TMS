@@ -1,5 +1,7 @@
 ﻿
 using System;
+using TaskManagmentSystem.Core;
+using TaskManagmentSystem.Core.Contracts;
 
 namespace TaskManagmentSystem.CLI
 {
@@ -7,7 +9,10 @@ namespace TaskManagmentSystem.CLI
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            IRepository reository = new Repository();
+            ICommandFactory commandManager = new CommandFactory(reository);
+            IEngine engine = new Engine(commandManager);
+            engine.Start();
         }
     }
 }

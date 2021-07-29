@@ -1,6 +1,4 @@
-﻿
-using System;
-using TaskManagmentSystem.Core;
+﻿using TaskManagmentSystem.Core;
 using TaskManagmentSystem.Core.Contracts;
 
 namespace TaskManagmentSystem.CLI

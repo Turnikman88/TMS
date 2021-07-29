@@ -22,5 +22,13 @@
                 throw new UserInputException(message);
             }
         }
+        public static int ParseIntParameter(string value)
+        {
+            if (int.TryParse(value, out int result))
+            {
+                return result;
+            }
+            throw new UserInputException(string.Format(Constants.PARSE_INT_ERR, value));
+        }
     }
 }

@@ -1,7 +1,6 @@
-﻿using TaskManagmentSystem.Models.Common;
+﻿using System.Collections.Generic;
+using TaskManagmentSystem.Models.Common;
 using TaskManagmentSystem.Models.Contracts;
-using TaskManagmentSystem.Models.Enums.Bug;
-using System.Collections.Generic;
 
 namespace TaskManagmentSystem.Models
 {

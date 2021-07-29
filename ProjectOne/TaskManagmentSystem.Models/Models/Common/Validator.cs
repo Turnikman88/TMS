@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace TaskManagmentSystem.Models.Common
+﻿namespace TaskManagmentSystem.Models.Common
 {
     public class Validator
     {

@@ -1,21 +1,22 @@
 ﻿using ProjectOne.Commands.Contracts;
-using ProjectOne.Core.Contracts;
 using System;
-using System.Collections.Generic;
-using System.Text;
+using TaskManagmentSystem.Core.Contracts;
+using TaskManagmentSystem.Core.providers;
+using TaskManagmentSystem.Core.providers.Contracts;
 using TaskManagmentSystem.Models.Common;
 
-namespace ProjectOne.Core
+namespace TaskManagmentSystem.Core
 {
     public class Engine : IEngine
     {
         private readonly ICommandFactory commandFactory;
-
+        private readonly IWriter writer;
         
 
         public Engine(ICommandFactory commandFactory)
         {
             this.commandFactory = commandFactory;
+            this.writer = new ConsoleWriter();
         }
         public void Start()
         {
@@ -34,7 +35,7 @@ namespace ProjectOne.Core
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine(ex);
+                    writer.WriteLine(ex.ToString());
                 }
             }
         }
@@ -47,7 +48,7 @@ namespace ProjectOne.Core
 
             ICommand command = this.commandFactory.Create(commandLine);
             string result = command.Execute();
-            Console.WriteLine(result.Trim());
+            writer.WriteLine(result.Trim());
         }
 
         private void CheckPremissionToExecute(string commandLine)

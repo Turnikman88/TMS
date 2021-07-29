@@ -1,12 +1,10 @@
 ﻿using ProjectOne.Commands.Contracts;
-using ProjectOne.Core.Contracts;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using TaskManagmentSystem.Core.Commands;
+using TaskManagmentSystem.Core.Contracts;
 
-namespace ProjectOne.Core
+namespace TaskManagmentSystem.Core
 {
     public class CommandFactory : ICommandFactory
     {

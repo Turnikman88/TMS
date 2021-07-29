@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace TaskManagmentSystem.Models.Enums.Bug
+﻿namespace TaskManagmentSystem.Models.Enums.Bug
 {
     public enum Status
     {

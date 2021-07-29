@@ -1,9 +1,6 @@
 ﻿using TaskManagmentSystem.Models.Common;
 using TaskManagmentSystem.Models.Contracts;
 using TaskManagmentSystem.Models.Enums.Feedback;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace TaskManagmentSystem.Models
 {

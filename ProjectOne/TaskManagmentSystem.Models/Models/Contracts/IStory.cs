@@ -1,8 +1,5 @@
 ﻿using TaskManagmentSystem.Models.Enums;
 using TaskManagmentSystem.Models.Enums.Story;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace TaskManagmentSystem.Models.Contracts
 {

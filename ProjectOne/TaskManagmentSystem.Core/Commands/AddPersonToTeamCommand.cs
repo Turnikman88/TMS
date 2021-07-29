@@ -1,14 +1,13 @@
-﻿using ProjectOne.Core.Contracts;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using TaskManagmentSystem.Core.Contracts;
 
 namespace TaskManagmentSystem.Core.Commands
 {
     public class AddPersonToTeamCommand : BaseCommand
     {
         public AddPersonToTeamCommand(IList<string> commandParameters, IRepository repository)
-            :base(commandParameters, repository)
+            : base(commandParameters, repository)
         {
 
         }

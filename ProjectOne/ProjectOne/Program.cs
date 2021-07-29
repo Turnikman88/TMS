@@ -1,7 +1,7 @@
 ﻿
 using System;
 
-namespace ProjectOne
+namespace TaskManagmentSystem.CLI
 {
     class Program
     {

@@ -1,7 +1,4 @@
 ﻿using TaskManagmentSystem.Models.Enums.Feedback;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace TaskManagmentSystem.Models.Contracts
 {

@@ -1,6 +1,5 @@
-﻿using ProjectOne.Commands.Contracts;
-using ProjectOne.Core.Contracts;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using TaskManagmentSystem.Core.Contracts;
 
 namespace TaskManagmentSystem.Core.Commands
 {

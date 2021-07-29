@@ -1,4 +1,5 @@
-﻿using ProjectOne.Models.Contracts;
+﻿using ProjectOne.Models.Common;
+using ProjectOne.Models.Contracts;
 using ProjectOne.Models.Enums;
 using ProjectOne.Models.Enums.Story;
 
@@ -45,5 +46,22 @@ namespace ProjectOne.Models
         }
 
         public IMember Assignee { get; } //ToDo: later
+
+        public override void AdvanceStatus()
+        {
+            if(this.status == Status.Done)
+            {
+                throw new UserInputException(string.Format(Constants.STATUS_ADVANCE_ERROR, "Done"));
+            }
+            status++;
+        }
+        public override void RevertStatus()
+        {
+            if (this.status == Status.NotDone)
+            {
+                throw new UserInputException(string.Format(Constants.STATUS_REVERT_ERROR, "NotDone"));
+            }
+            status--;
+        }
     }
 }

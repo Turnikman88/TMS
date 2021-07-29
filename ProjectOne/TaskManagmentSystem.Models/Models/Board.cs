@@ -7,8 +7,8 @@ namespace TaskManagmentSystem.Models
     public class Board : IBoard, IActivityLog
     {
         private string name;
-        private IList<IBoardItem> tasks = new List<IBoardItem>();
-        private IList<IEventLog> events = new List<IEventLog>();
+        private readonly IList<IBoardItem> tasks = new List<IBoardItem>();
+        private readonly IList<IEventLog> events = new List<IEventLog>();
 
 
         public string Name
@@ -18,7 +18,9 @@ namespace TaskManagmentSystem.Models
             {
                 Validator.ValidateObjectIsNotNULL(value, string.Format(Constants.ITEM_NULL_ERR, nameof(Board)));
                 Validator.ValidateNameUniqueness(value);
-                Validator.ValidateRange(value.Length, Constants.BOARD_NAME_MIN_SYMBOLS, Constants.BOARD_NAME_MAX_SYMBOLS, string.Format(Constants.STRING_LENGHT_ERR, nameof(Team), Constants.BOARD_NAME_MIN_SYMBOLS, Constants.BOARD_NAME_MAX_SYMBOLS));
+                Validator.ValidateRange(value.Length, Constants.BOARD_NAME_MIN_SYMBOLS, Constants.BOARD_NAME_MAX_SYMBOLS,
+                    string.Format(Constants.STRING_LENGHT_ERR, nameof(Team), Constants.BOARD_NAME_MIN_SYMBOLS, Constants.BOARD_NAME_MAX_SYMBOLS));
+                this.name = value;
             }
         }
 

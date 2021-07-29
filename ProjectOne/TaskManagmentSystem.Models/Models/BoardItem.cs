@@ -8,8 +8,8 @@ namespace TaskManagmentSystem.Models
     {
         private string title;
         private string description;
-        private IList<IComment> comments = new List<IComment>();
-        private IList<IEventLog> eventLogs = new List<IEventLog>();
+        private readonly IList<IComment> comments = new List<IComment>();
+        private readonly IList<IEventLog> eventLogs = new List<IEventLog>();
         protected BoardItem(string title, string description)
         {
             this.Title = title;
@@ -22,7 +22,9 @@ namespace TaskManagmentSystem.Models
 
             private set
             {
-                Validator.ValidateRange(value.Length, Constants.TITLE_MIN_SYMBOLS, Constants.TITLE_MAX_SYMBOLS, string.Format(Constants.STRING_LENGHT_ERR, nameof(Title), Constants.TITLE_MIN_SYMBOLS, Constants.TITLE_MAX_SYMBOLS));
+                Validator.ValidateRange(value.Length, Constants.TITLE_MIN_SYMBOLS, Constants.TITLE_MAX_SYMBOLS,
+                    string.Format(Constants.STRING_LENGHT_ERR, nameof(Title), Constants.TITLE_MIN_SYMBOLS, Constants.TITLE_MAX_SYMBOLS));
+                this.title = value;
             }
         }
 
@@ -32,7 +34,9 @@ namespace TaskManagmentSystem.Models
 
             private set
             {
-                Validator.ValidateRange(value.Length, Constants.DESCRIPTION_MIN_SYMBOLS, Constants.DESCRIPTION_MAX_SYMBOLS, string.Format(Constants.STRING_LENGHT_ERR, nameof(Description), Constants.DESCRIPTION_MIN_SYMBOLS, Constants.DESCRIPTION_MAX_SYMBOLS));
+                Validator.ValidateRange(value.Length, Constants.DESCRIPTION_MIN_SYMBOLS, Constants.DESCRIPTION_MAX_SYMBOLS, 
+                    string.Format(Constants.STRING_LENGHT_ERR, nameof(Description), Constants.DESCRIPTION_MIN_SYMBOLS, Constants.DESCRIPTION_MAX_SYMBOLS));
+                this.description = value;
             }
         }
 

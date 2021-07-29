@@ -1,6 +1,7 @@
 ﻿using ProjectOne.Commands.Contracts;
 using System.Collections.Generic;
 using TaskManagmentSystem.Core.Contracts;
+using TaskManagmentSystem.Models.Common;
 
 namespace TaskManagmentSystem.Core.Commands
 {
@@ -22,6 +23,13 @@ namespace TaskManagmentSystem.Core.Commands
 
         public abstract string Execute();
 
-        //ToDo: implement comands to check here
+        /*protected int ParseIntParameter(string value)
+        {
+            if (int.TryParse(value, out int result))
+            {
+                return result;
+            }
+            
+        }*/
     }
 }

@@ -55,7 +55,7 @@ namespace TaskManagmentSystem.Core
                     command = new ShowBoardActivityCommand(commandParameters, repository);
                     break;
                 case "create":
-                    command = new CreateCommand(commandParameters, repository);
+                    command = new CreateTaskCommand(commandParameters, repository);
                     break;
                 case "change":
                     command = new ChangeCommand(commandParameters, repository);

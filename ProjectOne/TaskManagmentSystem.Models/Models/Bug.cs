@@ -11,7 +11,7 @@ namespace TaskManagmentSystem.Models
         private Priority priority;
         private Severity severity;
         private Status status;
-        private IList<string> steps;
+        private readonly IList<string> steps = new List<string>();
          
         public Bug(string title, string description)
             :base(title, description)

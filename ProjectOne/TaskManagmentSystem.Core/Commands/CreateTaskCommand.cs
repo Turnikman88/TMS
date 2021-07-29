@@ -5,9 +5,9 @@ using TaskManagmentSystem.Core.Contracts;
 
 namespace TaskManagmentSystem.Core.Commands
 {
-    public class CreateCommand : BaseCommand
+    public class CreateTaskCommand : BaseCommand
     {
-        public CreateCommand(IList<string> commandParameters, IRepository repository)
+        public CreateTaskCommand(IList<string> commandParameters, IRepository repository)
             : base(commandParameters, repository)
         {
 

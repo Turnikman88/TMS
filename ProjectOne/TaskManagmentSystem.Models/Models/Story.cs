@@ -51,7 +51,7 @@ namespace ProjectOne.Models
         {
             if(this.status == Status.Done)
             {
-                throw new UserInputException(string.Format(Constants.STATUS_ADVANCE_ERROR, "Done"));
+                throw new UserInputException(string.Format(Constants.STATUS_ADVANCE_ERROR, Status.Done.ToString()));
             }
             status++;
         }
@@ -59,7 +59,7 @@ namespace ProjectOne.Models
         {
             if (this.status == Status.NotDone)
             {
-                throw new UserInputException(string.Format(Constants.STATUS_REVERT_ERROR, "NotDone"));
+                throw new UserInputException(string.Format(Constants.STATUS_REVERT_ERROR, Status.NotDone.ToString()));
             }
             status--;
         }

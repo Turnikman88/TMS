@@ -35,7 +35,7 @@ namespace TaskManagmentSystem.Core
                 }
                 catch (Exception ex)
                 {
-                    writer.WriteLine(ex.ToString());
+                    writer.WriteLine(ex.Message);
                 }
             }
         }

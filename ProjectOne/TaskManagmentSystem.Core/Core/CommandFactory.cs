@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using TaskManagmentSystem.Core.Commands;
 using TaskManagmentSystem.Core.Contracts;
+using TaskManagmentSystem.Models.Common;
 
 namespace TaskManagmentSystem.Core
 {
@@ -16,10 +17,10 @@ namespace TaskManagmentSystem.Core
         public ICommand Create(string commandLine)
         {
             string[] arguments = commandLine.Split(); //ToDo: check why cant remove emptyentries
-            string name = ExtractName(arguments);
+            string commandName = ExtractName(arguments);
             List<string> commandParameters = ExtractParameters(arguments);
             ICommand command = null;
-            switch (name.ToLower())
+            switch (commandName.ToLower())
             {
                 case "createuser":
                     command = new CreateUserCommand(commandParameters, repository);
@@ -66,15 +67,15 @@ namespace TaskManagmentSystem.Core
                 case "addcomment":
                     command = new AddCommentToTask(commandParameters, repository);
                     break;
-
+                default:
+                    throw new UserInputException(string.Format(Constants.INVALID_COMMAND_ERR, commandName));
             }
             return command; //remove later
         }
 
         private List<string> ExtractParameters(string[] arguments)
-        {
-            List<string> commandParams = new List<string>();
-            var list = commandParams.Skip(1).ToList();
+        {            
+            var list = arguments.Skip(1).ToList();
             return list;
         }
 

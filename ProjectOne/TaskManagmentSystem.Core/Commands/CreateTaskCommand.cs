@@ -17,23 +17,21 @@ namespace TaskManagmentSystem.Core.Commands
         }
         public override string Execute()
         {
-            if (CommandParameters.Count != numberOfParameters)
-            {
-                throw new UserInputException("Invalid number of parameters"); //change later in constants
-            }
-            string itemType = CommandParameters[0]; //bug
+            Validator.ValidateParametersCount(numberOfParameters, CommandParameters.Count);
+
+            string itemType = CommandParameters[0]; 
             string itemName = CommandParameters[1];
             string itemDescription = CommandParameters[2];
-            string namespaceName = Assembly.GetExecutingAssembly().GetName().Name; //
+            string namespaceName = Assembly.GetExecutingAssembly().GetName().Name;
             string fullType = $"{namespaceName}.{itemType}";
             Type type;
             try //ToDo: maybe remove later try catch
             {
-                type = Type.GetType(namespaceName, true, true);
+                type = Type.GetType(fullType, true, true);
             }
             catch (Exception)
             {
-                throw new UserInputException("BoardItem of that type doesnt exist");  // change later in constants              
+                throw new UserInputException(string.Format(Constants.TASK_TYPE_ERR, itemName));          
             }
             //IBoardItem item = this.Repository.CreateTask();
             return $"{itemType} was created";

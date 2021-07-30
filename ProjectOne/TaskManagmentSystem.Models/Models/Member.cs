@@ -10,7 +10,10 @@ namespace TaskManagmentSystem.Models
         private IList<IEventLog> eventLogs = new List<IEventLog>();
         private IList<ITasks> tasks = new List<ITasks>();
 
-
+        public Member(string name)
+        {
+            this.Name = name;
+        }
         public string Name
         {
             get => this.name;

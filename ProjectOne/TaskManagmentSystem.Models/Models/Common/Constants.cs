@@ -37,7 +37,9 @@
 
         public const string PARSE_INT_ERR = "Invalid value for {0}. Should be an integer number.";
         public const string NUM_OF_PARAMETERS_ERR = "Invalid number of arguments. Expected: {0}, Received: {1}";
-
+        public const string TASK_TYPE_ERR = "Task of type {0} doesnt exist";
+        public const string PRINT_INFO_SEPARATOR = "--------------";
+        public const string INVALID_COMMAND_ERR = "Command with name: {0} doesn't exist!";
 
     }
 }

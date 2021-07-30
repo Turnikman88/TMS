@@ -6,6 +6,5 @@ namespace TaskManagmentSystem.Models.Contracts
     {
         int Rating { get; }
         Status Status { get; }
-
     }
 }

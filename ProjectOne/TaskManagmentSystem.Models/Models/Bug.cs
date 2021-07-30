@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using TaskManagmentSystem.Models.Common;
 using TaskManagmentSystem.Models.Contracts;
 using TaskManagmentSystem.Models.Enums;
 using TaskManagmentSystem.Models.Enums.Bug;
@@ -12,9 +11,9 @@ namespace TaskManagmentSystem.Models
         private Severity severity;
         private Status status;
         private readonly IList<string> steps = new List<string>();
-         
+
         public Bug(string title, string description)
-            :base(title, description)
+            : base(title, description)
         {
             this.Priority = Priority.Low;
         }
@@ -26,7 +25,6 @@ namespace TaskManagmentSystem.Models
                 this.priority = value;
             }
         }
-
 
         public Severity Severity
         {
@@ -53,22 +51,28 @@ namespace TaskManagmentSystem.Models
 
         public IMember Assignee { get; } //ToDo: later
 
-        public override void AdvanceStatus()
+        public void ChangePriority()
         {
-            if (this.status == Status.Fixed)
+            if (this.priority != Priority.High)
             {
-                throw new UserInputException(string.Format(Constants.STATUS_ADVANCE_ERROR, Status.Fixed.ToString()));
+                this.priority++;
+                return;
             }
-            status++;
-        }
-        public override void RevertStatus()
-        {
-            if (this.status == Status.Active)
-            {
-                throw new UserInputException(string.Format(Constants.STATUS_REVERT_ERROR, Status.Active.ToString()));
-            }
-            status--;
+            this.priority = Priority.Low;
         }
 
+        public void ChangeSeverity()
+        {
+            if (this.severity != Severity.Critical)
+            {
+                this.severity++;
+                return;
+            }
+            this.severity = Severity.Minor;
+        }
+        public override void ChangeStatus()
+        {
+            this.status = this.status == Status.Active ? Status.Fixed : Status.Active;
+        }
     }
 }

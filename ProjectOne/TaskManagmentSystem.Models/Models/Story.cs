@@ -1,5 +1,4 @@
-﻿using TaskManagmentSystem.Models.Common;
-using TaskManagmentSystem.Models.Contracts;
+﻿using TaskManagmentSystem.Models.Contracts;
 using TaskManagmentSystem.Models.Enums;
 using TaskManagmentSystem.Models.Enums.Story;
 
@@ -12,7 +11,7 @@ namespace TaskManagmentSystem.Models
         private Status status;
 
         public Story(string title, string description)
-            :base(title, description)
+            : base(title, description)
         {
             this.Priority = Priority.Low;
             this.Size = Size.Small;
@@ -47,21 +46,35 @@ namespace TaskManagmentSystem.Models
 
         public IMember Assignee { get; } //ToDo: later
 
-        public override void AdvanceStatus()
+        public void ChangeSize()
         {
-            if(this.status == Status.Done)
+            if (this.size != Size.Large)
             {
-                throw new UserInputException(string.Format(Constants.STATUS_ADVANCE_ERROR, Status.Done.ToString()));
+                this.size++;
+                return;
             }
-            status++;
+            this.size = Size.Small;
         }
-        public override void RevertStatus()
+
+        public void ChangePriority()
         {
-            if (this.status == Status.NotDone)
+            if (this.priority != Priority.High)
             {
-                throw new UserInputException(string.Format(Constants.STATUS_REVERT_ERROR, Status.NotDone.ToString()));
+                this.priority++;
+                return;
             }
-            status--;
+            this.priority = Priority.Low;
         }
+
+        public override void ChangeStatus()
+        {
+            if (this.status != Status.Done)
+            {
+                this.status++;
+                return;
+            }
+            this.status = Status.NotDone;
+        }
+
     }
 }

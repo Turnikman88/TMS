@@ -11,5 +11,7 @@ namespace TaskManagmentSystem.Models.Contracts
         Status Status { get; }
         List<string> Steps { get; }
         IMember Assignee { get; }
+        void ChangePriority();
+        void ChangeSeverity();
     }
 }

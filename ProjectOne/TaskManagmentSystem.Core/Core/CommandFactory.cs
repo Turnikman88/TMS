@@ -30,10 +30,10 @@ namespace TaskManagmentSystem.Core
                 case "showpersonactivity":
                     command = new ShowPersonActivityCommand(commandParameters, repository);
                     break;
-                case "createnewteam":
+                case "createteam":
                     command = new CreateNewTeamCommand(commandParameters, repository);
                     break;
-                case "showallteams": // maybe only admin can do it
+                case "showteams": // maybe only admin can do it
                     command = new ShowAllTeamsCommand(repository);
                     break;
                 case "showteamactivity":
@@ -42,7 +42,7 @@ namespace TaskManagmentSystem.Core
                 case "addperson":  //adds person to team
                     command = new AddPersonToTeamCommand(commandParameters, repository);
                     break;
-                case "showallmembers":  //shows all team members // we need validation if the user is member // one user can be member of more than one teams 
+                case "showmembers":  //shows all team members // we need validation if the user is member // one user can be member of more than one teams 
                     command = new ShowAllTeamMembersCommand(commandParameters, repository);
                     break;
                 case "createboard":
@@ -54,7 +54,7 @@ namespace TaskManagmentSystem.Core
                 case "showboardactivity":
                     command = new ShowBoardActivityCommand(commandParameters, repository);
                     break;
-                case "create":
+                case "createtask":
                     command = new CreateTaskCommand(commandParameters, repository);
                     break;
                 case "change":

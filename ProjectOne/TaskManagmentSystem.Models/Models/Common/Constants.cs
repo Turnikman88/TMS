@@ -36,6 +36,7 @@
         public const string STATUS_REVERT_ERROR = "Status cannot be Reverted! Current status {0}!";
 
         public const string PARSE_INT_ERR = "Invalid value for {0}. Should be an integer number.";
+        public const string NUM_OF_PARAMETERS_ERR = "Invalid number of arguments. Expected: {0}, Received: {1}";
 
 
     }

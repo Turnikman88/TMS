@@ -3,11 +3,11 @@ using TaskManagmentSystem.Core.Contracts;
 
 namespace TaskManagmentSystem.Core.Commands
 {
-    internal class CreatePersonCommand : BaseCommand
+    internal class CreateUserCommand : BaseCommand
     {
 
 
-        public CreatePersonCommand(List<string> commandParameters, IRepository repository)
+        public CreateUserCommand(List<string> commandParameters, IRepository repository)
             : base(commandParameters, repository)
         {
 

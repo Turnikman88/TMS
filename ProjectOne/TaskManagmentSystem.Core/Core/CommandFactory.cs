@@ -21,13 +21,13 @@ namespace TaskManagmentSystem.Core
             ICommand command = null;
             switch (name.ToLower())
             {
-                case "createperson":
-                    command = new CreatePersonCommand(commandParameters, repository);
+                case "createuser":
+                    command = new CreateUserCommand(commandParameters, repository);
                     break;
-                case "showallpeople": // maybe only admin can do it
+                case "showallusers": // maybe only admin can do it
                     command = new ShowAllPeopleCommand(repository);
                     break;
-                case "showpersonactivity":
+                case "showuseractivity":
                     command = new ShowPersonActivityCommand(commandParameters, repository);
                     break;
                 case "createteam":
@@ -39,7 +39,7 @@ namespace TaskManagmentSystem.Core
                 case "showteamactivity":
                     command = new ShowTeamActivityCommand(commandParameters, repository);
                     break;
-                case "addperson":  //adds person to team
+                case "adduser":  //adds person to team
                     command = new AddPersonToTeamCommand(commandParameters, repository);
                     break;
                 case "showmembers":  //shows all team members // we need validation if the user is member // one user can be member of more than one teams 
@@ -58,9 +58,6 @@ namespace TaskManagmentSystem.Core
                     command = new CreateTaskCommand(commandParameters, repository);
                     break;
                 case "advance": //! advance id priority/status...
-                    command = new AdvanceCommand(commandParameters, repository);
-                    break;
-                case "revert": //!
                     command = new AdvanceCommand(commandParameters, repository);
                     break;
                 case "assign":

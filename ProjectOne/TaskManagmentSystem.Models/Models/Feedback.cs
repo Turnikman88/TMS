@@ -10,7 +10,7 @@ namespace TaskManagmentSystem.Models
         private Status status;
 
         public Feedback(string title, string description)
-            :base(title, description)
+            : base(title, description)
         {
             this.Status = Status.New;
         }

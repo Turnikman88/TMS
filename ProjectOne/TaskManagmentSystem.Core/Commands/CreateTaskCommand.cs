@@ -21,13 +21,13 @@ namespace TaskManagmentSystem.Core.Commands
             {
                 throw new UserInputException("Invalid number of parameters"); //change later in constants
             }
-            string itemType = CommandParameters[0];
+            string itemType = CommandParameters[0]; //bug
             string itemName = CommandParameters[1];
             string itemDescription = CommandParameters[2];
-            string namespaceName = Assembly.GetExecutingAssembly().GetName().Name;
+            string namespaceName = Assembly.GetExecutingAssembly().GetName().Name; //
             string fullType = $"{namespaceName}.{itemType}";
             Type type;
-            try
+            try //ToDo: maybe remove later try catch
             {
                 type = Type.GetType(namespaceName, true, true);
             }

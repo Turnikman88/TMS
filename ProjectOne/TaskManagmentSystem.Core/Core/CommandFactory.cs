@@ -57,8 +57,11 @@ namespace TaskManagmentSystem.Core
                 case "createtask":
                     command = new CreateTaskCommand(commandParameters, repository);
                     break;
-                case "change":
-                    command = new ChangeCommand(commandParameters, repository);
+                case "advance": //! advance id priority/status...
+                    command = new AdvanceCommand(commandParameters, repository);
+                    break;
+                case "revert": //!
+                    command = new AdvanceCommand(commandParameters, repository);
                     break;
                 case "assign":
                     command = new AssignCommand(commandParameters, repository);

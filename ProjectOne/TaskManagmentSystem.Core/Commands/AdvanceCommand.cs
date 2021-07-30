@@ -4,9 +4,9 @@ using TaskManagmentSystem.Core.Contracts;
 
 namespace TaskManagmentSystem.Core.Commands
 {
-    public class ChangeCommand : BaseCommand
+    public class AdvanceCommand : BaseCommand
     {
-        public ChangeCommand(List<string> commandParameters, IRepository repository)
+        public AdvanceCommand(List<string> commandParameters, IRepository repository)
             : base(commandParameters, repository)
         {
 

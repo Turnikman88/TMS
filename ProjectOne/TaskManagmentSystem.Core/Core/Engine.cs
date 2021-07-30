@@ -22,8 +22,8 @@ namespace TaskManagmentSystem.Core
         {
             while (true)
             {
-               // try
-               // {
+                try
+                {
                     string inputLine = Console.ReadLine().Trim();
 
                     if (inputLine.ToLower() == Constants.TerminationCommand)
@@ -32,11 +32,11 @@ namespace TaskManagmentSystem.Core
                     }
 
                     ProcessCommand(inputLine);
-                //}
-                /*catch (Exception ex)
+                }
+                catch (Exception ex)
                 {
                     writer.WriteLine(ex.Message);
-                }*/
+                }
             }
         }
 

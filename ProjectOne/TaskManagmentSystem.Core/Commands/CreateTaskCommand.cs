@@ -20,27 +20,16 @@ namespace TaskManagmentSystem.Core.Commands
         {
             Validator.ValidateParametersCount(numberOfParameters, CommandParameters.Count);
 
-            string taskType = CommandParameters[0]; 
+            string taskType = CommandParameters[0];
+            string taskTypeForReflection = $".{taskType}";
+
             string taskTitle = CommandParameters[1];
             string taskDescription = CommandParameters[2];
-            var namespaceName = "TaskManagmentSystem.Models";
-            string fullType = $"{namespaceName}.{taskType}";
-            Type type;
-            /*            switch (taskType.ToLower())
-                        {
-                            case "bug":                    
-                                type = typeof(Bug);
-                                break;
-                            case "story":
-                                type = typeof(Story);
-                                break;
-                            case "feedback":
-                                type = typeof(Feedback);
-                                break;
-                            default:                    
-                                throw new UserInputException(string.Format(Constants.TASK_TYPE_ERR, taskType));                   
-                        }*/
-            type = Type.GetType("TaskManagmentSystem.Models.Bug", true, true);
+            Type type = Reflection.GetTypeOfTask(taskTypeForReflection);
+            if (type is null)
+            {
+                throw new UserInputException(string.Format(Constants.TASK_TYPE_ERR, taskType));
+            }
             
             IBoardItem task = this.Repository.CreateTask(type, taskTitle, taskDescription);
             //ToDo: Add this task to Board;

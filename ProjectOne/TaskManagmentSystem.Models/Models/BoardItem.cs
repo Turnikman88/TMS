@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Reflection;
 using TaskManagmentSystem.Models.Common;
 using TaskManagmentSystem.Models.Contracts;
 
@@ -15,8 +16,8 @@ namespace TaskManagmentSystem.Models
             this.Id = id;
             this.Title = title;
             this.Description = description;
-        }
 
+        }
         public string Title
         {
             get => this.title;

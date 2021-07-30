@@ -1,11 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+	  <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\TaskManagmentSystem.Models\TaskManagmentSystem.Models.csproj" />
+	<ProjectReference Include="..\TaskManagmentSystem.Models\TaskManagmentSystem.Models.csproj" />
   </ItemGroup>
 
 </Project>

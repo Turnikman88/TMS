@@ -40,6 +40,7 @@
         public const string TASK_TYPE_ERR = "Task of type {0} doesnt exist";
         public const string PRINT_INFO_SEPARATOR = "--------------";
         public const string INVALID_COMMAND_ERR = "Command with name: {0} doesn't exist!";
+        public const string USER_NOT_LOGGED_IN = "You are not logged!";
 
     }
 }

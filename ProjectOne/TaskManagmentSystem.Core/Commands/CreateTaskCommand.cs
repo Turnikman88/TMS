@@ -26,20 +26,21 @@ namespace TaskManagmentSystem.Core.Commands
             var namespaceName = "TaskManagmentSystem.Models";
             string fullType = $"{namespaceName}.{taskType}";
             Type type;
-            switch (taskType.ToLower())
-            {
-                case "bug":                    
-                    type = typeof(Bug);
-                    break;
-                case "story":
-                    type = typeof(Story);
-                    break;
-                case "feedback":
-                    type = typeof(Feedback);
-                    break;
-                default:                    
-                    throw new UserInputException(string.Format(Constants.TASK_TYPE_ERR, taskType));                   
-            }
+            /*            switch (taskType.ToLower())
+                        {
+                            case "bug":                    
+                                type = typeof(Bug);
+                                break;
+                            case "story":
+                                type = typeof(Story);
+                                break;
+                            case "feedback":
+                                type = typeof(Feedback);
+                                break;
+                            default:                    
+                                throw new UserInputException(string.Format(Constants.TASK_TYPE_ERR, taskType));                   
+                        }*/
+            type = Type.GetType("TaskManagmentSystem.Models.Bug", true, true);
             
             IBoardItem task = this.Repository.CreateTask(type, taskTitle, taskDescription);
             //ToDo: Add this task to Board;

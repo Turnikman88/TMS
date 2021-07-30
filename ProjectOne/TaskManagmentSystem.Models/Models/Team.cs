@@ -36,10 +36,17 @@ namespace TaskManagmentSystem.Models
 
         public int Id { get; }
 
-        public void AddPersonToTeam(IMember member)
+        public void AddBoard(IBoard board)
+        {
+            this.boards.Add(board);
+        }
+
+        public void AddMember(IMember member)
         {
             this.members.Add(member);
         }
+         
+        
 
     }
 }

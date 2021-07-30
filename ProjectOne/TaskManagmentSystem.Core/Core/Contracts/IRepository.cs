@@ -12,6 +12,12 @@ namespace TaskManagmentSystem.Core.Contracts
         ITeam CreateTeam(string teamName);
         IMember CreateUser(string username);
         IBoardItem CreateTask(Type type, string title, string description);
+        IBoard CreateBoard(string name);
+
+        ITeam FindTeamById(int id);
+        ITeam FindTeamByName(string name);
+        IMember LoggedUser { get; set; }
+
 
     }
 }

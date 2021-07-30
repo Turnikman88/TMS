@@ -18,23 +18,25 @@ namespace TaskManagmentSystem.Core
         {
             string[] arguments = commandLine.Split(); //ToDo: check why cant remove emptyentries
             string commandName = ExtractName(arguments);
+            CheckPremissionToExecute(commandName);
             List<string> commandParameters = ExtractParameters(arguments);
             ICommand command = null;
             switch (commandName.ToLower())
             {
-                case "createuser":
+                
+                case "createuser": //Done
                     command = new CreateUserCommand(commandParameters, repository);
                     break;
-                case "showallusers": // maybe only admin can do it
+                case "showusers": // maybe only admin can do it //Done
                     command = new ShowAllPeopleCommand(repository);
                     break;
                 case "showuseractivity":
                     command = new ShowPersonActivityCommand(commandParameters, repository);
                     break;
-                case "createteam":
+                case "createteam": //Done
                     command = new CreateNewTeamCommand(commandParameters, repository);
                     break;
-                case "showteams": // maybe only admin can do it
+                case "showteams": // maybe only admin can do it //Done
                     command = new ShowAllTeamsCommand(repository);
                     break;
                 case "showteamactivity":
@@ -55,7 +57,7 @@ namespace TaskManagmentSystem.Core
                 case "showboardactivity":
                     command = new ShowBoardActivityCommand(commandParameters, repository);
                     break;
-                case "createtask":
+                case "createtask": //Half Done
                     command = new CreateTaskCommand(commandParameters, repository);
                     break;
                 case "advance": //! advance id priority/status...
@@ -83,6 +85,16 @@ namespace TaskManagmentSystem.Core
         {
             string nameOfCommand = arguments[0];
             return nameOfCommand;
+        }
+        private void CheckPremissionToExecute(string commandName)
+        {
+            if (commandName.ToLower() != "createuser" && commandName.ToLower() == "login")
+            {
+                if (this.repository.LoggedUser == null)
+                {
+                    throw new UserInputException(Constants.USER_NOT_LOGGED_IN);
+                }
+            }
         }
     }
 }

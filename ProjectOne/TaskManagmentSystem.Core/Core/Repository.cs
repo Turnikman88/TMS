@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TaskManagmentSystem.Core.Contracts;
 using TaskManagmentSystem.Models;
 using TaskManagmentSystem.Models.Contracts;
@@ -21,7 +22,7 @@ namespace TaskManagmentSystem.Core
         
         public IList Teams
             => new List<ITeam>(teams);
-
+        public IMember LoggedUser { get; set; }
         public IMember CreateUser(string username)
         {
             var user = new Member(++nextId, username);
@@ -38,6 +39,20 @@ namespace TaskManagmentSystem.Core
         {
             var task = Activator.CreateInstance(type, ++nextId, title, description) as IBoardItem;
             return task;
+        }
+        public IBoard CreateBoard(string name)
+        {
+            var board = new Board(++nextId, name);
+            return board;
+        }
+
+        public ITeam FindTeamById(int id)
+        {
+            return this.teams.First(x => x.Id == id);
+        }
+        public ITeam FindTeamByName(string name)
+        {
+            return this.teams.First(x => x.Name == name);
         }
     }
 }

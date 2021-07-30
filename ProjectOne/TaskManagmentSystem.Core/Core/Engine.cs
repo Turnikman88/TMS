@@ -22,8 +22,8 @@ namespace TaskManagmentSystem.Core
         {
             while (true)
             {
-                try
-                {
+               // try
+               // {
                     string inputLine = Console.ReadLine().Trim();
 
                     if (inputLine.ToLower() == Constants.TerminationCommand)
@@ -32,11 +32,11 @@ namespace TaskManagmentSystem.Core
                     }
 
                     ProcessCommand(inputLine);
-                }
-                catch (Exception ex)
+                //}
+                /*catch (Exception ex)
                 {
                     writer.WriteLine(ex.Message);
-                }
+                }*/
             }
         }
 
@@ -44,16 +44,11 @@ namespace TaskManagmentSystem.Core
         {
             Validator.ValidateObjectIsNotNULL(commandLine.Trim(), Constants.EmptyCommandError);
 
-            CheckPremissionToExecute(commandLine);
-
             ICommand command = this.commandFactory.Create(commandLine);
             string result = command.Execute();
             writer.WriteLine(result.Trim());
         }
 
-        private void CheckPremissionToExecute(string commandLine)
-        {
-            //ToDo: Checks if user is the member of the team, before processing command
-        }
+
     }
 }

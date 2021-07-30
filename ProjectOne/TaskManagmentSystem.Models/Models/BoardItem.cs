@@ -49,8 +49,6 @@ namespace TaskManagmentSystem.Models
             this.comments.Add(comment);
         }
 
-        public abstract void AdvanceStatus();
-
-        public abstract void RevertStatus();
+        public abstract void ChangeStatus();
     }
 }

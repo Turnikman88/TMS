@@ -30,26 +30,19 @@ namespace TaskManagmentSystem.Models
             get => this.status;
             private set
             {
-
                 this.status = value;
             }
         }
+        public override void ChangeStatus()
+        {
+            if (this.status != Status.Done)
+            {
+                this.status++;
+                return;
+            }
+            this.status = Status.New;
+        }
 
-        public override void AdvanceStatus()
-        {
-            if (this.status == Status.Done)
-            {
-                throw new UserInputException(string.Format(Constants.STATUS_ADVANCE_ERROR, Status.Done.ToString()));
-            }
-            status++;
-        }
-        public override void RevertStatus()
-        {
-            if (this.status == Status.New)
-            {
-                throw new UserInputException(string.Format(Constants.STATUS_REVERT_ERROR, Status.New.ToString()));
-            }
-            status--;
-        }
+
     }
 }

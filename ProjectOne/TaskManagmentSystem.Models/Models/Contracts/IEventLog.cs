@@ -6,7 +6,6 @@ namespace TaskManagmentSystem.Models.Contracts
     {
         string Description { get; }
         DateTime EventTime { get; }
-
         string ViewInfo();
     }
 }

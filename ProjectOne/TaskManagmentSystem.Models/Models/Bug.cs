@@ -12,8 +12,8 @@ namespace TaskManagmentSystem.Models
         private Status status;
         private readonly IList<string> steps = new List<string>();
 
-        public Bug(string title, string description)
-            : base(title, description)
+        public Bug(int id, string title, string description)
+            : base(id, title, description)
         {
             this.Priority = Priority.Low;
         }

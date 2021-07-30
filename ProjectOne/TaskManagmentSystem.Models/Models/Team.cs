@@ -9,8 +9,9 @@ namespace TaskManagmentSystem.Models
         private string name;
         private IList<IMember> members = new List<IMember>();
         private IList<IBoard> boards = new List<IBoard>();
-        public Team(string name)
+        public Team(int id, string name)
         {
+            this.Id = id;
             this.Name = name;
         }
         public IList<IMember> Members
@@ -32,6 +33,8 @@ namespace TaskManagmentSystem.Models
                 this.name = value;
             }
         }
+
+        public int Id { get; }
 
         public void AddPersonToTeam(IMember member)
         {

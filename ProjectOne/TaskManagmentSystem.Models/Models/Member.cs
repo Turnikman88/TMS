@@ -10,8 +10,9 @@ namespace TaskManagmentSystem.Models
         private IList<IEventLog> eventLogs = new List<IEventLog>();
         private IList<ITasks> tasks = new List<ITasks>();
 
-        public Member(string name)
+        public Member(int id, string name)
         {
+            this.Id = id;
             this.Name = name;
         }
         public string Name
@@ -39,6 +40,8 @@ namespace TaskManagmentSystem.Models
                 this.tasks = value;
             }
         }
+
+        public int Id { get; }
 
         public void AddTask(ITasks task)
         {

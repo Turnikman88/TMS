@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using TaskManagmentSystem.Core.Contracts;
 using TaskManagmentSystem.Models;
@@ -23,9 +24,20 @@ namespace TaskManagmentSystem.Core
 
         public IMember CreateUser(string username)
         {
-            var user = new Member(username);
+            var user = new Member(++nextId, username);
             this.users.Add(user);
             return user;
+        }
+        public ITeam CreateTeam(string teamName)
+        {
+            var team = new Team(++nextId, teamName);
+            this.teams.Add(team);
+            return team;
+        }
+        public IBoardItem CreateTask(Type type, string title, string description)
+        {
+            var task = Activator.CreateInstance(type, ++nextId, title, description) as IBoardItem;
+            return task;
         }
     }
 }

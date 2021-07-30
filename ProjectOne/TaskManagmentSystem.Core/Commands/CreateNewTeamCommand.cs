@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using TaskManagmentSystem.Core.Contracts;
+using TaskManagmentSystem.Models.Common;
 
 namespace TaskManagmentSystem.Core.Commands
 {
     public class CreateNewTeamCommand : BaseCommand
     {
+        private const int numberOfParameters = 1;
+
         public CreateNewTeamCommand(IList<string> commandParameters, IRepository repository)
             : base(commandParameters, repository)
         {
@@ -13,7 +16,13 @@ namespace TaskManagmentSystem.Core.Commands
         }
         public override string Execute()
         {
-            throw new NotImplementedException();
+            Validator.ValidateParametersCount(numberOfParameters, CommandParameters.Count);
+
+            string teamName = this.CommandParameters[0];
+            var team = this.Repository.CreateTeam(teamName);
+
+            return $"Team with name {team.Name} was created";
+
         }
     }
 }

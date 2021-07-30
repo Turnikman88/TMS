@@ -30,6 +30,8 @@ namespace TaskManagmentSystem.Models
         public IList<IEventLog> EventLogs
             => new List<IEventLog>(this.events);
 
+        public int Id { get; }
+
         //TODO - дали тези таскове ще имат пълна функционалност
         public void AddTask(IBoardItem task)
         {

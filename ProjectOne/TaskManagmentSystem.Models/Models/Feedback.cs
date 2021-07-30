@@ -9,8 +9,8 @@ namespace TaskManagmentSystem.Models
         private int rating;
         private Status status;
 
-        public Feedback(string title, string description)
-            : base(title, description)
+        public Feedback(int id, string title, string description)
+            : base(id, title, description)
         {
             this.Status = Status.New;
         }

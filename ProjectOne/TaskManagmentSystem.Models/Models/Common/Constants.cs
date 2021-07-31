@@ -4,7 +4,7 @@
     {
         public const string TerminationCommand = "exit";
         public const string EmptyCommandError = "Command cannot be empty.";
-
+        public const string EVENT_WAS_CREATED = "{0} event was created";
 
         public const string STRING_LENGHT_ERR = "{0} must be between {1} and {2} symbols long!";
 

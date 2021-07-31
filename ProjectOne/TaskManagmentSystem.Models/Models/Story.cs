@@ -12,7 +12,7 @@ namespace TaskManagmentSystem.Models
         private Status status;
 
         public Story(int id, string title, string description)
-            : base(id, title, description)
+            : base(id, title, description, "Story")
         {
             this.Priority = Priority.Low;
             this.Size = Size.Small;

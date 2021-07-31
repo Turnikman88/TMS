@@ -36,13 +36,13 @@ namespace TaskManagmentSystem.Models
         }
         public override string ToString()
         {
-            return "-----"
+            return $"{Constants.PRINT_INFO_SEPARATOR}"
                 + Environment.NewLine
                 + $"    {this.Content}"
                 + Environment.NewLine
                 + $"      User: {this.Author}"
                 + Environment.NewLine
-                + "-----";
+                + $"{Constants.PRINT_INFO_SEPARATOR}";
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
 using TaskManagmentSystem.Models.Common;
 using TaskManagmentSystem.Models.Contracts;
 
@@ -50,5 +52,29 @@ namespace TaskManagmentSystem.Models
         }
 
         public abstract void ChangeStatus();
+        protected abstract string AddAdditionalInfo();
+
+        public override string ToString()
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append($"{this.Title} {Environment.NewLine} " +
+                $"Descritpion: {this.Description} {Environment.NewLine} ");
+            sb.AppendLine(AddAdditionalInfo());
+            if (comments.Count > 0)
+            {
+                sb.AppendLine("-----");
+                foreach (var comment in comments)
+                {
+                    sb.AppendLine(comment.ToString());
+                }
+                sb.AppendLine("-----");
+            }
+            else
+            {
+                sb.AppendLine("No comments");
+            }
+
+            return sb.ToString();
+        }
     }
 }

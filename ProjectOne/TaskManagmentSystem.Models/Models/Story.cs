@@ -1,4 +1,5 @@
-﻿using TaskManagmentSystem.Models.Contracts;
+﻿using System;
+using TaskManagmentSystem.Models.Contracts;
 using TaskManagmentSystem.Models.Enums;
 using TaskManagmentSystem.Models.Enums.Story;
 
@@ -76,5 +77,13 @@ namespace TaskManagmentSystem.Models
             this.status = Status.NotDone;
         }
 
+        public override string ToString()
+        {
+            return "Story: " + base.ToString();
+        }
+        protected override string AddAdditionalInfo()
+        {
+            return $"Assignee {this.Assignee.Name} {Environment.NewLine} Status: {this.Status} {Environment.NewLine} Priority: {this.Priority} {Environment.NewLine} Size: {this.Size} ";
+        }
     }
 }

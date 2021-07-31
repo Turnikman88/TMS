@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using TaskManagmentSystem.Models.Contracts;
 using TaskManagmentSystem.Models.Enums;
 using TaskManagmentSystem.Models.Enums.Bug;
@@ -73,6 +74,15 @@ namespace TaskManagmentSystem.Models
         public override void ChangeStatus()
         {
             this.status = this.status == Status.Active ? Status.Fixed : Status.Active;
+        }
+
+        public override string ToString()
+        {
+            return "Bug: " + base.ToString();
+        }
+        protected override string AddAdditionalInfo()
+        {
+            return $"Assignee {this.Assignee.Name} {Environment.NewLine} Status: {this.Status} {Environment.NewLine} Priority: {this.Priority} {Environment.NewLine} Saverity: {this.Severity} {Environment.NewLine} Steps to reproduce: {Environment.NewLine}" + String.Join(Environment.NewLine, this.steps);
         }
     }
 }

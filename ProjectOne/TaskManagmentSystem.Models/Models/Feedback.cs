@@ -1,4 +1,5 @@
-﻿using TaskManagmentSystem.Models.Common;
+﻿using System;
+using TaskManagmentSystem.Models.Common;
 using TaskManagmentSystem.Models.Contracts;
 using TaskManagmentSystem.Models.Enums.Feedback;
 
@@ -43,6 +44,14 @@ namespace TaskManagmentSystem.Models
             this.status = Status.New;
         }
 
+        public override string ToString()
+        {
+            return "Feedback: " + base.ToString();
+        }
+        protected override string AddAdditionalInfo()
+        {
+            return $"Status: {this.Status} {Environment.NewLine} Rating: {this.Rating}";
+        }
 
     }
 }

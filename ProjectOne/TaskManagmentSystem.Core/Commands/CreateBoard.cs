@@ -6,11 +6,11 @@ using TaskManagmentSystem.Models.Contracts;
 
 namespace TaskManagmentSystem.Core.Commands
 {
-    public class CreateBoardCommand : BaseCommand
+    public class CreateBoard : BaseCommand
     {
         private const int numberOfParameters = 2;
 
-        public CreateBoardCommand(List<string> commandParameters, IRepository repository)
+        public CreateBoard(IList<string> commandParameters, IRepository repository)
             : base(commandParameters, repository)
         {
 

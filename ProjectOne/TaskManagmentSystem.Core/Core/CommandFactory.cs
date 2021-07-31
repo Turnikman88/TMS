@@ -1,4 +1,5 @@
 ﻿using ProjectOne.Commands.Contracts;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using TaskManagmentSystem.Core.Commands;
@@ -21,64 +22,12 @@ namespace TaskManagmentSystem.Core
             CheckPremissionToExecute(commandName);
             List<string> commandParameters = ExtractParameters(arguments);
             ICommand command = null;
-            switch (commandName.ToLower())
-            {
-                case "login":
-                    command = new LogInCommand(commandParameters, repository);
-                    break;
-                case "logout":
-                    command = new LogOutCommand(repository);
-                    break;
+            var type = this.repository.CoreClassTypes.First(x => x.Name.ToLower() == commandName)
+                ?? throw new UserInputException(string.Format(Constants.INVALID_COMMAND_ERR, commandName));
 
-                case "createuser": //Done
-                    command = new CreateUserCommand(commandParameters, repository);
-                    break;
-                case "showusers": // maybe only admin can do it //Done
-                    command = new ShowAllPeopleCommand(repository);
-                    break;
-                case "showuseractivity":
-                    command = new ShowPersonActivityCommand(commandParameters, repository);
-                    break;
-                case "createteam": //Done
-                    command = new CreateNewTeamCommand(commandParameters, repository);
-                    break;
-                case "showteams": // maybe only admin can do it //Done
-                    command = new ShowAllTeamsCommand(repository);
-                    break;
-                case "showteamactivity":
-                    command = new ShowTeamActivityCommand(commandParameters, repository);
-                    break;
-                case "adduser":  //adds person to team
-                    command = new AddPersonToTeamCommand(commandParameters, repository);
-                    break;
-                case "showmembers":  //shows all team members // we need validation if the user is member // one user can be member of more than one teams 
-                    command = new ShowAllTeamMembersCommand(commandParameters, repository);
-                    break;
-                case "createboard":
-                    command = new CreateBoardCommand(commandParameters, repository);
-                    break;
-                case "showteamboards":
-                    command = new ShowTeamBoardsCommand(commandParameters, repository);
-                    break;
-                case "showboardactivity":
-                    command = new ShowBoardActivityCommand(commandParameters, repository);
-                    break;
-                case "createtask": //Half Done
-                    command = new CreateTaskCommand(commandParameters, repository);
-                    break;
-                case "advance": //! advance id priority/status...
-                    command = new AdvanceCommand(commandParameters, repository);
-                    break;
-                case "assign":
-                    command = new AssignCommand(commandParameters, repository);
-                    break;
-                case "addcomment":
-                    command = new AddCommentToTask(commandParameters, repository);
-                    break;
-                default:
-                    throw new UserInputException(string.Format(Constants.INVALID_COMMAND_ERR, commandName));
-            }
-            return command; //remove later
+            command = Activator.CreateInstance(type, commandParameters, repository) as ICommand;
+
+            return command; 
         }
 
         private List<string> ExtractParameters(string[] arguments)

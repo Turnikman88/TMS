@@ -9,10 +9,10 @@ using TaskManagmentSystem.Models.Contracts;
 
 namespace TaskManagmentSystem.Core.Commands
 {
-    public class CreateTaskCommand : BaseCommand
+    public class CreateTask : BaseCommand
     {
         private const int numberOfParameters = 3;
-        public CreateTaskCommand(IList<string> commandParameters, IRepository repository)
+        public CreateTask(IList<string> commandParameters, IRepository repository)
             : base(commandParameters, repository)
         {
 

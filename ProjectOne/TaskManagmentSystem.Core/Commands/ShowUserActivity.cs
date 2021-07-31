@@ -4,10 +4,11 @@ using TaskManagmentSystem.Core.Contracts;
 
 namespace TaskManagmentSystem.Core.Commands
 {
-    public class ShowBoardActivityCommand : BaseCommand
+    public class ShowUserActivity : BaseCommand
     {
-        public ShowBoardActivityCommand(List<string> commandParameters, IRepository repository)
-            :base(commandParameters, repository)
+        public ShowUserActivity(IList<string> commandParameters, IRepository repository)
+            : base(commandParameters, repository)
+
         {
 
         }

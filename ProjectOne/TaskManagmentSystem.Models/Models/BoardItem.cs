@@ -18,7 +18,6 @@ namespace TaskManagmentSystem.Models
             this.Title = title;
             this.Description = description;
             AddEvent(new EventLog(string.Format(Constants.EVENT_WAS_CREATED, type)));
-
         }
         public string Title
         {
@@ -57,9 +56,9 @@ namespace TaskManagmentSystem.Models
 
         public abstract void ChangeStatus();
         protected abstract string AddAdditionalInfo();
-        protected void AddEvent()
+        protected void AddEvent(IEventLog Log)
         {
-
+            this.eventLogs.Add(Log);
         }
         public override string ToString()
         {

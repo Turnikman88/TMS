@@ -19,6 +19,10 @@ namespace TaskManagmentSystem.Core.Commands
         {
             Validator.ValidateParametersCount(numberOfParameters, CommandParameters.Count);
             string username = CommandParameters[0];
+            if (this.Repository.FindUserByName(username) != null)
+            {
+                throw new UserInputException(string.Format(Constants.USER_ALREADY_EXIST, username));
+            }
             var user = this.Repository.CreateUser(username);
 
             return $"User with username {user.Name} was created";

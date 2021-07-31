@@ -48,11 +48,17 @@ namespace TaskManagmentSystem.Core
 
         public ITeam FindTeamById(int id)
         {
-            return this.teams.First(x => x.Id == id);
+            return this.teams.SingleOrDefault(x => x.Id == id);
         }
         public ITeam FindTeamByName(string name)
         {
-            return this.teams.First(x => x.Name == name);
+            return this.teams.SingleOrDefault(x => x.Name == name);
+        }
+
+        public IMember FindUserByName(string name)
+        {
+            var user = this.users.SingleOrDefault(x => x.Name == name);
+            return user;
         }
     }
 }

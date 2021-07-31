@@ -17,6 +17,7 @@ namespace TaskManagmentSystem.Core.Contracts
         ITeam FindTeamById(int id);
         ITeam FindTeamByName(string name);
         IMember LoggedUser { get; set; }
+        IMember FindUserByName(string name);
 
 
     }

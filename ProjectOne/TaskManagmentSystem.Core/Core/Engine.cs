@@ -35,7 +35,14 @@ namespace TaskManagmentSystem.Core
                 }
                 catch (Exception ex)
                 {
-                    writer.WriteLine(ex.Message);
+                    if (ex.InnerException != null)
+                    {
+                        writer.WriteLine(ex.InnerException.Message.ToString());
+                    }
+                    else
+                    {
+                        writer.WriteLine(ex.Message);
+                    }
                 }
             }
         }

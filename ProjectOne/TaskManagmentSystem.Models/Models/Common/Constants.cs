@@ -40,7 +40,16 @@
         public const string TASK_TYPE_ERR = "Task of type {0} doesnt exist";
         public const string PRINT_INFO_SEPARATOR = "--------------";
         public const string INVALID_COMMAND_ERR = "Command with name: {0} doesn't exist!";
+
+        public const string WRONG_USERNAME = "Wrong username!";
+        public const string USER_ALREADY_EXIST = "User {0} already exist. Choose a different username!";
         public const string USER_NOT_LOGGED_IN = "You are not logged!";
+        public const string USER_LOGGED_OUT = "You logged out!";
+        public const string NO_USER_LOGGED = "You can't log out, no one is logged!";
+        public const string USER_LOGGED_IN = "User {0} successfully logged in!";
+        public const string USER_LOGGED_IN_ALREADY = "User {0} is logged in! Please log out first!";
+
+
 
     }
 }

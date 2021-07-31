@@ -25,11 +25,8 @@ namespace TaskManagmentSystem.Core.Commands
 
             string taskTitle = CommandParameters[1];
             string taskDescription = CommandParameters[2];
-            Type type = Reflection.GetTypeOfTask(taskTypeForReflection);
-            if (type is null)
-            {
-                throw new UserInputException(string.Format(Constants.TASK_TYPE_ERR, taskType));
-            }
+            Type type = Reflection.GetTypeOfTask(taskTypeForReflection) ?? throw new UserInputException(string.Format(Constants.TASK_TYPE_ERR, taskType));
+
             
             IBoardItem task = this.Repository.CreateTask(type, taskTitle, taskDescription);
             //ToDo: Add this task to Board;

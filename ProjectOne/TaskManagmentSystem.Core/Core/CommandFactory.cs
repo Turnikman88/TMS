@@ -86,7 +86,7 @@ namespace TaskManagmentSystem.Core
             string nameOfCommand = arguments[0];
             return nameOfCommand;
         }
-        private void CheckPremissionToExecute(string commandName)
+        private void CheckPremissionToExecute(string commandName) 
         {
             if (commandName.ToLower() != "createuser" && commandName.ToLower() == "login")
             {

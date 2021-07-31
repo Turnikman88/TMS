@@ -11,20 +11,31 @@ namespace TaskManagmentSystem.Core
     public class Repository : IRepository
     {
         private int nextId;
+        private IList<Type> coreClassTypes = new List<Type>();
+        private IList<Type> modelsClassTypes = new List<Type>();
         private readonly IList<IMember> users = new List<IMember>();
         private readonly IList<ITeam> teams = new List<ITeam>();
-        public Repository()
+        public Repository(IList<Type> coreClassTypes, IList<Type> modelsClassTypes)
         {
             this.nextId = 0;
+            this.coreClassTypes = coreClassTypes;
+            this.modelsClassTypes = modelsClassTypes;
         }
+
+        
         public IList Users        
             => new List<IMember>(users);
         
         public IList Teams
             => new List<ITeam>(teams);
         public IMember LoggedUser { get; set; }
+        public IList<Type> CoreClassTypes
+            => new List<Type>(coreClassTypes);
+        public IList<Type> ModelsClassTypes
+            => new List<Type>(modelsClassTypes);
+
         public IMember CreateUser(string username)
-        {
+        {           
             var user = new Member(++nextId, username);
             this.users.Add(user);
             return user;

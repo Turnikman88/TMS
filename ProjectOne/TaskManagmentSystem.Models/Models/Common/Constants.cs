@@ -2,6 +2,9 @@
 {
     public class Constants
     {
+        public const string CORE_ASSEMBLY_KEY = "Core";
+        public const string MODELS_ASSEMBLY_KEY = "Models";
+
         public const string TerminationCommand = "exit";
         public const string EmptyCommandError = "Command cannot be empty.";
         public const string EVENT_WAS_CREATED = "{0} event was created";

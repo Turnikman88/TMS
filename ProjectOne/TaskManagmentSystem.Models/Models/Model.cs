@@ -1,15 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Reflection;
 using System.Text;
 
 namespace TaskManagmentSystem.Models
 {
-    public class StartUp
+    public class Model
     {
-        public static void Main()
+        public void Test()
         {
-            
+            Console.WriteLine("It works");
         }
     }
 }

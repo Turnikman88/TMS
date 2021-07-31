@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using TaskManagmentSystem.Models.Contracts;
 
 namespace TaskManagmentSystem.Core.Contracts
@@ -18,7 +19,8 @@ namespace TaskManagmentSystem.Core.Contracts
         ITeam FindTeamByName(string name);
         IMember LoggedUser { get; set; }
         IMember FindUserByName(string name);
-
+        IList<Type> CoreClassTypes { get; }
+        IList<Type> ModelsClassTypes { get; }
 
     }
 }

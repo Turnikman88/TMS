@@ -1,4 +1,5 @@
-﻿using TaskManagmentSystem.Models.Common;
+﻿using System;
+using TaskManagmentSystem.Models.Common;
 using TaskManagmentSystem.Models.Contracts;
 
 namespace TaskManagmentSystem.Models
@@ -32,6 +33,16 @@ namespace TaskManagmentSystem.Models
                 Validator.ValidateObjectIsNotNULL(value, string.Format(Constants.ITEM_NULL_ERR, "Author"));
                 this.author = value;
             }
+        }
+        public override string ToString()
+        {
+            return "-----"
+                + Environment.NewLine
+                + $"    {this.Content}"
+                + Environment.NewLine
+                + $"      User: {this.Author}"
+                + Environment.NewLine
+                + "-----";
         }
     }
 }

@@ -1,6 +1,8 @@
-﻿namespace TaskManagmentSystem.Models.Common
+﻿using System.Linq;
+using TaskManagmentSystem.Models.Contracts;
+namespace TaskManagmentSystem.Models.Common
 {
-    public class Validator
+    public class Validator //ToDo: Ask Kalin
     {
         public static void ValidateRange(int value, int min, int max, string message)
         {

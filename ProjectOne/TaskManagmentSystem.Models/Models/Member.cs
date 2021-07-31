@@ -4,7 +4,7 @@ using TaskManagmentSystem.Models.Contracts;
 
 namespace TaskManagmentSystem.Models
 {
-    public class Member : IMember, IActivityLog
+    public class Member : IMember, IActivityLog   //ToDo: Ask Kalin
     {
         private string name;
         private IList<IEventLog> eventLogs = new List<IEventLog>();

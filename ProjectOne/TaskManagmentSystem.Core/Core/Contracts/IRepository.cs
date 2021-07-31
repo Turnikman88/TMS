@@ -18,6 +18,7 @@ namespace TaskManagmentSystem.Core.Contracts
         ITeam FindTeamById(int id);
         ITeam FindTeamByName(string name);
         IMember LoggedUser { get; set; }
+        IMember FindUserById(int id);
         IMember FindUserByName(string name);
         IList<Type> CoreClassTypes { get; }
         IList<Type> ModelsClassTypes { get; }

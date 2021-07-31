@@ -59,17 +59,20 @@ namespace TaskManagmentSystem.Core
 
         public ITeam FindTeamById(int id)
         {
-            return this.teams.SingleOrDefault(x => x.Id == id);
+            return this.teams.FirstOrDefault(x => x.Id == id);
         }
         public ITeam FindTeamByName(string name)
         {
-            return this.teams.SingleOrDefault(x => x.Name == name);
+            return this.teams.FirstOrDefault(x => x.Name == name);
         }
 
+        public IMember FindUserById(int id)
+        {
+            return this.users.FirstOrDefault(x => x.Id == id);
+        }
         public IMember FindUserByName(string name)
         {
-            var user = this.users.SingleOrDefault(x => x.Name == name);
-            return user;
+            return this.users.FirstOrDefault(x => x.Name == name);
         }
     }
 }

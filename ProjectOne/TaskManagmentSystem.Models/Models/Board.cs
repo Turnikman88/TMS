@@ -10,6 +10,10 @@ namespace TaskManagmentSystem.Models
         private readonly IList<IBoardItem> tasks = new List<IBoardItem>();
         private readonly IList<IEventLog> events = new List<IEventLog>();
 
+        public Board(string name)
+        {
+            this.Name = name;
+        }
 
         public string Name
         {

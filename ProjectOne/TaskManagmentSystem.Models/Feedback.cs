@@ -10,9 +10,10 @@ namespace TaskManagmentSystem.Models
         private int rating;
         private Status status;
 
-        public Feedback(string title, string description)
-            : base(title, description)
+        public Feedback(string title, string description, int rating, int id)
+            : base(title, description, id)
         {
+            this.rating = rating;
             this.Status = Status.New;
         }
 
@@ -42,6 +43,10 @@ namespace TaskManagmentSystem.Models
                 return;
             }
             this.status = Status.New;
+        }
+        public void ChangeRating(int number)
+        {
+            this.Rating = number;
         }
 
         public override string ToString()

@@ -2,7 +2,7 @@
 
 namespace TaskManagmentSystem.Models.Contracts
 {
-    public interface IFeedback
+    public interface IFeedback : HasId
     {
         int Rating { get; }
         Status Status { get; }

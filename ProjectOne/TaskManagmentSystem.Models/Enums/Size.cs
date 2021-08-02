@@ -1,6 +1,6 @@
 ﻿namespace TaskManagmentSystem.Models.Enums.Story
 {
-    public enum Size
+    public enum Size : byte
     {
         Small,
         Medium,

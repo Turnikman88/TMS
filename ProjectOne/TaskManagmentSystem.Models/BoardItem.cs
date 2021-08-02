@@ -12,10 +12,11 @@ namespace TaskManagmentSystem.Models
         private string description;
         private readonly IList<IComment> comments = new List<IComment>();
         private readonly IList<IEventLog> eventLogs = new List<IEventLog>();
-        protected BoardItem(string title, string description)
+        protected BoardItem(string title, string description, int id)
         {
             this.Title = title;
             this.Description = description;
+            this.Id = id;
         }
 
         public string Title
@@ -29,6 +30,7 @@ namespace TaskManagmentSystem.Models
             }
         }
 
+        public int Id { get; }
         public string Description
         {
             get => this.description;
@@ -50,7 +52,10 @@ namespace TaskManagmentSystem.Models
         {
             this.comments.Add(comment);
         }
-
+        public void AddEvent(IEventLog eventLog)
+        {
+            this.eventLogs.Add(eventLog);
+        }
         public abstract void ChangeStatus();
         protected abstract string AddAdditionalInfo();
 

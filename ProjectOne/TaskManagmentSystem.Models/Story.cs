@@ -11,8 +11,8 @@ namespace TaskManagmentSystem.Models
         private Size size;
         private Status status;
 
-        public Story(string title, string description)
-            : base(title, description)
+        public Story(string title, string description, int id)
+            : base(title, description, id)
         {
             this.Priority = Priority.Low;
             this.Size = Size.Small;

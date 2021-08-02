@@ -13,10 +13,12 @@ namespace TaskManagmentSystem.Models
         private Status status;
         private readonly IList<string> steps = new List<string>();
 
-        public Bug(string title, string description)
-            : base(title, description)
+        public Bug(string title, string description, List<string> steps, int id)
+            : base(title, description, id)
         {
             this.Priority = Priority.Low;
+            this.steps = steps;
+            AddEvent(new EventLog($"ID: {id} Bug {title} was created"));
         }
         public Priority Priority
         {
@@ -60,6 +62,8 @@ namespace TaskManagmentSystem.Models
                 return;
             }
             this.priority = Priority.Low;
+            AddEvent(new EventLog($"ID: {id} Bug {title} was created"));
+
         }
 
         public void ChangeSeverity()

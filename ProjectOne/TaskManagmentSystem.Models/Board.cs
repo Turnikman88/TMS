@@ -10,9 +10,10 @@ namespace TaskManagmentSystem.Models
         private readonly IList<IBoardItem> tasks = new List<IBoardItem>();
         private readonly IList<IEventLog> events = new List<IEventLog>();
 
-        public Board(string name)
+        public Board(string name, int id)
         {
             this.Name = name;
+            this.Id = id;
         }
 
         public string Name
@@ -30,9 +31,10 @@ namespace TaskManagmentSystem.Models
         public IList<IBoardItem> Tasks
             => new List<IBoardItem>(this.tasks);
 
-
         public IList<IEventLog> EventLogs
             => new List<IEventLog>(this.events);
+
+        public int Id { get; }
 
         //TODO - дали тези таскове ще имат пълна функционалност
         public void AddTask(IBoardItem task)

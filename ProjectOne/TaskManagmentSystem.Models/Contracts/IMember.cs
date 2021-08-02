@@ -2,10 +2,10 @@
 
 namespace TaskManagmentSystem.Models.Contracts
 {
-    public interface IMember : IName
+    public interface IMember : IName, HasId
     {
-        IList<ITasks> Tasks { get; }
+        IList<IBoardItem> Tasks { get; }
         IList<IEventLog> EventLogs { get; }
-        void AddTask(ITasks task);
+        void AddTask(IBoardItem task);
     }
 }

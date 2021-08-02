@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using TaskManagmentSystem.Core.Contracts;
 using TaskManagmentSystem.Models;
+using TaskManagmentSystem.Models.Common;
 using TaskManagmentSystem.Models.Contracts;
 
 namespace TaskManagmentSystem.Core
@@ -43,7 +44,8 @@ namespace TaskManagmentSystem.Core
         public ITeam CreateTeam(string teamName)
         {
             var team = new Team(++nextId, teamName);
-            this.teams.Add(team);
+            team.AddMember(LoggedUser);
+            this.teams.Add(team);            
             return team;
         }
         public IBoardItem CreateTask(Type type, string title, string description)
@@ -73,6 +75,45 @@ namespace TaskManagmentSystem.Core
         public IMember FindUserByName(string name)
         {
             return this.users.FirstOrDefault(x => x.Name == name);
+        }
+
+        public bool IsTeamMember(ITeam team, IMember user) //ToDo: Ask Kalin
+        {
+            if (team.Members.Any(x => x.Name == user.Name))           
+            {
+                return true;
+            }
+            return false;
+        }
+        public IMember GetUser(string userIndicator)
+        {
+            IMember user;
+            if (int.TryParse(userIndicator, out int userId))
+            {
+                user = this.FindUserById(userId);
+            }
+            else
+            {
+                user = this.FindUserByName(userIndicator);
+            }
+
+            return user ?? throw new UserInputException(string.Format(Constants.USER_DOESNT_EXSIST, userIndicator));
+
+        }
+
+        public ITeam GetTeam(string teamIdentificator)
+        {
+            ITeam team;
+            if (int.TryParse(teamIdentificator, out int temaId))
+            {
+                team = this.FindTeamById(temaId);
+            }
+            else
+            {
+                team = this.FindTeamByName(teamIdentificator);
+            }
+
+            return team ?? throw new UserInputException(string.Format(Constants.TEAM_DOESNT_EXSIST, teamIdentificator));
         }
     }
 }

@@ -51,11 +51,15 @@
         public const string NO_USER_LOGGED = "You can't log out, no one is logged!";
         public const string USER_LOGGED_IN = "User {0} successfully logged in!";
         public const string USER_LOGGED_IN_ALREADY = "User {0} is logged in! Please log out first!";
+        public const string USER_DOESNT_EXSIST = "User {0} doesn't exsist";
+
         public const string MEMBER_NOT_IN_TEAM = "User {0} is not member of the team";
         public const string MEMBER_ALREADY_IN_TEAM = "User {0} is already member of the team";
 
         public const string TEAM_DOESNT_EXSIST = "Team {0} doesn't exsist";
-        
+
+        public const string BOARS_ALREADY_EXIST = "Board {0} already exist. Choose a different name!";
+
 
 
 

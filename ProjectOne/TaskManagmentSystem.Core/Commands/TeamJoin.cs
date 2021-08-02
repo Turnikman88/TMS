@@ -6,10 +6,10 @@ using TaskManagmentSystem.Models.Contracts;
 
 namespace TaskManagmentSystem.Core.Commands
 {
-    public class AddUserToTeam : BaseCommand
+    public class TeamJoin : BaseCommand
     {
         private int numberOfParameters = 2;
-        public AddUserToTeam(IList<string> commandParameters, IRepository repository)
+        public TeamJoin(IList<string> commandParameters, IRepository repository)
             : base(commandParameters, repository)
         {
 
@@ -21,14 +21,14 @@ namespace TaskManagmentSystem.Core.Commands
             string userIndicator = CommandParameters[0];
             string teamIndicator = CommandParameters[1];
 
-            IMember user = GetUser(userIndicator);
-            ITeam team = GetTeam(teamIndicator);
+            IMember user = this.Repository.GetUser(userIndicator);
+            ITeam team = this.Repository.GetTeam(teamIndicator);
 
-            if (IsTeamMember(team, user))
+            if (this.Repository.IsTeamMember(team, user))
             {
-                throw new UserInputException(string.Format(Constants.USER_ALREADY_EXIST, user.Name));
+                throw new UserInputException(string.Format(Constants.MEMBER_ALREADY_IN_TEAM, user.Name));
             }
-            team.Members.Add(user);
+            team.AddMember(user);
             return $"User with name {user.Name} was successfully added to team {team.Name}";
         }
     }

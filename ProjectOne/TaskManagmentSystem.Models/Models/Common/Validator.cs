@@ -19,7 +19,7 @@ namespace TaskManagmentSystem.Models.Common
 
         public static void ValidateObjectIsNotNULL(object obj, string message)
         {
-            if(obj is null)
+            if(obj is null || obj.ToString() == "")
             {
                 throw new UserInputException(message);
             }

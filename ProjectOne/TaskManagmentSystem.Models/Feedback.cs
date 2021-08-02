@@ -9,13 +9,11 @@ namespace TaskManagmentSystem.Models
     {
         private int rating;
         private Status status;
-        public Feedback(int id, string title, string description)
+        public Feedback(int id, string title, string description, int rating)
             : base(id, title, description, "Feedback")
         {
             this.rating = rating;
             this.Status = Status.New;
-            AddEvent(new EventLog($"ID {id} Feedback {title} was created"));
-
         }
 
         public int Rating

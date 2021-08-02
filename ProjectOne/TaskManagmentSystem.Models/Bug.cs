@@ -13,12 +13,11 @@ namespace TaskManagmentSystem.Models
         private Status status;
         private readonly IList<string> steps = new List<string>();
 
-        public Bug(int id, string title, string description)
+        public Bug(int id, string title, string description, List<string> steps)
             : base(id, title, description, "Bug")
         {
             this.Priority = Priority.Low;
             this.steps = steps;
-            AddEvent(new EventLog($"ID: {id} Bug {title} was created"));
         }
         public Priority Priority
         {
@@ -51,16 +50,12 @@ namespace TaskManagmentSystem.Models
         {
             get => new List<string>(this.steps);
         }
-
         public IMember Assignee { get; private set; }
-
         public void ChangePriority()
         {
             this.priority = this.priority != Priority.High ? priority++ : Priority.Low;
             AddEvent(new EventLog($"Priority for ID {this.Id} {this.Title} was changed to {this.Priority}"));
-
         }
-
         public void ChangeSeverity()
         {
             this.severity = this.severity != Severity.Critical ? severity++ : Severity.Minor;
@@ -71,7 +66,6 @@ namespace TaskManagmentSystem.Models
             this.status = this.status == Status.Active ? Status.Fixed : Status.Active;
             AddEvent(new EventLog($"Status for ID {this.Id} {this.Title} was changed to {this.Status}"));
         }
-
         public void AddAssignee(IMember assignee)
         {
             this.Assignee = assignee;

@@ -17,8 +17,8 @@ namespace TaskManagmentSystem.Models
             this.Priority = Priority.Low;
             this.Size = Size.Small;
             this.Status = Status.NotDone;
-            AddEvent(new EventLog($"ID: {id} Story {title} was created"));
         }
+
         public Priority Priority
         {
             get => this.priority;
@@ -76,7 +76,6 @@ namespace TaskManagmentSystem.Models
         {
             return "Story: " + base.ToString();
         }
-
         protected override string AddAdditionalInfo()
         {
             return $"Assignee {this.Assignee.Name} {Environment.NewLine} Status: {this.Status} {Environment.NewLine} Priority: {this.Priority} {Environment.NewLine} Size: {this.Size} ";

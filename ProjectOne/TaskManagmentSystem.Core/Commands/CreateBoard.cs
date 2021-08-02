@@ -32,7 +32,7 @@ namespace TaskManagmentSystem.Core.Commands
             }
 
             var board = this.Repository.CreateBoard(boardName);
-            if (team.Boards.Any(x => x.Name == boardName))
+            if (team.Boards.Any(x => x.Name == boardName)) //ToDo: maybe another class
             {
                 throw new UserInputException(string.Format(Constants.BOARS_ALREADY_EXIST, boardName));
             }

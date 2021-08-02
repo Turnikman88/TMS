@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Text.RegularExpressions;
 using TaskManagmentSystem.Models.Contracts;
 namespace TaskManagmentSystem.Models.Common
 {
@@ -37,6 +38,14 @@ namespace TaskManagmentSystem.Models.Common
             if (expected != recived)
             {
                 throw new UserInputException(string.Format(Constants.NUM_OF_PARAMETERS_ERR, expected, recived));
+            }
+        }
+        public static void ValidatePattern(string value, string pattern, string message)
+        {
+            var regex = new Regex(pattern);
+            if (!regex.IsMatch(value))
+            {
+                throw new UserInputException(message);
             }
         }
     }

@@ -22,7 +22,7 @@ namespace TaskManagmentSystem.Models
             {
                 Validator.ValidateObjectIsNotNULL(value, string.Format(Constants.ITEM_NULL_ERR, nameof(Member)));
                 Validator.ValidateRange(value.Length, Constants.MEMBER_NAME_MIN_SYMBOLS, Constants.MEMBER_NAME_MAX_SYMBOLS, string.Format(Constants.STRING_LENGHT_ERR, nameof(Member), Constants.MEMBER_NAME_MIN_SYMBOLS, Constants.MEMBER_NAME_MAX_SYMBOLS));
-                Validator.ValidateNameUniqueness(value);
+                Validator.ValidatePattern(value, Constants.USERNAME_PATTERN, Constants.USERNAME_PATTERN_ERR);
                 this.name = value;
             }
         }

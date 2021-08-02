@@ -44,6 +44,9 @@
         public const string PRINT_INFO_SEPARATOR = "--------------";
         public const string INVALID_COMMAND_ERR = "Command with name: {0} doesn't exist!";
 
+        public const string USERNAME_PATTERN = "^(?=.{8,20}$)[a-zA-Z0-9._]+$";
+        public const string USERNAME_PATTERN_ERR = "Username must be at least 8 characters long and must not contain any special characters except '.' or '_'!";
+        public const string PASSWORD_PATTERN = "^(?=.{8,20}$)[a-zA-Z0-9._-*@+]+$";
         public const string WRONG_USERNAME = "Wrong username!";
         public const string USER_ALREADY_EXIST = "User {0} already exist. Choose a different username!";
         public const string USER_NOT_LOGGED_IN = "You are not logged!";

@@ -26,6 +26,7 @@ namespace TaskManagmentSystem.Core.Commands
             string taskTitle = CommandParameters[1];
             string taskDescription = CommandParameters[2];
 
+           
             var type = this.Repository.ModelsClassTypes.SingleOrDefault(x => x.Name.ToLower() == taskType) ?? throw new UserInputException(string.Format(Constants.TASK_TYPE_ERR, taskType));
             var task = this.Repository.CreateTask(type, taskTitle, taskDescription);
             return $"{task.GetType().Name} was created";            

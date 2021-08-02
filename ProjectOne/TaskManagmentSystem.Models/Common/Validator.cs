@@ -30,5 +30,12 @@
             }
             throw new UserInputException(string.Format(Constants.PARSE_INT_ERR, value));
         }
+        public static void ValidateParametersCount(int expected, int recived)
+        {
+            if (expected != recived)
+            {
+                throw new UserInputException(string.Format(Constants.NUM_OF_PARAMETERS_ERR, expected, recived));
+            }
+        }
     }
 }

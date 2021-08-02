@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 using TaskManagmentSystem.Core.Contracts;
+using TaskManagmentSystem.Models.Common;
 
 namespace TaskManagmentSystem.Core.Commands
 {
@@ -13,7 +15,21 @@ namespace TaskManagmentSystem.Core.Commands
         }
         public override string Execute()
         {
-            throw new NotImplementedException();
+            if (this.Repository.Teams.Count > 0)
+            {
+                var sb = new StringBuilder();
+                foreach (var team in this.Repository.Teams)
+                {
+                    sb.AppendLine(team.ToString());
+                    sb.AppendLine(Constants.PRINT_INFO_SEPARATOR);
+                }
+                return sb.ToString().Trim();
+            }
+            else
+            {
+                return "There are no registered teams."; //maybe constant ?
+            }
+
         }
     }
 }

@@ -4,7 +4,7 @@
     {
         public const string TerminationCommand = "exit";
         public const string EmptyCommandError = "Command cannot be empty.";
-
+        public const string EVENT_WAS_CREATED = "{0} event was created";
 
         public const string STRING_LENGHT_ERR = "{0} must be between {1} and {2} symbols long!";
 
@@ -36,6 +36,19 @@
         public const string STATUS_REVERT_ERROR = "Status cannot be Reverted! Current status {0}!";
 
         public const string PARSE_INT_ERR = "Invalid value for {0}. Should be an integer number.";
+        public const string NUM_OF_PARAMETERS_ERR = "Invalid number of arguments. Expected: {0}, Received: {1}";
+        public const string TASK_TYPE_ERR = "Task of type {0} doesnt exist";
+        public const string PRINT_INFO_SEPARATOR = "--------------";
+        public const string INVALID_COMMAND_ERR = "Command with name: {0} doesn't exist!";
+
+        public const string WRONG_USERNAME = "Wrong username!";
+        public const string USER_ALREADY_EXIST = "User {0} already exist. Choose a different username!";
+        public const string USER_NOT_LOGGED_IN = "You are not logged!";
+        public const string USER_LOGGED_OUT = "You logged out!";
+        public const string NO_USER_LOGGED = "You can't log out, no one is logged!";
+        public const string USER_LOGGED_IN = "User {0} successfully logged in!";
+        public const string USER_LOGGED_IN_ALREADY = "User {0} is logged in! Please log out first!";
+
 
 
     }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using TaskManagmentSystem.Core.Commands;
 using TaskManagmentSystem.Core.Contracts;
+using TaskManagmentSystem.Models.Common;
 
 namespace TaskManagmentSystem.Core
 {
@@ -16,30 +17,38 @@ namespace TaskManagmentSystem.Core
         public ICommand Create(string commandLine)
         {
             string[] arguments = commandLine.Split(); //ToDo: check why cant remove emptyentries
-            string name = ExtractName(arguments);
+            string commandName = ExtractName(arguments);
+            CheckPremissionToExecute(commandName);
             List<string> commandParameters = ExtractParameters(arguments);
             ICommand command = null;
-            switch (name.ToLower())
+            switch (commandName.ToLower())
             {
-                case "createperson":
-                    command = new CreatePersonCommand(commandParameters, repository);
+                case "login":
+                    command = new LogInCommand(commandParameters, repository);
                     break;
-                case "showallpeople": // maybe only admin can do it
+                case "logout":
+                    command = new LogOutCommand(repository);
+                    break;
+
+                case "createuser": //Done
+                    command = new CreateUserCommand(commandParameters, repository);
+                    break;
+                case "showusers": // maybe only admin can do it //Done
                     command = new ShowAllPeopleCommand(repository);
                     break;
-                case "showpersonactivity":
+                case "showuseractivity":
                     command = new ShowPersonActivityCommand(commandParameters, repository);
                     break;
-                case "createteam":
+                case "createteam": //Done
                     command = new CreateNewTeamCommand(commandParameters, repository);
                     break;
-                case "showteams": // maybe only admin can do it
+                case "showteams": // maybe only admin can do it //Done
                     command = new ShowAllTeamsCommand(repository);
                     break;
                 case "showteamactivity":
                     command = new ShowTeamActivityCommand(commandParameters, repository);
                     break;
-                case "addperson":  //adds person to team
+                case "adduser":  //adds person to team
                     command = new AddPersonToTeamCommand(commandParameters, repository);
                     break;
                 case "showmembers":  //shows all team members // we need validation if the user is member // one user can be member of more than one teams 
@@ -54,13 +63,10 @@ namespace TaskManagmentSystem.Core
                 case "showboardactivity":
                     command = new ShowBoardActivityCommand(commandParameters, repository);
                     break;
-                case "createtask":
+                case "createtask": //Half Done
                     command = new CreateTaskCommand(commandParameters, repository);
                     break;
                 case "advance": //! advance id priority/status...
-                    command = new AdvanceCommand(commandParameters, repository);
-                    break;
-                case "revert": //!
                     command = new AdvanceCommand(commandParameters, repository);
                     break;
                 case "assign":
@@ -69,15 +75,15 @@ namespace TaskManagmentSystem.Core
                 case "addcomment":
                     command = new AddCommentToTask(commandParameters, repository);
                     break;
-
+                default:
+                    throw new UserInputException(string.Format(Constants.INVALID_COMMAND_ERR, commandName));
             }
             return command; //remove later
         }
 
         private List<string> ExtractParameters(string[] arguments)
-        {
-            List<string> commandParams = new List<string>();
-            var list = commandParams.Skip(1).ToList();
+        {            
+            var list = arguments.Skip(1).ToList();
             return list;
         }
 
@@ -85,6 +91,15 @@ namespace TaskManagmentSystem.Core
         {
             string nameOfCommand = arguments[0];
             return nameOfCommand;
+        }
+        private void CheckPremissionToExecute(string commandName) 
+        {
+            
+            if (this.repository.LoggedUser == null && commandName.ToLower() != "createuser" && commandName.ToLower() != "login")
+            {
+                throw new UserInputException(Constants.USER_NOT_LOGGED_IN); //ToDo: fix error message when type login 
+            }
+            
         }
     }
 }

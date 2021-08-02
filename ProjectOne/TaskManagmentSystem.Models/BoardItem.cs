@@ -12,13 +12,13 @@ namespace TaskManagmentSystem.Models
         private string description;
         private readonly IList<IComment> comments = new List<IComment>();
         private readonly IList<IEventLog> eventLogs = new List<IEventLog>();
-        protected BoardItem(int id, string title, string description)
+        protected BoardItem(int id, string title, string description, string type)
         {
+            this.Id = id;
             this.Title = title;
             this.Description = description;
-            this.Id = id;
+            AddEvent(new EventLog(string.Format(Constants.EVENT_WAS_CREATED, type)));
         }
-
         public string Title
         {
             get => this.title;
@@ -70,7 +70,10 @@ namespace TaskManagmentSystem.Models
         public abstract void ChangeStatus();
 
         protected abstract string AddAdditionalInfo();
-
+        protected void AddEvent(IEventLog Log)
+        {
+            this.eventLogs.Add(Log);
+        }
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
@@ -79,12 +82,12 @@ namespace TaskManagmentSystem.Models
             sb.AppendLine(AddAdditionalInfo());
             if (comments.Count > 0)
             {
-                sb.AppendLine("-----");
+                sb.AppendLine(Constants.PRINT_INFO_SEPARATOR);
                 foreach (var comment in comments)
                 {
                     sb.AppendLine(comment.ToString());
                 }
-                sb.AppendLine("-----");
+                sb.AppendLine(Constants.PRINT_INFO_SEPARATOR);
             }
             else
             {

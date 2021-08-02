@@ -35,7 +35,14 @@ namespace TaskManagmentSystem.Core
                 }
                 catch (Exception ex)
                 {
-                    writer.WriteLine(ex.ToString());
+                    if (ex.InnerException != null)
+                    {
+                        writer.WriteLine(ex.InnerException.Message.ToString());
+                    }
+                    else
+                    {
+                        writer.WriteLine(ex.Message);
+                    }
                 }
             }
         }
@@ -44,16 +51,11 @@ namespace TaskManagmentSystem.Core
         {
             Validator.ValidateObjectIsNotNULL(commandLine.Trim(), Constants.EmptyCommandError);
 
-            CheckPremissionToExecute(commandLine);
-
             ICommand command = this.commandFactory.Create(commandLine);
             string result = command.Execute();
             writer.WriteLine(result.Trim());
         }
 
-        private void CheckPremissionToExecute(string commandLine)
-        {
-            //ToDo: Checks if user is the member of the team, before processing command
-        }
+
     }
 }

@@ -4,12 +4,12 @@ using TaskManagmentSystem.Models.Common;
 
 namespace TaskManagmentSystem.Core.Commands
 {
-    internal class CreateUserCommand : BaseCommand
+    internal class CreateUser : BaseCommand
     {
         private const int numberOfParameters = 1;
 
 
-        public CreateUserCommand(List<string> commandParameters, IRepository repository)
+        public CreateUser(IList<string> commandParameters, IRepository repository)
             : base(commandParameters, repository)
         {
 

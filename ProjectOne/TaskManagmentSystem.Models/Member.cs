@@ -4,7 +4,7 @@ using TaskManagmentSystem.Models.Contracts;
 
 namespace TaskManagmentSystem.Models
 {
-    public class Member : IMember, IActivityLog
+    public class Member : IMember, IActivityLog   //ToDo: Ask Kalin
     {
         private string name;
         private IList<IEventLog> eventLogs = new List<IEventLog>();
@@ -22,7 +22,6 @@ namespace TaskManagmentSystem.Models
             {
                 Validator.ValidateObjectIsNotNULL(value, string.Format(Constants.ITEM_NULL_ERR, nameof(Member)));
                 Validator.ValidateRange(value.Length, Constants.MEMBER_NAME_MIN_SYMBOLS, Constants.MEMBER_NAME_MAX_SYMBOLS, string.Format(Constants.STRING_LENGHT_ERR, nameof(Member), Constants.MEMBER_NAME_MIN_SYMBOLS, Constants.MEMBER_NAME_MAX_SYMBOLS));
-                Validator.ValidateNameUniqueness(value);
                 this.name = value;
             }
         }

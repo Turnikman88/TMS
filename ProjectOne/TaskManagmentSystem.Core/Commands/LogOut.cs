@@ -6,10 +6,10 @@ using TaskManagmentSystem.Models.Common;
 
 namespace TaskManagmentSystem.Core.Commands
 {
-    public class LogOutCommand : BaseCommand
+    public class LogOut : BaseCommand
     {
-        public LogOutCommand(IRepository repository)
-            : base(new List<string>(), repository)
+        public LogOut(IList<string> commandParameters, IRepository repository)
+            : base(commandParameters, repository)
         {
 
         }

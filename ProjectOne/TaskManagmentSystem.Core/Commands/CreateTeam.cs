@@ -5,11 +5,11 @@ using TaskManagmentSystem.Models.Common;
 
 namespace TaskManagmentSystem.Core.Commands
 {
-    public class CreateNewTeamCommand : BaseCommand
+    public class CreateTeam : BaseCommand
     {
         private const int numberOfParameters = 1;
 
-        public CreateNewTeamCommand(IList<string> commandParameters, IRepository repository)
+        public CreateTeam(IList<string> commandParameters, IRepository repository)
             : base(commandParameters, repository)
         {
 

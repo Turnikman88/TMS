@@ -8,10 +8,10 @@ using TaskManagmentSystem.Models.Common;
 
 namespace TaskManagmentSystem.Core.Commands
 {
-    public class ShowAllPeopleCommand : BaseCommand
+    public class ShowAllUsers : BaseCommand
     {
-        public ShowAllPeopleCommand(IRepository repository)
-            : base(new List<string>(), repository)
+        public ShowAllUsers(IList<string> commandParameters, IRepository repository)
+            : base(commandParameters, repository)
 
         {
 

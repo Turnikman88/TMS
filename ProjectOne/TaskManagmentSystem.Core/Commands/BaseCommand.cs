@@ -1,6 +1,9 @@
 ﻿using ProjectOne.Commands.Contracts;
 using System.Collections.Generic;
+using System.Linq;
 using TaskManagmentSystem.Core.Contracts;
+using TaskManagmentSystem.Models.Common;
+using TaskManagmentSystem.Models.Contracts;
 
 namespace TaskManagmentSystem.Core.Commands
 {
@@ -22,7 +25,7 @@ namespace TaskManagmentSystem.Core.Commands
 
         public abstract string Execute();
 
-
+        
         //maybe some Enum parser
     }
 }

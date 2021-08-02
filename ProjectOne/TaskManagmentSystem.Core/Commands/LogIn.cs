@@ -6,11 +6,11 @@ using TaskManagmentSystem.Models.Common;
 
 namespace TaskManagmentSystem.Core.Commands
 {
-    public class LogInCommand : BaseCommand
+    public class LogIn : BaseCommand
     {
         private const int numberOfParameters = 1;
 
-        public LogInCommand(List<string> commandParameters, IRepository repository)
+        public LogIn(IList<string> commandParameters, IRepository repository)
             : base(commandParameters, repository)
         {
 

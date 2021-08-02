@@ -4,9 +4,9 @@ using TaskManagmentSystem.Core.Contracts;
 
 namespace TaskManagmentSystem.Core.Commands
 {
-    public class ShowTeamBoardsCommand : BaseCommand
+    public class Advance : BaseCommand
     {
-        public ShowTeamBoardsCommand(List<string> commandParameters, IRepository repository)
+        public Advance(IList<string> commandParameters, IRepository repository)
             : base(commandParameters, repository)
         {
 

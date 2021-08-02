@@ -6,10 +6,10 @@ using TaskManagmentSystem.Models.Common;
 
 namespace TaskManagmentSystem.Core.Commands
 {
-    public class ShowAllTeamsCommand : BaseCommand
+    public class ShowAllTeams : BaseCommand
     {
-        public ShowAllTeamsCommand(IRepository repository)
-            :base(new List<string>(), repository)
+        public ShowAllTeams(IList<string> commandParameters, IRepository repository)
+            :base(commandParameters, repository)
         {
 
         }

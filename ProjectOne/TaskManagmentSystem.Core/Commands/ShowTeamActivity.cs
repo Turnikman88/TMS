@@ -4,9 +4,9 @@ using TaskManagmentSystem.Core.Contracts;
 
 namespace TaskManagmentSystem.Core.Commands
 {
-    public class ShowTeamActivityCommand : BaseCommand
+    public class ShowTeamActivity : BaseCommand
     {
-        public ShowTeamActivityCommand(IList<string> commandParameters, IRepository repository)
+        public ShowTeamActivity(IList<string> commandParameters, IRepository repository)
             :base(commandParameters, repository)
         {
 

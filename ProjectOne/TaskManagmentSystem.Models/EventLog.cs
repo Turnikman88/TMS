@@ -1,4 +1,5 @@
 ﻿using System;
+using TaskManagmentSystem.Models.Common;
 using TaskManagmentSystem.Models.Contracts;
 
 namespace TaskManagmentSystem.Models
@@ -27,7 +28,7 @@ namespace TaskManagmentSystem.Models
             {
                 if (string.IsNullOrEmpty(value))
                 {
-                    throw new ArgumentException("Please provide a non-empty description");
+                    throw new UserInputException("Please provide a non-empty description");
                 }
                 this.description = value;
             }

@@ -10,7 +10,7 @@ namespace TaskManagmentSystem.Models
         private IList<IMember> members = new List<IMember>();
         private IList<IBoard> boards = new List<IBoard>();
 
-        public Team(string name, int id)
+        public Team(int id, string name)
         {
             this.Name = name;
             this.Id = id;

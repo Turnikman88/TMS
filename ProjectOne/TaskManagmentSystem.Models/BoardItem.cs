@@ -12,7 +12,7 @@ namespace TaskManagmentSystem.Models
         private string description;
         private readonly IList<IComment> comments = new List<IComment>();
         private readonly IList<IEventLog> eventLogs = new List<IEventLog>();
-        protected BoardItem(string title, string description, int id)
+        protected BoardItem(int id, string title, string description)
         {
             this.Title = title;
             this.Description = description;

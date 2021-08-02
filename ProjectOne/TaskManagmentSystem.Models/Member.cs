@@ -11,7 +11,7 @@ namespace TaskManagmentSystem.Models
         private readonly IList<IEventLog> eventLogs = new List<IEventLog>();
         private readonly IList<IBoardItem> tasks = new List<IBoardItem>();
 
-        public Member(string name, int id)
+        public Member(int id, string name)
         {
             this.name = name;
             AddEvent(new EventLog($"Member {name} was created"));

@@ -12,7 +12,6 @@ namespace TaskManagmentSystem.Models
         private string description;
         //private DateTime eventDate;
 
-
         //ctor
         public EventLog(string description)
         {

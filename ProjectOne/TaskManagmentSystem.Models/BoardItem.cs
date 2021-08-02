@@ -31,6 +31,7 @@ namespace TaskManagmentSystem.Models
         }
 
         public int Id { get; }
+
         public string Description
         {
             get => this.description;
@@ -51,12 +52,23 @@ namespace TaskManagmentSystem.Models
         public void AddComment(Comment comment)
         {
             this.comments.Add(comment);
+            AddEvent(new EventLog($"New comment was added, Author: {comment.Author}"));
         }
-        public void AddEvent(IEventLog eventLog)
+        public void ViewHistory()
+        {
+            foreach (var item in eventLogs)
+            {
+                item.ViewInfo();
+            }
+        }
+
+        protected void AddEvent(IEventLog eventLog)
         {
             this.eventLogs.Add(eventLog);
         }
+
         public abstract void ChangeStatus();
+
         protected abstract string AddAdditionalInfo();
 
         public override string ToString()

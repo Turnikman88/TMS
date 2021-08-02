@@ -25,25 +25,31 @@ namespace TaskManagmentSystem.Models
             {
                 Validator.ValidateObjectIsNotNULL(value, string.Format(Constants.ITEM_NULL_ERR, nameof(Member)));
                 Validator.ValidateRange(value.Length, Constants.MEMBER_NAME_MIN_SYMBOLS, Constants.MEMBER_NAME_MAX_SYMBOLS, string.Format(Constants.STRING_LENGHT_ERR, nameof(Member), Constants.MEMBER_NAME_MIN_SYMBOLS, Constants.MEMBER_NAME_MAX_SYMBOLS));
-                Validator.ValidateNameUniqueness(value);
+                //Validator.ValidateNameUniqueness(value);
+                //ToDo Uniqueness should be checked in engine
                 this.name = value;
             }
         }
         public int Id { get; }
+
         public IList<IEventLog> EventLogs
             => new List<IEventLog>(this.eventLogs);
 
         public IList<IBoardItem> Tasks
-            => new List<IBoardItem>(this.tasks); //ToDo: just Itasks Tasks or List<IBoardItems>
+            => new List<IBoardItem>(this.tasks); 
+
+        //ToDo: just Itasks Tasks or List<IBoardItems>
         private void AddEvent(IEventLog eventLog)
         {
             this.eventLogs.Add(eventLog);
         }
+
         public void AddTask(IBoardItem task)
         {
             Validator.ValidateObjectIsNotNULL(task, string.Format(Constants.ITEM_NULL_ERR, "Task"));
             AddEvent(new EventLog($"New task  was created {task.Title}"));
         }
+
         public void ViewHistory()
         {
             foreach (var item in eventLogs)
@@ -51,6 +57,7 @@ namespace TaskManagmentSystem.Models
                 item.ViewInfo();
             }
         }
+
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();

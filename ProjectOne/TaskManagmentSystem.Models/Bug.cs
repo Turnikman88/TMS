@@ -52,34 +52,31 @@ namespace TaskManagmentSystem.Models
             get => new List<string>(this.steps);
         }
 
-        public IMember Assignee { get; } //ToDo: later
+        public IMember Assignee { get; private set; }
 
         public void ChangePriority()
         {
-            if (this.priority != Priority.High)
-            {
-                this.priority++;
-                return;
-            }
-            this.priority = Priority.Low;
-            AddEvent(new EventLog($"ID: {id} Bug {title} was created"));
+            this.priority = this.priority != Priority.High ? priority++ : Priority.Low;
+            AddEvent(new EventLog($"Priority for ID {this.Id} {this.Title} was changed to {this.Priority}"));
 
         }
 
         public void ChangeSeverity()
         {
-            if (this.severity != Severity.Critical)
-            {
-                this.severity++;
-                return;
-            }
-            this.severity = Severity.Minor;
+            this.severity = this.severity != Severity.Critical ? severity++ : Severity.Minor;
+            AddEvent(new EventLog($"Saverity for ID {this.Id} {this.Title} was changed to {this.Severity}"));
         }
         public override void ChangeStatus()
         {
             this.status = this.status == Status.Active ? Status.Fixed : Status.Active;
+            AddEvent(new EventLog($"Status for ID {this.Id} {this.Title} was changed to {this.Status}"));
         }
 
+        public void AddAssignee(IMember assignee)
+        {
+            this.Assignee = assignee;
+            AddEvent(new EventLog($"Assignee {assignee.Id} was assigneed to ID: {this.Id}, Story {this.Title}"));
+        }
         public override string ToString()
         {
             return "Bug: " + base.ToString();

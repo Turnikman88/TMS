@@ -12,9 +12,10 @@ namespace TaskManagmentSystem.Models
 
         public Board(int id, string name)
         {
-            this.Id = id;
             this.Name = name;
+            this.Id = id;
         }
+
         public string Name
         {
             get => this.name;
@@ -29,7 +30,6 @@ namespace TaskManagmentSystem.Models
 
         public IList<IBoardItem> Tasks
             => new List<IBoardItem>(this.tasks);
-
 
         public IList<IEventLog> EventLogs
             => new List<IEventLog>(this.events);

@@ -8,7 +8,7 @@ namespace TaskManagmentSystem.Models
     {
         private string name;
         private IList<IEventLog> eventLogs = new List<IEventLog>();
-        private IList<ITasks> tasks = new List<ITasks>();
+        private IList<IBoardItem> tasks = new List<IBoardItem>();
 
         public Member(int id, string name)
         {
@@ -31,9 +31,9 @@ namespace TaskManagmentSystem.Models
         public IList<IEventLog> EventLogs
             => new List<IEventLog>(this.eventLogs);
 
-        public IList<ITasks> Tasks
+        public IList<IBoardItem> Tasks
         {
-            get => new List<ITasks>(this.tasks);
+            get => new List<IBoardItem>(this.tasks);
             private set
             {
                 Validator.ValidateObjectIsNotNULL(value, Constants.MEMBER_FIRST_TASK_NULL);
@@ -43,7 +43,7 @@ namespace TaskManagmentSystem.Models
 
         public int Id { get; }
 
-        public void AddTask(ITasks task)
+        public void AddTask(IBoardItem task)
         {
             Validator.ValidateObjectIsNotNULL(task, string.Format(Constants.ITEM_NULL_ERR, "Task"));
             this.tasks.Add(task);

@@ -1,6 +1,6 @@
 ﻿namespace TaskManagmentSystem.Models.Enums
 {
-    public enum Priority
+    public enum Priority : byte
     {
         Low,
         Medium,

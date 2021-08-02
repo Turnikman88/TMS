@@ -3,7 +3,7 @@ using TaskManagmentSystem.Models.Enums.Story;
 
 namespace TaskManagmentSystem.Models.Contracts
 {
-    public interface IStory
+    public interface IStory : HasId
     {
         Priority Priority { get; }
         Size Size { get; }

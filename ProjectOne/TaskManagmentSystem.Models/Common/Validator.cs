@@ -1,6 +1,6 @@
 ﻿namespace TaskManagmentSystem.Models.Common
 {
-    public class Validator
+    public static class Validator
     {
         public static void ValidateRange(int value, int min, int max, string message)
         {

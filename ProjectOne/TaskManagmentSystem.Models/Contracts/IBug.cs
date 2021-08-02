@@ -4,7 +4,7 @@ using TaskManagmentSystem.Models.Enums.Bug;
 
 namespace TaskManagmentSystem.Models.Contracts
 {
-    public interface IBug : IBoardItem
+    public interface IBug : IBoardItem, HasId
     {
         Priority Priority { get; }
         Severity Severity { get; }

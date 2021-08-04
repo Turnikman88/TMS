@@ -44,15 +44,22 @@
         public const string PRINT_INFO_SEPARATOR = "--------------";
         public const string INVALID_COMMAND_ERR = "Command with name: {0} doesn't exist!";
 
-        public const string PASSWORD_PATTERN = "^(?=.{8,20}$)[a-zA-Z0-9._-*@+]+$";
+        public const string PASSWORD_PATTERN = @"^(?=.{8,20}$)[a-zA-Z0-9\W]+$";
+        public const string PASSWORD_CHANGE_ERR = "Password doesn't match!";
+        public const string PASSWORD_CHANGED_SUCC = "Password succsessfully changed from {0} to {1}";
+        public const string WRONG_PASSWORD = "Wrong password!";
+        public const string PASSWORD_PATTERN_ERR = "Password must be at least 8 characters long!";
+
         public const string WRONG_USERNAME = "Wrong username!";
         public const string USER_ALREADY_EXIST = "User {0} already exist. Choose a different username!";
         public const string USER_NOT_LOGGED_IN = "You are not logged!";
+        public const string THIS_USER_LOGGED_IN = "You are already logged!";
         public const string USER_LOGGED_OUT = "You logged out!";
         public const string NO_USER_LOGGED = "You can't log out, no one is logged!";
         public const string USER_LOGGED_IN = "User {0} successfully logged in!";
         public const string USER_LOGGED_IN_ALREADY = "User {0} is logged in! Please log out first!";
         public const string USER_DOESNT_EXSIST = "User {0} doesn't exsist";
+        public const string USER_NOT_ROOT = "You are not the owner!";
 
         public const string MEMBER_NOT_IN_TEAM = "User {0} is not member of the team";
         public const string MEMBER_ALREADY_IN_TEAM = "User {0} is already member of the team";

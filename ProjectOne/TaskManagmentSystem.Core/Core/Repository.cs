@@ -11,6 +11,8 @@ namespace TaskManagmentSystem.Core
 {
     public class Repository : IRepository
     {
+        private const string adminName = "superuser";
+        private const string adminPass = "adminadmin";
         private int nextId;
         private IList<Type> coreClassTypes = new List<Type>();
         private IList<Type> modelsClassTypes = new List<Type>();
@@ -21,6 +23,7 @@ namespace TaskManagmentSystem.Core
             this.nextId = 0;
             this.coreClassTypes = coreClassTypes;
             this.modelsClassTypes = modelsClassTypes;
+            CreateAdmin(); // ToDo: Maybe in static constructor
         }
 
         
@@ -34,17 +37,23 @@ namespace TaskManagmentSystem.Core
             => new List<Type>(coreClassTypes);
         public IList<Type> ModelsClassTypes
             => new List<Type>(modelsClassTypes);
-
-        public IMember CreateUser(string username)
+        private void CreateAdmin()
+        {
+            var admin = new Member(0, adminName, adminPass);
+            admin.ChangeRole("root");
+            this.users.Add(admin);
+        }
+        public IMember CreateUser(string username, string password)
         {           
-            var user = new Member(++nextId, username);
+            var user = new Member(++nextId, username, password);
             this.users.Add(user);
             return user;
         }
         public ITeam CreateTeam(string teamName)
         {
-            var team = new Team(++nextId, teamName);
+            var team =  new Team(++nextId, teamName);
             team.AddMember(LoggedUser);
+            team.AddAdministrator(LoggedUser);
             this.teams.Add(team);            
             return team;
         }

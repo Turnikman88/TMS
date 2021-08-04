@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using TaskManagmentSystem.Core.Contracts;
 using TaskManagmentSystem.Models.Common;
+using TaskManagmentSystem.Models.Enums;
 
 namespace TaskManagmentSystem.Core.Commands
 {
@@ -15,6 +16,10 @@ namespace TaskManagmentSystem.Core.Commands
         }
         public override string Execute()
         {
+            if (this.Repository.LoggedUser.Role != Role.Root)
+            {
+                throw new UserInputException(Constants.USER_NOT_ROOT);
+            }
             if (this.Repository.Teams.Count > 0)
             {
                 var sb = new StringBuilder();

@@ -16,10 +16,7 @@ namespace TaskManagmentSystem.Core.Commands
         }
         public override string Execute()
         {
-            if (this.Repository.LoggedUser.Role != Role.Root)
-            {
-                throw new UserInputException(Constants.USER_NOT_ROOT);
-            }
+            CheckIsRoot();
             if (this.Repository.Teams.Count > 0)
             {
                 var sb = new StringBuilder();
@@ -36,5 +33,6 @@ namespace TaskManagmentSystem.Core.Commands
             }
 
         }
+
     }
 }

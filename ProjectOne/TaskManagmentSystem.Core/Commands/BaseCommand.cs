@@ -4,6 +4,7 @@ using System.Linq;
 using TaskManagmentSystem.Core.Contracts;
 using TaskManagmentSystem.Models.Common;
 using TaskManagmentSystem.Models.Contracts;
+using TaskManagmentSystem.Models.Enums;
 
 namespace TaskManagmentSystem.Core.Commands
 {
@@ -25,7 +26,14 @@ namespace TaskManagmentSystem.Core.Commands
 
         public abstract string Execute();
 
-        
+        protected void CheckIsRoot()
+        {
+            if (this.Repository.LoggedUser.Role != Role.Root)
+            {
+                throw new UserInputException(Constants.USER_NOT_ROOT);
+            }
+        }
+
         //maybe some Enum parser
     }
 }

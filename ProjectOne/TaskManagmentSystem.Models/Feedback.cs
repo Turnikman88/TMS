@@ -9,9 +9,10 @@ namespace TaskManagmentSystem.Models
     {
         private int rating;
         private Status status;
-        public Feedback(int id, string title, string description)
+        public Feedback(int id, string title, string description, int rating)
             : base(id, title, description, "Feedback")
         {
+            this.rating = rating;
             this.Status = Status.New;
         }
 
@@ -35,22 +36,23 @@ namespace TaskManagmentSystem.Models
         }
         public override void ChangeStatus()
         {
-            if (this.status != Status.Done)
-            {
-                this.status++;
-                return;
-            }
-            this.status = Status.New;
+            this.status = this.status != Status.Done ? status++ : Status.New;
+            AddEvent(new EventLog($"Status for ID {this.Id} {this.Title} was changed to {this.Status}"));
+        }
+        public void ChangeRating(int number)
+        {
+            this.Rating = number;
+            AddEvent(new EventLog($"Rating for ID {this.Id} {this.Title} was changed to {this.Status}"));
         }
 
         public override string ToString()
         {
             return "Feedback: " + base.ToString();
         }
+
         protected override string AddAdditionalInfo()
         {
             return $"Status: {this.Status} {Environment.NewLine} Rating: {this.Rating}";
         }
-
     }
 }

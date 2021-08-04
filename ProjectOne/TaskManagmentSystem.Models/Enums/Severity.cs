@@ -1,6 +1,6 @@
 ﻿namespace TaskManagmentSystem.Models.Enums
 {
-    public enum Severity
+    public enum Severity : byte
     {
         Minor,
         Major,

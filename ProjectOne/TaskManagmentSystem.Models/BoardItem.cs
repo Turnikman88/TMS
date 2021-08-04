@@ -12,6 +12,7 @@ namespace TaskManagmentSystem.Models
         private string description;
         private readonly IList<IComment> comments = new List<IComment>();
         private readonly IList<IEventLog> eventLogs = new List<IEventLog>();
+
         protected BoardItem(int id, string title, string description, string type)
         {
             this.Id = id;
@@ -19,6 +20,7 @@ namespace TaskManagmentSystem.Models
             this.Description = description;
             AddEvent(new EventLog(string.Format(Constants.EVENT_WAS_CREATED, type)));
         }
+
         public string Title
         {
             get => this.title;
@@ -29,6 +31,8 @@ namespace TaskManagmentSystem.Models
                 this.title = value;
             }
         }
+
+        public int Id { get; }
 
         public string Description
         {
@@ -47,19 +51,26 @@ namespace TaskManagmentSystem.Models
         public IList<IEventLog> EventLogs
             => new List<IEventLog>(this.eventLogs);
 
-        public int Id { get; }
-
         public void AddComment(Comment comment)
         {
             this.comments.Add(comment);
+            AddEvent(new EventLog($"New comment was added, Author: {comment.Author}"));
+        }
+        public void ViewHistory()
+        {
+            foreach (var item in eventLogs)
+            {
+                item.ViewInfo();
+            }
+        }
+
+        protected void AddEvent(EventLog eventLog)
+        {
+            this.eventLogs.Add(eventLog);
         }
 
         public abstract void ChangeStatus();
         protected abstract string AddAdditionalInfo();
-        protected void AddEvent(IEventLog Log)
-        {
-            this.eventLogs.Add(Log);
-        }
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();

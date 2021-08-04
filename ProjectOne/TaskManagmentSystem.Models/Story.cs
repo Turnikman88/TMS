@@ -18,6 +18,7 @@ namespace TaskManagmentSystem.Models
             this.Size = Size.Small;
             this.Status = Status.NotDone;
         }
+
         public Priority Priority
         {
             get => this.priority;
@@ -45,36 +46,30 @@ namespace TaskManagmentSystem.Models
             }
         }
 
-        public IMember Assignee { get; } //ToDo: later
+        public IMember Assignee { get; private set; }
+
+        public void AddAssignee(IMember assignee)
+        {
+            this.Assignee = assignee;
+            AddEvent(new EventLog($"Assignee {assignee.Id} was assigneed to ID: {this.Id}, Story {this.Title}"));
+        }
 
         public void ChangeSize()
         {
-            if (this.size != Size.Large)
-            {
-                this.size++;
-                return;
-            }
-            this.size = Size.Small;
+            this.size = this.size != Size.Large ? size++ : Size.Small;
+            AddEvent(new EventLog($"Size for ID {this.Id} {this.Title} was changed to {this.Size}"));
         }
 
         public void ChangePriority()
         {
-            if (this.priority != Priority.High)
-            {
-                this.priority++;
-                return;
-            }
-            this.priority = Priority.Low;
+            this.priority = this.priority != Priority.High ? priority++ : Priority.Low;
+            AddEvent(new EventLog($"Priority for ID {this.Id} {this.Title} was changed to {this.Priority}"));
         }
 
         public override void ChangeStatus()
         {
-            if (this.status != Status.Done)
-            {
-                this.status++;
-                return;
-            }
-            this.status = Status.NotDone;
+            this.status = this.status != Status.Done ? status++ : Status.NotDone;
+            AddEvent(new EventLog($"Status for ID {this.Id} {this.Title} was changed to {this.Status}"));
         }
 
         public override string ToString()

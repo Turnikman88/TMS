@@ -1,6 +1,6 @@
 ﻿namespace TaskManagmentSystem.Models.Enums.Bug
 {
-    public enum Status
+    public enum Status : byte
     {
         Active,
         Fixed
@@ -8,7 +8,7 @@
 }
 namespace TaskManagmentSystem.Models.Enums.Story
 {
-    public enum Status
+    public enum Status : byte
     {
         NotDone, 
         InProgress,
@@ -17,7 +17,7 @@ namespace TaskManagmentSystem.Models.Enums.Story
 }
 namespace TaskManagmentSystem.Models.Enums.Feedback
 {
-    public enum Status
+    public enum Status : byte
     {
         New, 
         Unscheduled, 

@@ -8,11 +8,12 @@ namespace TaskManagmentSystem.Models.Contracts
        
         string Password { get; }
         Role Role { get; }
-        IList<IBoardItem> Tasks { get; }
         IList<IEventLog> EventLogs { get; }
+        IList<IBoardItem> Tasks { get; }
         void AddTask(IBoardItem task);
         void RemoveTask(IBoardItem task);
         string ChangePass(string newPass);
         void ChangeRole(string role);
+        string ViewHistory();
     }
 }

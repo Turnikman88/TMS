@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using TaskManagmentSystem.Models.Common;
 using TaskManagmentSystem.Models.Contracts;
 using TaskManagmentSystem.Models.Enums;
@@ -20,7 +21,9 @@ namespace TaskManagmentSystem.Models
             this.Name = name;
             this.Password = password;
             this.Role = Role.Normal;
+            AddEvent(new EventLog(string.Format(Constants.EVENT_WAS_CREATED, "Member")));
         }
+        public int Id { get; }
         public string Name
         {
             get => this.name;
@@ -56,32 +59,35 @@ namespace TaskManagmentSystem.Models
         public IList<IBoardItem> Tasks
         {
             get => new List<IBoardItem>(this.tasks);
-            private set
+/*            private set
             {
-                Validator.ValidateObjectIsNotNULL(value, Constants.MEMBER_FIRST_TASK_NULL);
+                Validator.ValidateObjectIsNotNULL(value, Constants.MEMBER_FIRST_TASK_NULL); //ToDo: Is this a mistake? ?
                 this.tasks = value;
-            }
+            }*/
         }
-
-        public int Id { get; }
-
+        protected void AddEvent(IEventLog eventLog)
+        {
+            this.eventLogs.Add(eventLog);
+        }
         public void AddTask(IBoardItem task)
         {
             Validator.ValidateObjectIsNotNULL(task, string.Format(Constants.ITEM_NULL_ERR, "Task"));
             this.tasks.Add(task);
+            AddEvent(new EventLog($"{task.GetType().Name} {task.Title} with ID {task.Id} was assigned on {this.Name}"));
         }
         public void RemoveTask(IBoardItem task)
         {
             Validator.ValidateObjectIsNotNULL(task, string.Format(Constants.ITEM_NULL_ERR, "Task"));
             this.tasks.Remove(task);
+            AddEvent(new EventLog($"{task.GetType().Name} {task.Title} with ID {task.Id} was unassigned from {this.Name}"));
         }
         public string ChangePass(string newPass)
         {
-            Console.WriteLine("Please enter your old password"); //ToDo: maybe in constants ?
+            Console.WriteLine("Please enter your old password"); //ToDo: maybe in constants ? // I think event log for password is stupid idea
             string oldPass = Console.ReadLine();
             if (this.Password == oldPass)
             {
-                this.Password = newPass;
+                this.Password = newPass;                
                 return string.Format(Constants.PASSWORD_CHANGED_SUCC, oldPass, newPass);
             }
             return Constants.PASSWORD_CHANGE_ERR;
@@ -89,6 +95,11 @@ namespace TaskManagmentSystem.Models
         public void ChangeRole(string role)
         {
             this.Role = Validator.ParseRole(role);
+            AddEvent(new EventLog($"User {this.Name} with ID {this.Id} changed his role to {this.Role}"));
+        }
+        public string ViewHistory()
+        {
+            return string.Join($"{Environment.NewLine}", eventLogs.Select(x => x.ViewInfo()));
         }
     }
 }

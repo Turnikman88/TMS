@@ -2,7 +2,7 @@
 {
     public interface IBoard : IName, ITasks, IHasId
     {
-
-        //ToDo: Extend?
+        void AddTask(IBoardItem task);
+        void RemoveTask(IBoardItem task);
     }
 }

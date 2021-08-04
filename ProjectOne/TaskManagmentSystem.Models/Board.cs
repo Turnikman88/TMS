@@ -40,7 +40,12 @@ namespace TaskManagmentSystem.Models
         public void AddTask(IBoardItem task)
         {
             Validator.ValidateObjectIsNotNULL(task, string.Format(Constants.ITEM_NULL_ERR, "Task"));
-            this.Tasks.Add(task);
+            this.tasks.Add(task);
+        }
+        public void RemoveTask(IBoardItem task)
+        {
+            Validator.ValidateObjectIsNotNULL(task, string.Format(Constants.ITEM_NULL_ERR, "Task"));
+            this.tasks.Remove(task);
         }
     }
 }

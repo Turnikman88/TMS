@@ -9,7 +9,8 @@ namespace TaskManagmentSystem.Models.Contracts
         Size Size { get; }
         Status Status { get; }
         IMember Assignee { get; }
-        void ChangePriority();
+        void AddAssignee(IMember assignee);
         void ChangeSize();
+        void ChangePriority();        
     }
 }

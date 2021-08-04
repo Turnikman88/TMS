@@ -46,7 +46,7 @@ namespace TaskManagmentSystem.Models
             }
         }
 
-        public List<string> Steps
+        public IList<string> Steps
         {
             get => new List<string>(this.steps);
         }

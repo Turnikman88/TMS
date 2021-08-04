@@ -16,15 +16,7 @@ namespace TaskManagmentSystem.Models
             this.Id = id;
             this.Name = name;            
         }
-
-        public IList<IMember> Members
-            => new List<IMember>(this.members);
-
-
-        public IList<IBoard> Boards
-             => new List<IBoard>(this.boards);
-        public IList<IMember> Administrators
-            => new List<IMember>(administrators);
+        public int Id { get; }
         public string Name
         {
             get => this.name;
@@ -32,26 +24,30 @@ namespace TaskManagmentSystem.Models
             {
                 Validator.ValidateObjectIsNotNULL(value, string.Format(Constants.ITEM_NULL_ERR, nameof(Team)));
                 Validator.ValidateRange(value.Length, Constants.TEAM_NAME_MIN_SYMBOLS, Constants.TEAM_NAME_MAX_SYMBOLS, string.Format(Constants.STRING_LENGHT_ERR, nameof(Team), Constants.TEAM_NAME_MIN_SYMBOLS, Constants.TEAM_NAME_MAX_SYMBOLS));
-                
+
                 this.name = value;
             }
         }
-
-        public int Id { get; }
-
+        public IList<IMember> Members
+            => new List<IMember>(this.members);
+        public IList<IBoard> Boards
+             => new List<IBoard>(this.boards);
+        public IList<IMember> Administrators
+            => new List<IMember>(administrators);        
         public void AddBoard(IBoard board)
         {
+            Validator.ValidateObjectIsNotNULL(board, string.Format(Constants.ITEM_NULL_ERR, "Board"));
             this.boards.Add(board);
         }
-
         public void AddMember(IMember member)
         {
+            Validator.ValidateObjectIsNotNULL(member, string.Format(Constants.ITEM_NULL_ERR, "Member"));
             this.members.Add(member);
         }
         public void AddAdministrator(IMember admin)
         {
+            Validator.ValidateObjectIsNotNULL(admin, string.Format(Constants.ITEM_NULL_ERR, "Admin"));
             this.administrators.Add(admin);
         }
-
     }
 }

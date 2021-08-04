@@ -42,7 +42,7 @@ namespace TaskManagmentSystem.Models
         public void ChangeRating(int number)
         {
             this.Rating = number;
-            AddEvent(new EventLog($"Rating for ID {this.Id} {this.Title} was changed to {this.Status}"));
+            AddEvent(new EventLog($"Rating for ID {this.Id} {this.Title} was changed to {this.Rating}"));
         }
 
         public override string ToString()

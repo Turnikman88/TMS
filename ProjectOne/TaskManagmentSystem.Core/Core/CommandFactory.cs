@@ -29,7 +29,7 @@ namespace TaskManagmentSystem.Core
 
             command = Activator.CreateInstance(type, commandParameters, repository) as ICommand;
 
-            return command; 
+            return command;
         }
 
         private List<string> ExtractParameters(string[] arguments)
@@ -44,7 +44,7 @@ namespace TaskManagmentSystem.Core
                 bool quotesOpen = false;
                 for (int i = 0; i < arg.Length; i++)
                 {
-                    var currSymbol = arg[i].ToString(); 
+                    var currSymbol = arg[i].ToString();
                     if (currSymbol == "\"")
                     {
                         quotesOpen = quotesOpen == true ? false : true;
@@ -73,15 +73,15 @@ namespace TaskManagmentSystem.Core
             string nameOfCommand = arguments[0];
             return nameOfCommand;
         }
-        private void CheckPremissionToExecute(string commandName) 
+        private void CheckPremissionToExecute(string commandName)
         {
-            
-            if (this.repository.LoggedUser == null && commandName.ToLower() != "createuser" && commandName.ToLower() != "login" 
+
+            if (this.repository.LoggedUser == null && commandName.ToLower() != "createuser" && commandName.ToLower() != "login"
                 && commandName.ToLower() != "help")
             {
                 throw new UserInputException(Constants.USER_NOT_LOGGED_IN); //ToDo: fix error message when type login 
             }
-            
+
         }
     }
 }

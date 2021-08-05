@@ -68,8 +68,7 @@
 
         public const string BOARS_ALREADY_EXIST = "Board {0} already exist. Choose a different name!";
 
-
-
+        public const string PATH_TO_DATABASE = @"../.../../../../../TaskManagmentSystem.Core\DB\";
 
     }
 }

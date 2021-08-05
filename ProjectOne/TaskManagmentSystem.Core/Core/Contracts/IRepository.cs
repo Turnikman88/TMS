@@ -14,7 +14,7 @@ namespace TaskManagmentSystem.Core.Contracts
         IList<Type> ModelsClassTypes { get; }
 
         ITeam CreateTeam(string teamName);
-        IMember CreateUser(string username);
+        IMember CreateUser(string username, string password);
         IBoardItem CreateTask(Type type, string title, string description);
         IBoard CreateBoard(string name);
 

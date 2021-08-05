@@ -18,6 +18,7 @@ namespace TaskManagmentSystem.Core.Commands
         }
         public override string Execute()
         {
+            CheckIsRoot();
             if (this.Repository.Users.Count > 0)
             {
                 var sb = new StringBuilder();

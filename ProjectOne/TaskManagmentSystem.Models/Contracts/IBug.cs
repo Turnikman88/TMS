@@ -9,9 +9,10 @@ namespace TaskManagmentSystem.Models.Contracts
         Priority Priority { get; }
         Severity Severity { get; }
         Status Status { get; }
-        List<string> Steps { get; }
+        IList<string> Steps { get; }
         IMember Assignee { get; }
         void ChangePriority();
         void ChangeSeverity();
+        void AddAssignee(IMember assignee);
     }
 }

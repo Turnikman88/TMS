@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using TaskManagmentSystem.Core;
+using TaskManagmentSystem.Core.Commands;
 using TaskManagmentSystem.Core.Contracts;
 using TaskManagmentSystem.Models;
 using TaskManagmentSystem.Models.Common;
@@ -15,9 +16,8 @@ namespace TaskManagmentSystem.CLI
     {
         static void Main(string[] args)
         {
-            var model = new Model(); // we need that because assemblies get optimized if there is not declared type of that assembly
-                      
-
+            Console.WriteLine(Model.GenerateLogo()); // we need that because assemblies get optimized if there is not declared type of that assembly
+            
             IRepository reository = new Repository(GetCoreClassTypes(), GetModelsClassTypes());
             ICommandFactory commandManager = new CommandFactory(reository);
             IEngine engine = new Engine(commandManager);
@@ -30,7 +30,7 @@ namespace TaskManagmentSystem.CLI
                 .GetReferencedAssemblies()
                 .Select(x => Assembly.Load(x))
                 .SelectMany(x => x.GetTypes())
-                .Where(x => x.FullName.Contains(Constants.CORE_ASSEMBLY_KEY) && x.IsClass).ToList();
+                .Where(x => x.FullName.Contains(Constants.CORE_ASSEMBLY_KEY) && x.BaseType == typeof(BaseCommand)).ToList();
         }
 
         private static List<Type> GetModelsClassTypes()
@@ -39,7 +39,7 @@ namespace TaskManagmentSystem.CLI
                 .GetReferencedAssemblies()
                 .Select(x => Assembly.Load(x))
                 .SelectMany(x => x.GetTypes())
-                .Where(x => x.FullName.Contains(Constants.MODELS_ASSEMBLY_KEY) && x.IsClass).ToList();
+                .Where(x => x.FullName.Contains(Constants.MODELS_ASSEMBLY_KEY) && x.BaseType == typeof(BoardItem)).ToList();
         }
     }
 }

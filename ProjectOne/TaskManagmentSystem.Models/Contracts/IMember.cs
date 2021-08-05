@@ -1,11 +1,19 @@
 ﻿using System.Collections.Generic;
+using TaskManagmentSystem.Models.Enums;
 
 namespace TaskManagmentSystem.Models.Contracts
 {
     public interface IMember : IName, IHasId
     {
-        IList<IBoardItem> Tasks { get; }
+       
+        string Password { get; }
+        Role Role { get; }
         IList<IEventLog> EventLogs { get; }
+        IList<IBoardItem> Tasks { get; }
         void AddTask(IBoardItem task);
+        void RemoveTask(IBoardItem task);
+        string ChangePass(string newPass);
+        void ChangeRole(string role);
+        string ViewHistory();
     }
 }

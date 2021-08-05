@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using TaskManagmentSystem.Models.Common;
 using TaskManagmentSystem.Models.Contracts;
-
+using System.Linq;
 namespace TaskManagmentSystem.Models
 {
     public abstract class BoardItem : IBoardItem, ICommentable, IActivityLog
@@ -51,21 +51,31 @@ namespace TaskManagmentSystem.Models
         public IList<IEventLog> EventLogs
             => new List<IEventLog>(this.eventLogs);
 
-        public void AddComment(Comment comment)
+        public void AddComment(IComment comment)
         {
+            Validator.ValidateObjectIsNotNULL(comment, string.Format(Constants.ITEM_NULL_ERR, "Comment"));
             this.comments.Add(comment);
             AddEvent(new EventLog($"New comment was added, Author: {comment.Author}"));
         }
-        public void ViewHistory()
+        public void RemoveComment(IComment comment)
         {
-            foreach (var item in eventLogs)
+            Validator.ValidateObjectIsNotNULL(comment, string.Format(Constants.ITEM_NULL_ERR, "Comment"));
+            this.comments.Remove(comment);
+            var length = (comment.Content.Length >= 20 ? 20 : comment.Content.Length);
+            AddEvent(new EventLog($"Comment was deleted '{comment.Content.Substring(0, length)} ...'"));
+
+        }
+        public string ViewHistory()
+        {
+            /*foreach (var item in eventLogs)
             {
                 item.ViewInfo();
-            }
+            }*/
+            return string.Join($"{Environment.NewLine}", eventLogs.Select(x => x.ViewInfo()));
         }
 
-        protected void AddEvent(EventLog eventLog)
-        {
+        protected void AddEvent(IEventLog eventLog)
+        {            
             this.eventLogs.Add(eventLog);
         }
 
@@ -93,5 +103,6 @@ namespace TaskManagmentSystem.Models
 
             return sb.ToString();
         }
+
     }
 }

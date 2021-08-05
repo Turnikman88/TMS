@@ -6,9 +6,9 @@ namespace TaskManagmentSystem.Models.Contracts
     {
         IList<IMember> Members { get; }
         IList<IBoard> Boards { get; }
-        void AddMember(IMember member);
+        IList<IMember> Administrators { get; }
         void AddBoard(IBoard board);
-       
-
+        void AddMember(IMember member);
+        void AddAdministrator(IMember admin);
     }
 }

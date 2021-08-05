@@ -1,4 +1,5 @@
 ﻿using System;
+using TaskManagmentSystem.Models.Common;
 using TaskManagmentSystem.Models.Contracts;
 using TaskManagmentSystem.Models.Enums;
 using TaskManagmentSystem.Models.Enums.Story;
@@ -50,6 +51,7 @@ namespace TaskManagmentSystem.Models
 
         public void AddAssignee(IMember assignee)
         {
+            Validator.ValidateObjectIsNotNULL(assignee, string.Format(Constants.ITEM_NULL_ERR, "Assignee"));
             this.Assignee = assignee;
             AddEvent(new EventLog($"Assignee {assignee.Id} was assigneed to ID: {this.Id}, Story {this.Title}"));
         }

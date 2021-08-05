@@ -4,11 +4,26 @@ using System.Text;
 
 namespace TaskManagmentSystem.Models
 {
-    public class Model
+    public static class Model
     {
-        public void Test()
+        public static string GenerateLogo()
         {
-            Console.WriteLine("It works");
+            Console.ForegroundColor = ConsoleColor.Magenta;
+            string logo = @"
+
+▄▄▄█████▓ ███▄ ▄███▓  ██████ 
+▓  ██▒ ▓▒▓██▒▀█▀ ██▒▒██    ▒ 
+▒ ▓██░ ▒░▓██    ▓██░░ ▓██▄   
+░ ▓██▓ ░ ▒██    ▒██   ▒   ██▒
+  ▒██▒ ░ ▒██▒   ░██▒▒██████▒▒
+  ▒ ░░   ░ ▒░   ░  ░▒ ▒▓▒ ▒ ░
+    ░    ░  ░      ░░ ░▒  ░ ░
+  ░      ░      ░   ░  ░  ░  
+                ░         ░  
+Type 'help' to see list of all commands...
+";
+            
+            return logo;
         }
     }
 }

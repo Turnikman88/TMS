@@ -44,7 +44,8 @@ namespace TaskManagmentSystem.Core
         private void CheckPremissionToExecute(string commandName) 
         {
             
-            if (this.repository.LoggedUser == null && commandName.ToLower() != "createuser" && commandName.ToLower() != "login")
+            if (this.repository.LoggedUser == null && commandName.ToLower() != "createuser" && commandName.ToLower() != "login" 
+                && commandName.ToLower() != "help")
             {
                 throw new UserInputException(Constants.USER_NOT_LOGGED_IN); //ToDo: fix error message when type login 
             }

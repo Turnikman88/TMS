@@ -20,6 +20,7 @@ namespace TaskManagmentSystem.Core
         }
         public void Start()
         {
+            Console.ForegroundColor = ConsoleColor.Cyan;
             while (true)
             {
                 try
@@ -31,7 +32,7 @@ namespace TaskManagmentSystem.Core
                         break;
                     }
 
-                    ProcessCommand(inputLine);
+                    ProcessCommand(inputLine);                    
                 }
                 catch (Exception ex)
                 {

@@ -16,8 +16,8 @@ namespace TaskManagmentSystem.CLI
     {
         static void Main(string[] args)
         {
-            var model = new Model(); // we need that because assemblies get optimized if there is not declared type of that assembly            
-
+            Console.WriteLine(Model.GenerateLogo()); // we need that because assemblies get optimized if there is not declared type of that assembly
+            
             IRepository reository = new Repository(GetCoreClassTypes(), GetModelsClassTypes());
             ICommandFactory commandManager = new CommandFactory(reository);
             IEngine engine = new Engine(commandManager);

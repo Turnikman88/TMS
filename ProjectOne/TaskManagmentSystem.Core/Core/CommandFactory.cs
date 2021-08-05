@@ -17,12 +17,12 @@ namespace TaskManagmentSystem.Core
         }
         public ICommand Create(string commandLine)
         {
-            string[] arguments = commandLine.Split(); //ToDo: check why cant remove emptyentries
+            string[] arguments = commandLine.Split(); //ToDo: check why cant remove empty entries
             string commandName = ExtractName(arguments);
             CheckPremissionToExecute(commandName);
             List<string> commandParameters = ExtractParameters(arguments);
             ICommand command = null;
-            var type = this.repository.CoreClassTypes.First(x => x.Name.ToLower() == commandName)
+            var type = this.repository.CoreClassTypes.FirstOrDefault(x => x.Name.ToLower() == commandName)
                 ?? throw new UserInputException(string.Format(Constants.INVALID_COMMAND_ERR, commandName));
 
             command = Activator.CreateInstance(type, commandParameters, repository) as ICommand;

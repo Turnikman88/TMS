@@ -1,4 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using TaskManagmentSystem.Models.Common;
 using TaskManagmentSystem.Models.Contracts;
 
@@ -48,6 +51,22 @@ namespace TaskManagmentSystem.Models
         {
             Validator.ValidateObjectIsNotNULL(admin, string.Format(Constants.ITEM_NULL_ERR, "Admin"));
             this.administrators.Add(admin);
+        }
+        public override string ToString()
+        {
+            var members = this.Members.Count == 0 ? "There are no members!" : 
+                string.Join(Environment.NewLine, this.Members.OrderBy(x => x.Name).Select(x => x.ToString()));
+            var boards = this.Boards.Count == 0 ? "There are no boards!" :
+                string.Join(Environment.NewLine, this.Boards.OrderBy(x => x.Name).Select(x => x.ToString()));
+            var sb = new StringBuilder();
+            sb.AppendLine(Constants.PRINT_INFO_SEPARATOR);
+            sb.AppendLine($"Name: {this.Name}, ID: {this.Id}");
+            sb.AppendLine("Members:");
+            sb.AppendLine($"{members}");
+            sb.AppendLine(Constants.PRINT_INFO_SEPARATOR);
+            sb.AppendLine("Boards:");
+            sb.AppendLine($"{boards}");
+            return sb.ToString().Trim();
         }
     }
 }

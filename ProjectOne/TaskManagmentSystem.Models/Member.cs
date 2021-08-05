@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using TaskManagmentSystem.Models.Common;
 using TaskManagmentSystem.Models.Contracts;
 using TaskManagmentSystem.Models.Enums;
@@ -73,13 +74,13 @@ namespace TaskManagmentSystem.Models
         {
             Validator.ValidateObjectIsNotNULL(task, string.Format(Constants.ITEM_NULL_ERR, "Task"));
             this.tasks.Add(task);
-            AddEvent(new EventLog($"{task.GetType().Name} {task.Title} with ID {task.Id} was assigned on {this.Name}"));
+            AddEvent(new EventLog($"{task.GetType().Name} '{task.Title}' with ID {task.Id} was assigned on '{this.Name}'"));
         }
         public void RemoveTask(IBoardItem task)
         {
             Validator.ValidateObjectIsNotNULL(task, string.Format(Constants.ITEM_NULL_ERR, "Task"));
             this.tasks.Remove(task);
-            AddEvent(new EventLog($"{task.GetType().Name} {task.Title} with ID {task.Id} was unassigned from {this.Name}"));
+            AddEvent(new EventLog($"{task.GetType().Name} '{task.Title}' with ID {task.Id} was unassigned from '{this.Name}'"));
         }
         public string ChangePass(string newPass)
         {
@@ -100,6 +101,12 @@ namespace TaskManagmentSystem.Models
         public string ViewHistory()
         {
             return string.Join($"{Environment.NewLine}", eventLogs.Select(x => x.ViewInfo()));
+        }
+        public override string ToString()
+        {
+            var sb = new StringBuilder();
+            sb.Append($"Name: {this.Name}, ID: {this.Id}, Role: {this.Role} user, Number of assigned tasks: {this.Tasks.Count}");
+            return sb.ToString();
         }
     }
 }

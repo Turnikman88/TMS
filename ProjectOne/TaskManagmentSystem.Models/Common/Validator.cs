@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using System.Text.RegularExpressions;
 using TaskManagmentSystem.Models.Enums;
 namespace TaskManagmentSystem.Models.Common
@@ -40,14 +39,6 @@ namespace TaskManagmentSystem.Models.Common
             {
                 throw new UserInputException(string.Format(Constants.NUM_OF_PARAMETERS_ERR, expected, recived));
             }
-        }
-        public static Role ParseRole(string role)
-        {
-            if (Enum.TryParse<Role>(role, true, out var result))
-            {
-                return result;
-            }
-            throw new UserInputException("This type of role doesn't exsist!");
         }
         public static Role ParseRole(string role)
         {

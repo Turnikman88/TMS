@@ -58,41 +58,6 @@ namespace TaskManagmentSystem.Models
             this.priority = this.priority != Priority.High ? priority++ : Priority.Low;
             AddEvent(new EventLog($"Priority for ID {this.Id} {this.Title} was changed to {this.Priority}"));
         }
-                return;
-            }
-            this.priority = Priority.Low;
-        }
-
-                return;
-            }
-            this.priority = Priority.Low;
-        }
-
-                return;
-            }
-            this.priority = Priority.Low;
-        }
-
-                return;
-            }
-            this.priority = Priority.Low;
-        }
-
-                return;
-            }
-            this.priority = Priority.Low;
-        }
-
-                return;
-            }
-            this.priority = Priority.Low;
-        }
-
-                return;
-            }
-            this.priority = Priority.Low;
-        }
-
         public void ChangeSeverity()
         {
             this.severity = this.severity != Severity.Critical ? severity++ : Severity.Minor;

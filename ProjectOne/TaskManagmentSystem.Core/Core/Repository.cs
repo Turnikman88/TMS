@@ -57,7 +57,7 @@ namespace TaskManagmentSystem.Core
         }
         public ITeam CreateTeam(string teamName)
         {
-            var team =  new Team(++nextId, teamName);
+            var team = new Team(++nextId, teamName);
             team.AddMember(LoggedUser);
             team.AddAdministrator(LoggedUser);
             this.teams.Add(team);

@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
-using System.Text;
 using TaskManagmentSystem.Core.Contracts;
 using TaskManagmentSystem.Models.Common;
 
@@ -16,7 +14,7 @@ namespace TaskManagmentSystem.Core.Commands
         }
         public override string Execute()
         {
-            
+
             var help = File.ReadAllText(Constants.PATH_TO_DATABASE + "help.txt");
             return help;
         }

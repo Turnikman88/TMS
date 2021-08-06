@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using TaskManagmentSystem.Core.Contracts;
 using TaskManagmentSystem.Models.Common;
-using TaskManagmentSystem.Models.Contracts;
 using TaskManagmentSystem.Models.Enums;
 
 namespace TaskManagmentSystem.Core.Commands

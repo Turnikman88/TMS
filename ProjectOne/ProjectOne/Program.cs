@@ -15,8 +15,6 @@ namespace TaskManagmentSystem.CLI
     {
         static void Main(string[] args)
         {
-            Console.WriteLine(Model.GenerateLogo()); // we need that because assemblies get optimized if there is not declared type of that assembly
-            
             Console.SetWindowSize(Console.LargestWindowWidth, Console.LargestWindowHeight);
             Console.WriteLine(Model.GenerateLogo()); // we need that because assemblies get optimized if there is not declared type of that assembly
 

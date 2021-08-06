@@ -1,24 +1,53 @@
+List of all commands:
+
+   AddCommentToTask  		Adds comment to task
+   Advance 	           	Changes given enumeration of task (Status, Priority, Severity…)
+   Assign   			Assign’s task to given member of the team
+
+   CreateBoard 			Creates new board in team
+   CreateTask 			Creates new task in given board
+   CreateTeam  			Creates new team and puts the creator as member and admin of the team
+   CreateUser 			Creates new user 
+
+   Help				Lists all options
+   LogIn  			Verifies the user's identity and logs in the system
+   LogOut			Terminate connection with the system
+
+   ShowAllTeams 		Shows info about all teams
+   ShowAllUsers 		Shows info about all users
+   ShowAllTeamMembers 		Shows info about all the members of a team
+   ShowTeamBoards		Shows info about all boards
+
+   ShowBoardActivity 		Shows info about all events that happend in given board
+   ShowTeamActivity 		Shows info about all events that happend in given team   
+   ShowUserActivity		Shows info about all events that happend with given user
+
+Constrains of all commands:
 
 		YOU MUST BE LOGGED TO USE MOST OF THE COMMANDS
-		SOME COMMANDS ONLY CAN BE EXECUTED BY THE OWNER (SUPERUSER)    
+		SOME COMMANDS ONLY CAN BE EXECUTED BY THE OWNER (SUPERUSER)          
 
-		List of all commands:
+   AddCommentToTask  
+   Advance 
+   Assign   
+   CreateBoard  		First parameter is board name, the second can be either the team id or its name
+   CreateTask 
+   CreateTeam  			Only one parameter needed - the name of the team		
+   CreateUser 			First parameter is username, the second is password
 
-		addcommenttotask..........[teamname] [id] [comment] [author] - Adds comment to task
-		advance...................[teamname] [id] [statusToAdvance] - Changes given enumeration of task (Status, Priority, Severity…)
-		assign....................[teamname/id] [username/id] [taskID] - Assign’s task to given member of the team
-		createboard...............[boardname] [teamname/id] - Creates new board in team
-		createtask................[tasktype] [tasktitle] [taskdescription] - Creates new task in given board
-		createteam................[teamname] - Creates new team
-		createuser................[username] [password] - Creates new user
-		teamjoin..................[username/id] [teamname/id] - Adds user into a team
-		login.....................[username] [password] - Login
-		showallteammembers........[teamname] - shows all team members
-		showboardactivity.........[teamname/id] [boardname] - shows board activity
-		showteamactivity..........[teamname/id] - shows team activity
-		showteamboards............[teamname/id] - shows all boards in team
-		showuseractivity..........[teamname/id] [username/id] - shows user activity
-		showallteams..............No parameters needed
-		showallusers..............No parameters needed
-		help......................No parameters needed
-		logout....................No parameters needed
+   Help 			No parameters needed
+   LogIn  			First parameter is username, the second is password
+   LogOut			No parameters needed
+
+   ShowAllTeams			No parameters needed 
+   ShowAllUsers 		No parameters needed
+   ShowAllTeamMembers 
+   ShowTeamBoards		
+
+   ShowBoardActivity
+   ShowTeamActivity
+   ShowUserActivity
+   
+   
+
+

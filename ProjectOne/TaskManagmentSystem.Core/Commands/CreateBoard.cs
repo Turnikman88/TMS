@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using TaskManagmentSystem.Core.Contracts;
 using TaskManagmentSystem.Models.Common;
@@ -25,7 +24,7 @@ namespace TaskManagmentSystem.Core.Commands
 
             ITeam team = this.Repository.GetTeam(teamIdentificator);
             //Validator.ValidateObjectIsNotNULL(team, string.Format(Constants.TEAM_DOESNT_EXSIST, teamIdentificator));
-                    
+
             if (!this.Repository.IsTeamMember(team, this.Repository.LoggedUser))
             {
                 throw new UserInputException(string.Format(Constants.MEMBER_NOT_IN_TEAM, this.Repository.LoggedUser.Name));

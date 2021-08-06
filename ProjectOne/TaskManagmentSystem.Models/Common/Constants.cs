@@ -65,6 +65,8 @@
         public const string MEMBER_ALREADY_IN_TEAM = "User {0} is already member of the team";
 
         public const string TEAM_DOESNT_EXSIST = "Team {0} doesn't exsist";
+        public const string BOARD_DOESNT_EXSIST = "Board {0} doesn't exsist";
+        public const string TASK_DOESNT_EXSIST = "Task {0} doesn't exsist";
 
         public const string BOARS_ALREADY_EXIST = "Board {0} already exist. Choose a different name!";
 

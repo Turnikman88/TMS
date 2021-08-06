@@ -1,7 +1,9 @@
 ﻿using ProjectOne.Commands.Contracts;
 using System.Collections.Generic;
+using System.Linq;
 using TaskManagmentSystem.Core.Contracts;
 using TaskManagmentSystem.Models.Common;
+using TaskManagmentSystem.Models.Contracts;
 using TaskManagmentSystem.Models.Enums;
 
 namespace TaskManagmentSystem.Core.Commands

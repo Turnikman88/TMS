@@ -44,11 +44,11 @@
         public const string PRINT_INFO_SEPARATOR = "--------------";
         public const string INVALID_COMMAND_ERR = "Command with name: {0} doesn't exist!";
 
-        public const string PASSWORD_PATTERN = @"^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$";
+        public const string PASSWORD_PATTERN = @"^(?=.{8,20}$)[a-zA-Z0-9\W]+$";
         public const string PASSWORD_CHANGE_ERR = "Password doesn't match!";
         public const string PASSWORD_CHANGED_SUCC = "Password succsessfully changed from {0} to {1}";
         public const string WRONG_PASSWORD = "Wrong password!";
-        public const string PASSWORD_PATTERN_ERR = "Password must be at least 8 characters long and containse at least one upper-case, special symbol and digit!";
+        public const string PASSWORD_PATTERN_ERR = "Password must be at least 8 characters long!";
 
         public const string WRONG_USERNAME = "Wrong username!";
         public const string USER_ALREADY_EXIST = "User {0} already exist. Choose a different username!";
@@ -65,8 +65,6 @@
         public const string MEMBER_ALREADY_IN_TEAM = "User {0} is already member of the team";
 
         public const string TEAM_DOESNT_EXSIST = "Team {0} doesn't exsist";
-        public const string BOARD_DOESNT_EXSIST = "Board {0} doesn't exsist";
-        public const string TASK_DOESNT_EXSIST = "Task {0} doesn't exsist";
 
         public const string BOARS_ALREADY_EXIST = "Board {0} already exist. Choose a different name!";
 

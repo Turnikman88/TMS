@@ -18,14 +18,12 @@ namespace TaskManagmentSystem.Core.Contracts
         IBoardItem CreateTask(Type type, string title, string description);
         IBoard CreateBoard(string name);
 
-        IBoardItem FindTaskByID(int id);
         ITeam FindTeamById(int id);
         ITeam FindTeamByName(string name);
         IMember FindUserById(int id);
         IMember FindUserByName(string name);
         ITeam GetTeam(string teamIdentificator);
         IMember GetUser(string userIndicator);
-
         bool IsTeamMember(ITeam team, IMember user);
 
 

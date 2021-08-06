@@ -17,7 +17,7 @@ namespace TaskManagmentSystem.Models
         public Team(int id, string name)
         {
             this.Id = id;
-            this.Name = name;
+            this.Name = name;            
         }
         public int Id { get; }
         public string Name
@@ -36,7 +36,7 @@ namespace TaskManagmentSystem.Models
         public IList<IBoard> Boards
              => new List<IBoard>(this.boards);
         public IList<IMember> Administrators
-            => new List<IMember>(administrators);
+            => new List<IMember>(administrators);        
         public void AddBoard(IBoard board)
         {
             Validator.ValidateObjectIsNotNULL(board, string.Format(Constants.ITEM_NULL_ERR, "Board"));
@@ -52,17 +52,9 @@ namespace TaskManagmentSystem.Models
             Validator.ValidateObjectIsNotNULL(admin, string.Format(Constants.ITEM_NULL_ERR, "Admin"));
             this.administrators.Add(admin);
         }
-        public string ViewHistory()
-        {
-            var sb = new StringBuilder();
-            sb.Append(string.Join($"{Environment.NewLine}", members.Select(x => x.ViewHistory())));
-            sb.Append(string.Join($"{Environment.NewLine}", boards.Select(x => x.ViewHistory())));
-            return sb.ToString().Trim();
-        }
-
         public override string ToString()
         {
-            var members = this.Members.Count == 0 ? "There are no members!" :
+            var members = this.Members.Count == 0 ? "There are no members!" : 
                 string.Join(Environment.NewLine, this.Members.OrderBy(x => x.Name).Select(x => x.ToString()));
             var boards = this.Boards.Count == 0 ? "There are no boards!" :
                 string.Join(Environment.NewLine, this.Boards.OrderBy(x => x.Name).Select(x => x.ToString()));

@@ -1,14 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using TaskManagmentSystem.Core.Contracts;
-using TaskManagmentSystem.Models;
-using TaskManagmentSystem.Models.Common;
 
 namespace TaskManagmentSystem.Core.Commands
 {
     class AddCommentToTask : BaseCommand
     {
-        private const int numberOfParameters = 4;
-        //addcommenttotask [teamname] [id] [comment] [author]
         public AddCommentToTask(IList<string> commandParameters, IRepository repository)
             : base(commandParameters, repository)
         {

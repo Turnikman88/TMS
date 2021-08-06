@@ -7,7 +7,6 @@ using TaskManagmentSystem.Core.Commands;
 using TaskManagmentSystem.Core.Contracts;
 using TaskManagmentSystem.Models;
 using TaskManagmentSystem.Models.Common;
-using TaskManagmentSystem.Models.Contracts;
 
 
 namespace TaskManagmentSystem.CLI
@@ -16,8 +15,9 @@ namespace TaskManagmentSystem.CLI
     {
         static void Main(string[] args)
         {
+            Console.SetWindowSize(Console.LargestWindowWidth, Console.LargestWindowHeight);
             Console.WriteLine(Model.GenerateLogo()); // we need that because assemblies get optimized if there is not declared type of that assembly
-            
+
             IRepository reository = new Repository(GetCoreClassTypes(), GetModelsClassTypes());
             ICommandFactory commandManager = new CommandFactory(reository);
             IEngine engine = new Engine(commandManager);

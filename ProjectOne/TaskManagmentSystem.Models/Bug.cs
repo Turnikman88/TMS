@@ -50,7 +50,9 @@ namespace TaskManagmentSystem.Models
         {
             get => new List<string>(this.steps);
         }
+
         public IMember Assignee { get; private set; }
+
         public void ChangePriority()
         {
             this.priority = this.priority != Priority.High ? priority++ : Priority.Low;

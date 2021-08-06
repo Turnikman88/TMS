@@ -1,16 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Text;
 using TaskManagmentSystem.Core.Contracts;
 using TaskManagmentSystem.Models.Common;
-using TaskManagmentSystem.Models.Enums;
 
 namespace TaskManagmentSystem.Core.Commands
 {
     public class ShowAllTeams : BaseCommand
     {
         public ShowAllTeams(IList<string> commandParameters, IRepository repository)
-            :base(commandParameters, repository)
+            : base(commandParameters, repository)
         {
 
         }

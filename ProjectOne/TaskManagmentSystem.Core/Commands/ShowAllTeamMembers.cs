@@ -26,8 +26,6 @@ namespace TaskManagmentSystem.Core.Commands
 
             var team = this.Repository.GetTeam(teamName);
 
-            CheckIsRoot();
-
             var sb = new StringBuilder();
 
             foreach (var member in team.Members)
@@ -36,8 +34,6 @@ namespace TaskManagmentSystem.Core.Commands
                 sb.AppendLine(Constants.PRINT_INFO_SEPARATOR);
             }
             return sb.ToString().Trim();
-
-
         }
     }
 }

@@ -12,7 +12,7 @@ namespace TaskManagmentSystem.Core
     public class Repository : IRepository
     {
         private const string adminName = "superuser";
-        private const string adminPass = "adminadmin";
+        private const string adminPass = "th1$i$4dmiN";
         private int nextId;
         private IList<Type> coreClassTypes = new List<Type>();
         private IList<Type> modelsClassTypes = new List<Type>();
@@ -101,7 +101,7 @@ namespace TaskManagmentSystem.Core
         {
             return this.users.FirstOrDefault(x => x.Name == name);
         }
-        public bool IsTeamMember(ITeam team, IMember user) //ToDo: Ask Kalin
+        public bool IsTeamMember(ITeam team, IMember user)
         {
             if (team.Members.Any(x => x.Name == user.Name))
             {

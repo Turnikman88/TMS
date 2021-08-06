@@ -10,6 +10,5 @@ namespace TaskManagmentSystem.Models.Contracts
         void AddBoard(IBoard board);
         void AddMember(IMember member);
         void AddAdministrator(IMember admin);
-        string ViewHistory();
     }
 }

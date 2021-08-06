@@ -1,5 +1,25 @@
 List of all commands:
 
+		addcommenttotask.......[teamname] [id] [comment] [author] - Adds comment to task
+		advance................[teamname] [id] [statusToAdvance] - Changes given enumeration of task (Status, Priority, Severity…)
+		assign.................[teamname/id] [username/id] [taskID] - Assign’s task to given member of the team
+		createboard............[boardname] [teamname/id] - Creates new board in team
+		createtask.............[tasktype] [tasktitle] [taskdescription] - Creates new task in given board
+		createteam.............[teamname] - Creates new team
+		createuser.............[username] [password] - Creates new user
+		teamjoin...............[username/id] [teamname/id] - Adds user into a team
+		login..................[username] [password] - Login
+		showallteammembers.....[teamname] - shows all team members
+		showboardactivity......[teamname/id] [boardname] - shows board activity
+		showteamactivity.......[teamname/id] - shows team activity
+		showteamboards.........[teamname/id] - shows all boards in team
+		showuseractivity.......[teamname/id] [username/id] - shows user activity
+		showallteams
+		showallusers
+		help
+		logout
+
+
    AddCommentToTask  		Adds comment to task
    Advance 	           	Changes given enumeration of task (Status, Priority, Severity…)
    Assign   			Assign’s task to given member of the team

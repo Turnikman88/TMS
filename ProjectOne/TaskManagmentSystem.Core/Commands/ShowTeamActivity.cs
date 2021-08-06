@@ -17,9 +17,9 @@ namespace TaskManagmentSystem.Core.Commands
         {
             Validator.ValidateParametersCount(numberOfParameters, CommandParameters.Count);
 
-            string teamName = CommandParameters[0];
+            string teamNameOrID = CommandParameters[0];
 
-            var team = this.Repository.GetTeam(teamName);
+            var team = this.Repository.GetTeam(teamNameOrID);
 
             if (!this.Repository.IsTeamMember(team, this.Repository.LoggedUser))
             {

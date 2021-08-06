@@ -18,14 +18,14 @@ namespace TaskManagmentSystem.Core.Commands
         public override string Execute()
         {
             Validator.ValidateParametersCount(numberOfParameters, CommandParameters.Count);
-            string teamName = CommandParameters[0];
-            string userName = CommandParameters[1];
+            string teamNameOrID = CommandParameters[0];
+            string userNameOrID = CommandParameters[1];
             int id = int.Parse(CommandParameters[2]);
 
-            var team = this.Repository.GetTeam(teamName);
-            var user = this.Repository.GetUser(userName);
+            var team = this.Repository.GetTeam(teamNameOrID);
+            var user = this.Repository.GetUser(userNameOrID);
 
-            if (!this.Repository.IsTeamMember(team, this.Repository.LoggedUser) || team.Members.Contains(user))
+            if (!this.Repository.IsTeamMember(team, this.Repository.LoggedUser) || !team.Members.Contains(user))
             {
                 throw new UserInputException(string.Format(Constants.MEMBER_NOT_IN_TEAM, this.Repository.LoggedUser.Name));
             }
@@ -42,7 +42,7 @@ namespace TaskManagmentSystem.Core.Commands
                 story.AddAssignee(user);
             }
 
-            return $"User {userName} was assigned to {id}";
+            return $"User {userNameOrID} was assigned to {id}";
         }
     }
 }

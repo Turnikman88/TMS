@@ -16,9 +16,11 @@ namespace TaskManagmentSystem.Core
         private int nextId;
         private IList<Type> coreClassTypes = new List<Type>();
         private IList<Type> modelsClassTypes = new List<Type>();
+        private List<string> exsitingNames = new List<string>();
         private readonly IList<IMember> users = new List<IMember>();
         private readonly IList<ITeam> teams = new List<ITeam>();
         private readonly IList<IBoardItem> tasks = new List<IBoardItem>();
+
         public Repository(IList<Type> coreClassTypes, IList<Type> modelsClassTypes)
         {
             this.nextId = 0;
@@ -46,6 +48,11 @@ namespace TaskManagmentSystem.Core
         {
             var user = new Member(++nextId, username, password);
             this.users.Add(user);
+            if (this.exsitingNames.Contains(username))
+            {
+                throw new UserInputException("Name must be unique");
+            }
+            this.exsitingNames.Add(username);
             return user;
         }
         public ITeam CreateTeam(string teamName)
@@ -54,6 +61,11 @@ namespace TaskManagmentSystem.Core
             team.AddMember(LoggedUser);
             team.AddAdministrator(LoggedUser);
             this.teams.Add(team);
+            if (this.exsitingNames.Contains(teamName))
+            {
+                throw new UserInputException("Name must be unique");
+            }
+            this.exsitingNames.Add(teamName);
             return team;
         }
         public IBoardItem CreateTask(Type type, string title, string description)

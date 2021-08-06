@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using TaskManagmentSystem.Core.Contracts;
 using TaskManagmentSystem.Models.Common;
 
@@ -39,6 +40,36 @@ namespace TaskManagmentSystem.Core
         private List<string> ExtractParameters(string[] arguments)
         {
             var list = arguments.Skip(1).ToList();
+
+            if (string.Join(" ", list).Contains("\""))
+            {
+                var arg = string.Join(" ", list);
+                var newParams = new List<string>();
+                var word = new StringBuilder();
+                bool quotesOpen = false;
+                for (int i = 0; i < arg.Length; i++)
+                {
+                    var currSymbol = arg[i].ToString();
+                    if (currSymbol == "\"")
+                    {
+                        quotesOpen = quotesOpen == true ? false : true;
+                    }
+                    else if (quotesOpen)
+                    {
+                        word.Append(currSymbol);
+                    }
+                    else
+                    {
+                        word.Append(arg[i]);
+                    }
+                    if (i == arg.Length - 1 || !quotesOpen && currSymbol == " ")
+                    {
+                        newParams.Add(word.ToString());
+                        word.Clear();
+                    }
+                }
+                return newParams.Select(x => x.Trim()).ToList();
+            }
             return list;
         }
         private string ExtractName(string[] arguments)

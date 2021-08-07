@@ -62,5 +62,37 @@ namespace TaskManagmentSystem.Tests
             //Act and Assert
             Assert.ThrowsException<UserInputException>(() => login.Execute());
         }
+
+        [TestMethod]
+        public void ShouldThrowException_WhenSameUsernameAlreadyLogged()
+        {
+            //Arrange
+            IList<string> parameters = new List<string> { USER, PASSWORD };
+            LogIn login = new LogIn(parameters, this.repository);
+            login.Execute();
+
+            //Act and Assert
+            Assert.ThrowsException<UserInputException>(() => login.Execute());
+        }
+
+        [TestMethod]
+        public void ShouldThrowException_WhenAnotherUsernameAlreadyLogged()
+        {
+            //Arrange
+            string username = "NewUser";
+            repository.CreateUser(username, PASSWORD);
+
+            IList<string> parameters = new List<string> { USER, PASSWORD };
+            LogIn login = new LogIn(parameters, this.repository);
+            login.Execute();
+
+            IList<string> parameters2 = new List<string> { username, PASSWORD };
+            LogIn login2 = new LogIn(parameters2, this.repository);
+
+            //Act and Assert
+            Assert.ThrowsException<UserInputException>(() => login2.Execute());
+        }
+
     }
 }
+

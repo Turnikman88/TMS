@@ -14,14 +14,14 @@ namespace TaskManagmentSystem.Core.Commands
 
         }
 
-        public override string Execute() 
+        public override string Execute()
         {
             Validator.ValidateParametersCount(numberOfParameters, CommandParameters.Count);
             string currentUsername = CommandParameters[0];
             string password = CommandParameters[1];
             if (this.Repository.LoggedUser != null)
             {
-                if (this.Repository.LoggedUser.Name.ToLower() == currentUsername)
+                if (this.Repository.LoggedUser.Name.ToLower() == currentUsername.ToLower())
                 {
                     throw new UserInputException(Constants.THIS_USER_LOGGED_IN);
                 }

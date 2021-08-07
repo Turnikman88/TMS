@@ -10,10 +10,10 @@ namespace TaskManagmentSystem.Models
     {
         public static string GenerateLogo()
         {
+            Console.SetWindowSize(150, 35);
             Console.ForegroundColor = ConsoleColor.Magenta;
             string end = "Type 'help' to see list of all commands...";
-            var logo = File.ReadAllText(Constants.PATH_TO_DATABASE + "logos.txt").Split(new string[] { "\r\n\r\n" },
-                               StringSplitOptions.RemoveEmptyEntries);
+            var logo = File.ReadAllText(Constants.PATH_TO_DATABASE + "logos.txt").Split(',');
             var r = new Random();
             int num = r.Next(0, logo.Length);
 

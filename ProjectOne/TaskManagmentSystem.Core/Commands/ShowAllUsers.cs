@@ -20,14 +20,14 @@ namespace TaskManagmentSystem.Core.Commands
             {
                 var sb = new StringBuilder();
 
-                foreach (var user in this.Repository.Users)  //ToDo: Find a way to make this switch LINQ
+                foreach (var user in this.Repository.Users) 
                 {
                     sb.AppendLine(user.ToString());
                     sb.AppendLine(Constants.PRINT_INFO_SEPARATOR);
                 }
                 return sb.ToString().Trim();
             }
-            return "There are no registered users."; //maybe constant ?
+            return "There are no registered users.";
         }
     }
 }

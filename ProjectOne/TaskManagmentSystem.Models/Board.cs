@@ -41,13 +41,15 @@ namespace TaskManagmentSystem.Models
 
         public void AddTask(IBoardItem task)
         {
-            Validator.ValidateObjectIsNotNULL(task, string.Format(Constants.ITEM_NULL_ERR, "Task"));
             this.tasks.Add(task);
             AddEvent(new EventLog($"{task.GetType().Name} '{task.Title}' with ID {task.Id} was pinned to board '{this.Name}'"));
         }
         public void RemoveTask(IBoardItem task)
         {
-            Validator.ValidateObjectIsNotNULL(task, string.Format(Constants.ITEM_NULL_ERR, "Task"));
+            if (task is null)
+            {
+                throw new UserInputException(string.Format(Constants.ITEM_NULL_ERR, "Task"));
+            }
             this.tasks.Remove(task);
             AddEvent(new EventLog($"{task.GetType().Name} '{task.Title}' with ID {task.Id} was unpinned from board '{this.Name}'"));
         }

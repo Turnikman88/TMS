@@ -26,7 +26,13 @@ namespace TaskManagmentSystem.Core.Commands
                 throw new UserInputException(Constants.USER_NOT_ROOT);
             }
         }
-
-        //maybe some Enum parser
+        protected int ParseIntParameter(string value) // ToDo: we have the same method in models validator
+        {
+            if (int.TryParse(value, out int result))
+            {
+                return result;
+            }
+            throw new UserInputException(string.Format(Constants.PARSE_INT_ERR, value));
+        }
     }
 }

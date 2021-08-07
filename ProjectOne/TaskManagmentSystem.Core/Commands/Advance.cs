@@ -19,7 +19,7 @@ namespace TaskManagmentSystem.Core.Commands
             Validator.ValidateParametersCount(numberOfParameters, CommandParameters.Count);
 
             string teamName = CommandParameters[0];
-            int itemID = int.Parse(CommandParameters[1]);
+            int itemID = ParseIntParameter(CommandParameters[1]);
             string statusType = CommandParameters[2];
 
 

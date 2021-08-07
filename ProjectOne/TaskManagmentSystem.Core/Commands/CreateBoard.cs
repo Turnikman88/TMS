@@ -23,21 +23,23 @@ namespace TaskManagmentSystem.Core.Commands
             string teamIdentificator = CommandParameters[1];
 
             ITeam team = this.Repository.GetTeam(teamIdentificator);
-            //Validator.ValidateObjectIsNotNULL(team, string.Format(Constants.TEAM_DOESNT_EXSIST, teamIdentificator));
 
             if (!this.Repository.IsTeamMember(team, this.Repository.LoggedUser))
             {
                 throw new UserInputException(string.Format(Constants.MEMBER_NOT_IN_TEAM, this.Repository.LoggedUser.Name));
             }
-
+            if (team.Boards.Any(x => x.Name == boardName))
+            {
+                throw new UserInputException(Constants.NAME_MUST_BE_UNIQUE);
+            }
             var board = this.Repository.CreateBoard(boardName);
-            if (team.Boards.Any(x => x.Name == boardName)) //ToDo: maybe another class
+            if (team.Boards.Any(x => x.Name == boardName)) 
             {
                 throw new UserInputException(string.Format(Constants.BOARS_ALREADY_EXIST, boardName));
             }
             team.AddBoard(board);
 
-            return $"Board with name {board.Name}, ID: {board.Id} was created"; //Ask Kalin
+            return $"Board with name {board.Name}, ID: {board.Id} was created"; 
         }
 
 

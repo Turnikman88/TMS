@@ -72,7 +72,7 @@ namespace TaskManagmentSystem.Core
             return team;
         }
 
-        public IBoardItem CreateTask(Type type, string title, string description, params string[] parameters)
+        public IBoardItem CreateTask(Type type, string title, string description, IBoard board,  params string[] parameters)
         {
             IBoardItem task = null;
             switch (type.Name)
@@ -81,7 +81,11 @@ namespace TaskManagmentSystem.Core
                     task = Activator.CreateInstance(type, ++nextId, title, description, parameters.ToList()) as IBoardItem;
                     break;
                 case nameof(Feedback):
-                    task = Activator.CreateInstance(type, ++nextId, title, description, int.Parse(parameters[0])) as IBoardItem;
+                    if (!int.TryParse(parameters[0], out int rating))
+                    {
+                        throw new UserInputException(Constants.PARSE_INT_ERR);
+                    }
+                    task = Activator.CreateInstance(type, ++nextId, title, description, rating) as IBoardItem;
                     break;
                 case nameof(Story):
                     task = Activator.CreateInstance(type, ++nextId, title, description) as IBoardItem;
@@ -89,12 +93,13 @@ namespace TaskManagmentSystem.Core
                 default:
                     throw new UserInputException(string.Format(Constants.GIVEN_TYPE_ERR, type.Name));
             }
+            board.AddTask(task);
             tasks.Add(task);
             return task;
         }
 
         public IBoard CreateBoard(string name)
-        {
+        {            
             var board = new Board(++nextId, name);
             return board;
         }
@@ -119,6 +124,18 @@ namespace TaskManagmentSystem.Core
         {
             return this.users.FirstOrDefault(x => x.Name == name);
         }
+        public IBoard FindBoardById(int Id, IList<ITeam> teamsUserIsMember)
+        {
+            var team = teamsUserIsMember.FirstOrDefault(x => x.Boards.Any(i => i.Id == Id))
+                ?? throw new UserInputException(string.Format(Constants.BOARD_DOESNT_EXSIST, $"with Id: {Id}"));
+            return team.Boards.FirstOrDefault(x => x.Id == Id);
+        }
+        public IBoard FindBoardByName(string name, IList<ITeam> teamsUserIsMember)
+        {
+            var team = teamsUserIsMember.FirstOrDefault(x => x.Boards.Any(i => i.Name == name))
+                ?? throw new UserInputException(string.Format(Constants.BOARD_DOESNT_EXSIST, name));
+            return team.Boards.FirstOrDefault(x => x.Name == name);
+        }
         public bool IsTeamMember(ITeam team, IMember user)
         {
             if (team.Members.Any(x => x.Name == user.Name))
@@ -127,19 +144,21 @@ namespace TaskManagmentSystem.Core
             }
             return false;
         }
-        public IMember GetUser(string userIndicator)
+        public IMember GetUser(string userIdentificator)
         {
             IMember user;
-            if (int.TryParse(userIndicator, out int userId))
+            if (int.TryParse(userIdentificator, out int userId))
             {
-                user = this.FindUserById(userId);
+                user = this.FindUserById(userId)
+                    ?? throw new UserInputException(string.Format(Constants.USER_DOESNT_EXSIST, $"with ID: {userIdentificator}"));
             }
             else
             {
-                user = this.FindUserByName(userIndicator);
+                user = this.FindUserByName(userIdentificator) 
+                    ?? throw new UserInputException(string.Format(Constants.USER_DOESNT_EXSIST, userIdentificator));
             }
 
-            return user ?? throw new UserInputException(string.Format(Constants.USER_DOESNT_EXSIST, userIndicator));
+            return user; 
 
         }
 
@@ -148,16 +167,33 @@ namespace TaskManagmentSystem.Core
             ITeam team;
             if (int.TryParse(teamIdentificator, out int temaId))
             {
-                team = this.FindTeamById(temaId);
+                team = this.FindTeamById(temaId)
+                    ?? throw new UserInputException(string.Format(Constants.USER_DOESNT_EXSIST, $"with ID: {teamIdentificator}"));
             }
             else
             {
-                team = this.FindTeamByName(teamIdentificator);
+                team = this.FindTeamByName(teamIdentificator)
+                    ?? throw new UserInputException(string.Format(Constants.TEAM_DOESNT_EXSIST, teamIdentificator));
             }
 
-            return team ?? throw new UserInputException(string.Format(Constants.TEAM_DOESNT_EXSIST, teamIdentificator));
+            return team;
         }
+        public IBoard GetBoard(string boardIdentificator)
+        {
+            var teamsUserIsMember = this.teams.Where(x => x.Members.Any(i => i.Id == this.LoggedUser.Id)).ToList();
 
+            IBoard board;
+            if (int.TryParse(boardIdentificator, out int boardId))
+            {
+                board = this.FindBoardById(boardId, teamsUserIsMember);
+            }
+            else
+            {
+                board = this.FindBoardByName(boardIdentificator, teamsUserIsMember);
+            }
+
+            return board ?? throw new UserInputException(string.Format(Constants.BOARD_DOESNT_EXSIST, boardIdentificator));
+        }
         private static List<Type> GetCoreCommandTypes()
         {
             return Assembly.GetExecutingAssembly()

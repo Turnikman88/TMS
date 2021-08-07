@@ -13,10 +13,9 @@ namespace TaskManagmentSystem.CLI
     {
         static void Main(string[] args)
         {
-            Console.SetWindowSize(Console.LargestWindowWidth, Console.LargestWindowHeight);
-
+            //Console.SetWindowSize(Console.LargestWindowWidth, Console.LargestWindowHeight);
+            Console.WriteLine(Model.GenerateLogo());
             IRepository reository = new Repository();
-            IRepository reository = new Repository(GetCoreClassTypes(), GetModelsClassTypes());
             ICommandFactory commandManager = new CommandFactory(reository);
             IWriter writer = new ConsoleWriter();
 

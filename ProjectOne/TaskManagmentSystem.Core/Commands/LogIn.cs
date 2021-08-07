@@ -14,7 +14,7 @@ namespace TaskManagmentSystem.Core.Commands
 
         }
 
-        public override string Execute() //ToDO: some readability improvements needed
+        public override string Execute() 
         {
             Validator.ValidateParametersCount(numberOfParameters, CommandParameters.Count);
             string currentUsername = CommandParameters[0];

@@ -24,7 +24,7 @@ namespace TaskManagmentSystem.Core.Commands
             }
 
             string teamName = CommandParameters[0];
-            int itemID = int.Parse(CommandParameters[1]);
+            int itemID = ParseIntParameter(CommandParameters[1]);
 
             string comment = CommandParameters.Skip(2).Take(CommandParameters.Count - 2).ToString();
 

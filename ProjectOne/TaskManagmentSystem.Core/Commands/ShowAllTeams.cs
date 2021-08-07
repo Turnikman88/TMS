@@ -27,7 +27,7 @@ namespace TaskManagmentSystem.Core.Commands
             }
             else
             {
-                return "There are no registered teams."; //maybe constant ?
+                return "There are no registered teams.";
             }
 
         }

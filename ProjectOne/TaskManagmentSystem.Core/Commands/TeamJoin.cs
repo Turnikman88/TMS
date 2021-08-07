@@ -23,6 +23,10 @@ namespace TaskManagmentSystem.Core.Commands
             IMember user = this.Repository.GetUser(userIndicator);
             ITeam team = this.Repository.GetTeam(teamIndicator);
 
+            if (!this.Repository.IsTeamMember(team, this.Repository.LoggedUser))
+            {
+                throw new UserInputException(string.Format(Constants.MEMBER_ALREADY_IN_TEAM, user.Name));
+            }
             if (this.Repository.IsTeamMember(team, user))
             {
                 throw new UserInputException(string.Format(Constants.MEMBER_ALREADY_IN_TEAM, user.Name));

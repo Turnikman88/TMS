@@ -4,10 +4,9 @@ using TaskManagmentSystem.Models.Common;
 
 namespace TaskManagmentSystem.Core.Commands
 {
-    internal class CreateUser : BaseCommand
+    public class CreateUser : BaseCommand
     {
         private const int numberOfParameters = 2;
-
 
         public CreateUser(IList<string> commandParameters, IRepository repository)
             : base(commandParameters, repository)
@@ -26,7 +25,7 @@ namespace TaskManagmentSystem.Core.Commands
             }
             var user = this.Repository.CreateUser(username, password);
 
-            return $"User with username {user.Name}, ID {user.Id} was created";
+            return $"User with username {user.Name}, ID: {user.Id} was created";
         }
     }
 }

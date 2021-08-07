@@ -60,11 +60,6 @@ namespace TaskManagmentSystem.Models
         public IList<IBoardItem> Tasks
         {
             get => new List<IBoardItem>(this.tasks);
-            /*            private set
-                        {
-                            Validator.ValidateObjectIsNotNULL(value, Constants.MEMBER_FIRST_TASK_NULL); //ToDo: Is this a mistake? ?
-                            this.tasks = value;
-                        }*/
         }
         protected void AddEvent(IEventLog eventLog)
         {

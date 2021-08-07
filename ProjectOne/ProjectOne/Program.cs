@@ -22,6 +22,5 @@ namespace TaskManagmentSystem.CLI
             IEngine engine = new Engine(commandManager, writer);
             engine.Start();
         }
-
     }
 }

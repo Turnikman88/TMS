@@ -25,7 +25,7 @@ namespace TaskManagmentSystem.Core.Commands
 
             if (!this.Repository.IsTeamMember(team, this.Repository.LoggedUser))
             {
-                throw new UserInputException(string.Format(Constants.MEMBER_ALREADY_IN_TEAM, user.Name));
+                throw new UserInputException(string.Format(Constants.MEMBER_NOT_ALLOWED_JOINING, user.Name));
             }
             if (this.Repository.IsTeamMember(team, user))
             {

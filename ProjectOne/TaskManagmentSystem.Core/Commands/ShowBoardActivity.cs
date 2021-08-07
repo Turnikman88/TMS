@@ -8,7 +8,7 @@ namespace TaskManagmentSystem.Core.Commands
     public class ShowBoardActivity : BaseCommand
     {
         private const int numberOfParameters = 2;
-        //showboardactivity [teamname] [boardname]
+        //showboardactivity [teamname] [boardID]
         public ShowBoardActivity(IList<string> commandParameters, IRepository repository)
             : base(commandParameters, repository)
         {
@@ -19,7 +19,7 @@ namespace TaskManagmentSystem.Core.Commands
             Validator.ValidateParametersCount(numberOfParameters, CommandParameters.Count);
 
             string teamName = CommandParameters[0];
-            string boardName = CommandParameters[1];
+            int boardName = int.Parse(CommandParameters[1]);
 
             var team = this.Repository.GetTeam(teamName);
 
@@ -28,7 +28,7 @@ namespace TaskManagmentSystem.Core.Commands
                 throw new UserInputException(string.Format(Constants.MEMBER_NOT_IN_TEAM, this.Repository.LoggedUser.Name));
             }
 
-            return team.Boards.FirstOrDefault(x => x.Name == boardName).ViewHistory();
+            return team.Boards.FirstOrDefault(x => x.Id == boardName).ViewHistory();
         }
     }
 }

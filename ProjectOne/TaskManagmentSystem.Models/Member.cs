@@ -22,7 +22,7 @@ namespace TaskManagmentSystem.Models
             this.Name = name;
             this.Password = password;
             this.Role = Role.Normal;
-            AddEvent(new EventLog(string.Format(Constants.EVENT_WAS_CREATED, "Member")));
+            AddEvent(new EventLog(string.Format(Constants.EVENT_WAS_CREATED, "Member", id)));
         }
         public int Id { get; }
         public string Name
@@ -60,11 +60,6 @@ namespace TaskManagmentSystem.Models
         public IList<IBoardItem> Tasks
         {
             get => new List<IBoardItem>(this.tasks);
-/*            private set
-            {
-                Validator.ValidateObjectIsNotNULL(value, Constants.MEMBER_FIRST_TASK_NULL); //ToDo: Is this a mistake? ?
-                this.tasks = value;
-            }*/
         }
         protected void AddEvent(IEventLog eventLog)
         {
@@ -88,7 +83,7 @@ namespace TaskManagmentSystem.Models
             string oldPass = Console.ReadLine();
             if (this.Password == oldPass)
             {
-                this.Password = newPass;                
+                this.Password = newPass;
                 return string.Format(Constants.PASSWORD_CHANGED_SUCC, oldPass, newPass);
             }
             return Constants.PASSWORD_CHANGE_ERR;

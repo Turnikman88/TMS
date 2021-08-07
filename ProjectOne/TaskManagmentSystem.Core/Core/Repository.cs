@@ -2,6 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
+using TaskManagmentSystem.Core.Commands;
 using TaskManagmentSystem.Core.Contracts;
 using TaskManagmentSystem.Models;
 using TaskManagmentSystem.Models.Common;
@@ -21,11 +23,12 @@ namespace TaskManagmentSystem.Core
         private readonly IList<ITeam> teams = new List<ITeam>();
         private readonly IList<IBoardItem> tasks = new List<IBoardItem>();
 
-        public Repository(IList<Type> coreClassTypes, IList<Type> modelsClassTypes)
+        public Repository()
         {
+
             this.nextId = 0;
-            this.coreClassTypes = coreClassTypes;
-            this.modelsClassTypes = modelsClassTypes;
+            this.coreClassTypes = GetCoreCommandTypes();
+            this.modelsClassTypes = GetModelsClassTypes();
             CreateAdmin(); // ToDo: Maybe in static constructor
         }
         public IList Users
@@ -50,7 +53,7 @@ namespace TaskManagmentSystem.Core
             this.users.Add(user);
             if (this.exsitingNames.Contains(username))
             {
-                throw new UserInputException("Name must be unique");
+                throw new UserInputException(Constants.NAME_MUST_BE_UNIQUE);
             }
             this.exsitingNames.Add(username);
             return user;
@@ -63,14 +66,29 @@ namespace TaskManagmentSystem.Core
             this.teams.Add(team);
             if (this.exsitingNames.Contains(teamName))
             {
-                throw new UserInputException("Name must be unique");
+                throw new UserInputException(Constants.NAME_MUST_BE_UNIQUE);
             }
             this.exsitingNames.Add(teamName);
             return team;
         }
-        public IBoardItem CreateTask(Type type, string title, string description)
+
+        public IBoardItem CreateTask(Type type, string title, string description, params string[] parameters)
         {
-            var task = Activator.CreateInstance(type, ++nextId, title, description) as IBoardItem;
+            IBoardItem task = null;
+            switch (type.Name)
+            {
+                case nameof(Bug):
+                    task = Activator.CreateInstance(type, ++nextId, title, description, parameters.ToList()) as IBoardItem;
+                    break;
+                case nameof(Feedback):
+                    task = Activator.CreateInstance(type, ++nextId, title, description, int.Parse(parameters[0])) as IBoardItem;
+                    break;
+                case nameof(Story):
+                    task = Activator.CreateInstance(type, ++nextId, title, description) as IBoardItem;
+                    break;
+                default:
+                    throw new UserInputException(string.Format(Constants.GIVEN_TYPE_ERR, type.Name));
+            }
             tasks.Add(task);
             return task;
         }
@@ -138,6 +156,24 @@ namespace TaskManagmentSystem.Core
             }
 
             return team ?? throw new UserInputException(string.Format(Constants.TEAM_DOESNT_EXSIST, teamIdentificator));
+        }
+
+        private static List<Type> GetCoreCommandTypes()
+        {
+            return Assembly.GetExecutingAssembly()
+                .GetTypes()
+                .Where(x => x.FullName.Contains(Constants.CORE_ASSEMBLY_KEY)
+                         && x.BaseType == typeof(BaseCommand)).ToList();
+        }
+
+        private static List<Type> GetModelsClassTypes()
+        {
+            return Assembly.GetExecutingAssembly()
+                .GetReferencedAssemblies()
+                .Select(x => Assembly.Load(x))
+                .SelectMany(x => x.GetTypes())
+                .Where(x => x.FullName.Contains(Constants.MODELS_ASSEMBLY_KEY)
+                         && x.BaseType == typeof(BoardItem)).ToList();
         }
     }
 }

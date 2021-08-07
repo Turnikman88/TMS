@@ -14,7 +14,7 @@
 		teamjoin..................[username/id] [teamname/id] - Adds user into a team
 		login.....................[username] [password] - Login
 		showallteammembers........[teamname] - shows all team members
-		showboardactivity.........[teamname/id] [boardname] - shows board activity
+		showboardactivity.........[teamname/id] [boardID] - shows board activity
 		showteamactivity..........[teamname/id] - shows team activity
 		showteamboards............[teamname/id] - shows all boards in team
 		showuseractivity..........[teamname/id] [username/id] - shows user activity

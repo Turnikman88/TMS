@@ -37,7 +37,7 @@ namespace TaskManagmentSystem.Core.Commands
             }
             team.AddBoard(board);
 
-            return $"Board with name {board.Name} was created"; //Ask Kalin
+            return $"Board with name {board.Name}, ID: {board.Id} was created"; //Ask Kalin
         }
 
 

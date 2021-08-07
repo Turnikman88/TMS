@@ -36,13 +36,17 @@ namespace TaskManagmentSystem.Core.Commands
                 var bug = (Bug)task;
                 bug.AddAssignee(user);
             }
-            else
+            else if (task is Story)
             {
                 var story = (Story)task;
                 story.AddAssignee(user);
             }
+            else
+            {
+                throw new UserInputException("Feedbacks cannot be assigned");
+            }
 
-            return $"User {userNameOrID} was assigned to {id}";
+            return $"User {userNameOrID} was assigned to {task.GetType().Name} task with ID: {id}";
         }
     }
 }

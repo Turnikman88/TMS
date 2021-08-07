@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using TaskManagmentSystem.Models.Common;
 using TaskManagmentSystem.Models.Contracts;
-using System.Linq;
 namespace TaskManagmentSystem.Models
 {
     public abstract class BoardItem : IBoardItem, ICommentable, IActivityLog
@@ -18,7 +18,7 @@ namespace TaskManagmentSystem.Models
             this.Id = id;
             this.Title = title;
             this.Description = description;
-            AddEvent(new EventLog(string.Format(Constants.EVENT_WAS_CREATED, type)));
+            AddEvent(new EventLog(string.Format(Constants.EVENT_WAS_CREATED, type, id)));
         }
 
         public string Title
@@ -75,7 +75,7 @@ namespace TaskManagmentSystem.Models
         }
 
         protected void AddEvent(IEventLog eventLog)
-        {            
+        {
             this.eventLogs.Add(eventLog);
         }
 

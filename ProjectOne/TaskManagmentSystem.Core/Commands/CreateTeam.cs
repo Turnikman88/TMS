@@ -20,7 +20,7 @@ namespace TaskManagmentSystem.Core.Commands
             string teamName = this.CommandParameters[0];
             var team = this.Repository.CreateTeam(teamName);
 
-            return $"Team with name {team.Name} was created";
+            return $"Team with name {team.Name}, ID: {team.Id} was created";
 
         }
     }

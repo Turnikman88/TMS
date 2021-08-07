@@ -13,11 +13,6 @@ namespace TaskManagmentSystem.Models.Common
             }
         }
 
-        public static void ValidateNameUniqueness(string name)
-        {
-            //TODO: Validate Name Uniqueness
-        }
-
         public static void ValidateObjectIsNotNULL(object obj, string message)
         {
             if (obj is null || obj.ToString() == "")
@@ -25,6 +20,7 @@ namespace TaskManagmentSystem.Models.Common
                 throw new UserInputException(message);
             }
         }
+
         public static int ParseIntParameter(string value)
         {
             if (int.TryParse(value, out int result))
@@ -33,6 +29,7 @@ namespace TaskManagmentSystem.Models.Common
             }
             throw new UserInputException(string.Format(Constants.PARSE_INT_ERR, value));
         }
+
         public static void ValidateParametersCount(int expected, int recived)
         {
             if (expected != recived)
@@ -40,6 +37,7 @@ namespace TaskManagmentSystem.Models.Common
                 throw new UserInputException(string.Format(Constants.NUM_OF_PARAMETERS_ERR, expected, recived));
             }
         }
+
         public static Role ParseRole(string role)
         {
             if (Enum.TryParse<Role>(role, true, out var result))
@@ -48,6 +46,7 @@ namespace TaskManagmentSystem.Models.Common
             }
             throw new UserInputException("This type of role doesn't exsist!");
         }
+
         public static void ValidatePattern(string value, string pattern, string message)
         {
             var regex = new Regex(pattern);

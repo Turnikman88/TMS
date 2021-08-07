@@ -17,7 +17,7 @@ namespace TaskManagmentSystem.Models
         {
             this.Name = name;
             this.Id = id;
-            AddEvent(new EventLog(string.Format(Constants.EVENT_WAS_CREATED, "Board")));
+            AddEvent(new EventLog(string.Format(Constants.EVENT_WAS_CREATED, "Board", id)));
         }
 
         public string Name
@@ -26,7 +26,6 @@ namespace TaskManagmentSystem.Models
             private set
             {
                 Validator.ValidateObjectIsNotNULL(value, string.Format(Constants.ITEM_NULL_ERR, nameof(Board)));
-                Validator.ValidateNameUniqueness(value);
                 Validator.ValidateRange(value.Length, Constants.BOARD_NAME_MIN_SYMBOLS, Constants.BOARD_NAME_MAX_SYMBOLS, string.Format(Constants.STRING_LENGHT_ERR, nameof(Board), Constants.BOARD_NAME_MIN_SYMBOLS, Constants.BOARD_NAME_MAX_SYMBOLS));
                 this.name = value;
             }

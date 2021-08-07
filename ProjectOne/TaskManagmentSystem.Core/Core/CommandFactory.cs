@@ -19,7 +19,8 @@ namespace TaskManagmentSystem.Core
 
         public ICommand Create(string commandLine)
         {
-            string[] arguments = commandLine.Split(); //ToDo: check why cant remove empty entries
+            char[] arr = new char[] { ' ' };
+            string[] arguments = commandLine.Split(arr, StringSplitOptions.RemoveEmptyEntries).ToArray(); //ToDo: check why cant remove empty entries
 
             string commandName = ExtractName(arguments);
 

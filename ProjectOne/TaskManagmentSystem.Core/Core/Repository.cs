@@ -50,7 +50,7 @@ namespace TaskManagmentSystem.Core
             this.users.Add(user);
             if (this.exsitingNames.Contains(username))
             {
-                throw new UserInputException("Name must be unique");
+                throw new UserInputException(Constants.NAME_MUST_BE_UNIQUE);
             }
             this.exsitingNames.Add(username);
             return user;
@@ -63,14 +63,29 @@ namespace TaskManagmentSystem.Core
             this.teams.Add(team);
             if (this.exsitingNames.Contains(teamName))
             {
-                throw new UserInputException("Name must be unique");
+                throw new UserInputException(Constants.NAME_MUST_BE_UNIQUE);
             }
             this.exsitingNames.Add(teamName);
             return team;
         }
-        public IBoardItem CreateTask(Type type, string title, string description)
+
+        public IBoardItem CreateTask(Type type, string title, string description, params string[] parameters)
         {
-            var task = Activator.CreateInstance(type, ++nextId, title, description) as IBoardItem;
+            IBoardItem task = null;
+            switch (type.Name)
+            {
+                case nameof(Bug):
+                    task = Activator.CreateInstance(type, ++nextId, title, description, parameters.ToList()) as IBoardItem;
+                    break;
+                case nameof(Feedback):
+                    task = Activator.CreateInstance(type, ++nextId, title, description, int.Parse(parameters[0])) as IBoardItem;
+                    break;
+                case nameof(Story):
+                    task = Activator.CreateInstance(type, ++nextId, title, description) as IBoardItem;
+                    break;
+                default:
+                    throw new UserInputException(string.Format(Constants.GIVEN_TYPE_ERR, type.Name));
+            }
             tasks.Add(task);
             return task;
         }

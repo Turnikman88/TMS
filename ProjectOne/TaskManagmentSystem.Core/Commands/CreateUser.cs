@@ -26,7 +26,7 @@ namespace TaskManagmentSystem.Core.Commands
             }
             var user = this.Repository.CreateUser(username, password);
 
-            return $"User with username {user.Name} was created";
+            return $"User with username {user.Name}, ID {user.Id} was created";
         }
     }
 }

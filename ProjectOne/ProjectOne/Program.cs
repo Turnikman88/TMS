@@ -5,6 +5,8 @@ using System.Reflection;
 using TaskManagmentSystem.Core;
 using TaskManagmentSystem.Core.Commands;
 using TaskManagmentSystem.Core.Contracts;
+using TaskManagmentSystem.Core.providers;
+using TaskManagmentSystem.Core.providers.Contracts;
 using TaskManagmentSystem.Models;
 using TaskManagmentSystem.Models.Common;
 
@@ -20,7 +22,9 @@ namespace TaskManagmentSystem.CLI
 
             IRepository reository = new Repository(GetCoreClassTypes(), GetModelsClassTypes());
             ICommandFactory commandManager = new CommandFactory(reository);
-            IEngine engine = new Engine(commandManager);
+            IWriter writer = new ConsoleWriter();
+
+            IEngine engine = new Engine(commandManager, writer);
             engine.Start();
         }
 

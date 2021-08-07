@@ -7,7 +7,7 @@
 
         public const string TerminationCommand = "exit";
         public const string EmptyCommandError = "Command cannot be empty.";
-        public const string EVENT_WAS_CREATED = "{0} event was created";
+        public const string EVENT_WAS_CREATED = "{0} event with {1} was created";
 
         public const string STRING_LENGHT_ERR = "{0} must be between {1} and {2} symbols long!";
 
@@ -15,6 +15,8 @@
         public const string NAME_UNIQUE_ERR = "The name {0} already exists!";
         public const string ITEM_NULL_ERR = "{0} cannot be null or empty!";
 
+        public const string NAME_MUST_BE_UNIQUE = "Name must be unique";
+        public const string GIVEN_TYPE_ERR = "Given {0} type doesn't exsits";
         public const int TEAM_NAME_MIN_SYMBOLS = 5;
         public const int TEAM_NAME_MAX_SYMBOLS = 15;
 

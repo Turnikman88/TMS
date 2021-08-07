@@ -1,7 +1,6 @@
 ﻿using ProjectOne.Commands.Contracts;
 using System;
 using TaskManagmentSystem.Core.Contracts;
-using TaskManagmentSystem.Core.providers;
 using TaskManagmentSystem.Core.providers.Contracts;
 using TaskManagmentSystem.Models.Common;
 
@@ -11,12 +10,11 @@ namespace TaskManagmentSystem.Core
     {
         private readonly ICommandFactory commandFactory;
         private readonly IWriter writer;
-        
 
-        public Engine(ICommandFactory commandFactory)
+        public Engine(ICommandFactory commandFactory, IWriter writer)
         {
             this.commandFactory = commandFactory;
-            this.writer = new ConsoleWriter();
+            this.writer = writer;
         }
         public void Start()
         {
@@ -32,7 +30,7 @@ namespace TaskManagmentSystem.Core
                         break;
                     }
 
-                    ProcessCommand(inputLine);                    
+                    ProcessCommand(inputLine);
                 }
                 catch (Exception ex)
                 {

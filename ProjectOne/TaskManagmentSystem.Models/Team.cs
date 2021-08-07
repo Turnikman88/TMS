@@ -68,12 +68,12 @@ namespace TaskManagmentSystem.Models
                 string.Join(Environment.NewLine, this.Boards.OrderBy(x => x.Name).Select(x => x.ToString()));
             var sb = new StringBuilder();
             sb.AppendLine(Constants.PRINT_INFO_SEPARATOR);
-            sb.AppendLine($"Name: {this.Name}, ID: {this.Id}");
-            sb.AppendLine("Members:");
-            sb.AppendLine($"{members}");
+            sb.AppendLine($"        Name: {this.Name}, ID: {this.Id}");
+            sb.AppendLine("         Members:");
+            sb.AppendLine($"                {members}");
             sb.AppendLine(Constants.PRINT_INFO_SEPARATOR);
-            sb.AppendLine("Boards:");
-            sb.AppendLine($"{boards}");
+            sb.AppendLine("         Boards:");
+            sb.AppendLine($"                {boards}");
             return sb.ToString().Trim();
         }
     }

@@ -12,9 +12,7 @@ namespace TaskManagmentSystem.CLI
     public class Program
     {
         static void Main(string[] args)
-        {
-            //Console.SetWindowSize(Console.LargestWindowWidth, Console.LargestWindowHeight);
-            Console.WriteLine(Model.GenerateLogo());
+        {            
             IRepository reository = new Repository();
             ICommandFactory commandManager = new CommandFactory(reository);
             IWriter writer = new ConsoleWriter();

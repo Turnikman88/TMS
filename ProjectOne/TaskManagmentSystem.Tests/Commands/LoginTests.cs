@@ -1,6 +1,5 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
-using TaskManagmentSystem.CLI;
 using TaskManagmentSystem.Core;
 using TaskManagmentSystem.Core.Commands;
 using TaskManagmentSystem.Models.Common;
@@ -18,8 +17,7 @@ namespace TaskManagmentSystem.Tests
         [TestInitialize]
         public void Prepare()
         {
-            this.repository = new Repository(Program.GetCoreCommandTypes(), Program.GetModelsClassTypes());
-
+            this.repository = new Repository();
             this.repository.CreateUser(USER, PASSWORD);
         }
 

@@ -2,6 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
+using TaskManagmentSystem.Core.Commands;
 using TaskManagmentSystem.Core.Contracts;
 using TaskManagmentSystem.Models;
 using TaskManagmentSystem.Models.Common;
@@ -21,11 +23,12 @@ namespace TaskManagmentSystem.Core
         private readonly IList<ITeam> teams = new List<ITeam>();
         private readonly IList<IBoardItem> tasks = new List<IBoardItem>();
 
-        public Repository(IList<Type> coreClassTypes, IList<Type> modelsClassTypes)
+        public Repository()
         {
+
             this.nextId = 0;
-            this.coreClassTypes = coreClassTypes;
-            this.modelsClassTypes = modelsClassTypes;
+            this.coreClassTypes = GetCoreCommandTypes();
+            this.modelsClassTypes = GetModelsClassTypes();
             CreateAdmin(); // ToDo: Maybe in static constructor
         }
         public IList Users
@@ -153,6 +156,24 @@ namespace TaskManagmentSystem.Core
             }
 
             return team ?? throw new UserInputException(string.Format(Constants.TEAM_DOESNT_EXSIST, teamIdentificator));
+        }
+
+        private static List<Type> GetCoreCommandTypes()
+        {
+            return Assembly.GetExecutingAssembly()
+                .GetTypes()
+                .Where(x => x.FullName.Contains(Constants.CORE_ASSEMBLY_KEY)
+                         && x.BaseType == typeof(BaseCommand)).ToList();
+        }
+
+        private static List<Type> GetModelsClassTypes()
+        {
+            return Assembly.GetExecutingAssembly()
+                .GetReferencedAssemblies()
+                .Select(x => Assembly.Load(x))
+                .SelectMany(x => x.GetTypes())
+                .Where(x => x.FullName.Contains(Constants.MODELS_ASSEMBLY_KEY)
+                         && x.BaseType == typeof(BoardItem)).ToList();
         }
     }
 }

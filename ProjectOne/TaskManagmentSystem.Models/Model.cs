@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Text;
 using TaskManagmentSystem.Models.Common;
 
 namespace TaskManagmentSystem.Models
@@ -16,7 +14,6 @@ namespace TaskManagmentSystem.Models
                                StringSplitOptions.RemoveEmptyEntries);
             var r = new Random();
             int num = r.Next(0, logo.Length);
-
 
             return $"{logo[num]}\n{end}";
         }

@@ -13,6 +13,7 @@ namespace TaskManagmentSystem.Core.Commands
         {
 
         }
+
         public override string Execute()
         {
             Validator.ValidateParametersCount(numberOfParameters, CommandParameters.Count);
@@ -21,7 +22,6 @@ namespace TaskManagmentSystem.Core.Commands
             var team = this.Repository.CreateTeam(teamName);
 
             return $"Team with name {team.Name}, ID: {team.Id} was created";
-
         }
     }
 }

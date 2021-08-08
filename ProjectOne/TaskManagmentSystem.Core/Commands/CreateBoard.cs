@@ -33,13 +33,9 @@ namespace TaskManagmentSystem.Core.Commands
                 throw new UserInputException(Constants.NAME_MUST_BE_UNIQUE);
             }
             var board = this.Repository.CreateBoard(boardName);
-            if (team.Boards.Any(x => x.Name == boardName)) 
-            {
-                throw new UserInputException(string.Format(Constants.BOARS_ALREADY_EXIST, boardName));
-            }
             team.AddBoard(board);
 
-            return $"Board with name {board.Name}, ID: {board.Id} was created"; 
+            return $"Board with name {board.Name}, ID: {board.Id} was created";
         }
 
 

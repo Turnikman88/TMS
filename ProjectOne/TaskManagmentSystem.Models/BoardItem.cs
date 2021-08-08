@@ -67,10 +67,6 @@ namespace TaskManagmentSystem.Models
         }
         public string ViewHistory()
         {
-            /*foreach (var item in eventLogs)
-            {
-                item.ViewInfo();
-            }*/
             return string.Join($"{Environment.NewLine}", eventLogs.Select(x => x.ViewInfo()));
         }
 

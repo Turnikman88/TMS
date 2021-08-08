@@ -1,6 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.IO;
 using TaskManagmentSystem.Core.Contracts;
+using TaskManagmentSystem.Models.Common;
 
 namespace TaskManagmentSystem.Core.Commands
 {
@@ -13,7 +14,12 @@ namespace TaskManagmentSystem.Core.Commands
         }
         public override string Execute()
         {
-            throw new NotImplementedException();
+            //ToDo: Add validation? Anyone can erase? Huh?
+            using (StreamWriter writer = new StreamWriter(Constants.PATH_TO_DATABASE + @"\CommandHistory.txt"))
+            {
+
+            }
+            return $"Database history was deleted successfully";
         }
     }
 }

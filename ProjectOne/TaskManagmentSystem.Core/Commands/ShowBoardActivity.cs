@@ -19,16 +19,17 @@ namespace TaskManagmentSystem.Core.Commands
             Validator.ValidateParametersCount(numberOfParameters, CommandParameters.Count);
 
             string teamName = CommandParameters[0];
-            int boardName = int.Parse(CommandParameters[1]);
+            string boardID = CommandParameters[1];
 
             var team = this.Repository.GetTeam(teamName);
+            var board = this.Repository.GetBoard(boardID);
 
             if (!this.Repository.IsTeamMember(team, this.Repository.LoggedUser))
             {
                 throw new UserInputException(string.Format(Constants.MEMBER_NOT_IN_TEAM, this.Repository.LoggedUser.Name));
             }
 
-            return team.Boards.FirstOrDefault(x => x.Id == boardName).ViewHistory();
+            return team.Boards.FirstOrDefault(x => x.Id == board.Id).ViewHistory();
         }
     }
 }

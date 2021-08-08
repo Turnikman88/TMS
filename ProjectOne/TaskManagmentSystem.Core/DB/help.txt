@@ -19,7 +19,7 @@
 		showteamactivity..........[teamname/id] - shows team activity
 		showteamboards............[teamname/id] - shows all boards in team
 		showuseractivity..........[teamname/id] [username/id] - shows user activity
-		exporthistory.............No parameters needed - exports history of all events to desktop
+		exporthistory.............[teamname/id] (optional type[board or user] [board/userID]) - exports history events to desktop
 		erasehistory..............No parameters needed - deletes database
 		showallteams..............No parameters needed
 		showallusers..............No parameters needed

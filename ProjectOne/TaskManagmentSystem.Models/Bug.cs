@@ -73,7 +73,7 @@ namespace TaskManagmentSystem.Models
         public void AddAssignee(IMember assignee)
         {
             this.Assignee = assignee;
-            AddEvent(new EventLog($"Assignee {assignee.Id} was assigneed to ID: {this.Id}, Story {this.Title}"));
+            AddEvent(new EventLog($"Bug with Id: {this.Id} was assigned to {assignee.Name}"));
         }
         public override string ToString()
         {

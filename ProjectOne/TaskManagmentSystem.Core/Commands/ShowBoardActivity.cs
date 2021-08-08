@@ -20,13 +20,15 @@ namespace TaskManagmentSystem.Core.Commands
 
             string teamName = CommandParameters[0];
             string boardIdentifier = CommandParameters[1];
-            var board = this.Repository.GetBoard(boardIdentifier);
             var team = this.Repository.GetTeam(teamName);
+
 
             if (!this.Repository.IsTeamMember(team, this.Repository.LoggedUser))
             {
                 throw new UserInputException(string.Format(Constants.MEMBER_NOT_IN_TEAM, this.Repository.LoggedUser.Name));
             }
+
+            var board = this.Repository.GetBoard(boardIdentifier);
 
             return team.Boards.FirstOrDefault(x => x.Id == board.Id).ViewHistory();
         }

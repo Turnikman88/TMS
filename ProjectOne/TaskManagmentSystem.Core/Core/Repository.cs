@@ -169,7 +169,7 @@ namespace TaskManagmentSystem.Core
             if (int.TryParse(teamIdentificator, out int temaId))
             {
                 team = this.FindTeamById(temaId)
-                    ?? throw new UserInputException(string.Format(Constants.USER_DOESNT_EXSIST, $"with ID: {teamIdentificator}"));
+                    ?? throw new UserInputException(string.Format(Constants.TEAM_DOESNT_EXSIST, $"with ID: {teamIdentificator}"));
             }
             else
             {
@@ -193,7 +193,7 @@ namespace TaskManagmentSystem.Core
                 board = this.FindBoardByName(boardIdentificator, teamsUserIsMember);
             }
 
-            return board ?? throw new UserInputException(string.Format(Constants.BOARD_DOESNT_EXSIST, boardIdentificator));
+            return board;
         }
         private static List<Type> GetCoreCommandTypes()
         {

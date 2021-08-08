@@ -4,7 +4,7 @@
 
 		List of all commands:
 
-		addcommenttotask..........[teamname] [id] [comment] [author] - Adds comment to task
+		addcommenttotask..........[teamname/id] [id] [comment] [author] - Adds comment to task
 		change....................[teamname/id] [id] [statusToAdvance] - Changes given enumeration of task (Status, Priority, Severity…)
 		assign....................[teamname/id] [username/id] [taskID] - Assign’s task to given member of the team
 		createboard...............[boardname] [teamname/id] - Creates new board in team

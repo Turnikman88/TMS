@@ -23,21 +23,21 @@ namespace TaskManagmentSystem.Core.Commands
                 Validator.ValidateParametersCount(numberOfParameters, CommandParameters.Count);
             }
 
-            string teamName = CommandParameters[0];
+            string teamNameOrID = CommandParameters[0];
             int itemID = ParseIntParameter(CommandParameters[1]);
 
-            string comment = CommandParameters.Skip(2).Take(CommandParameters.Count - 2).ToString();
+            string content = CommandParameters[2];
 
             string author = CommandParameters[3];
 
-            if (!this.Repository.IsTeamMember(this.Repository.GetTeam(teamName), this.Repository.LoggedUser))
+            if (!this.Repository.IsTeamMember(this.Repository.GetTeam(teamNameOrID), this.Repository.LoggedUser))
             {
                 throw new UserInputException(string.Format(Constants.MEMBER_NOT_IN_TEAM, this.Repository.LoggedUser.Name));
             }
 
             var task = this.Repository.FindTaskByID(itemID) ?? throw new UserInputException("Task doesn't exsist");
 
-            task.AddComment(new Comment(comment, author));
+            task.AddComment(new Comment(content, author));
             return $"Comment was added";
         }
     }

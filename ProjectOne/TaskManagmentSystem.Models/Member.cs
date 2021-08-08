@@ -95,7 +95,7 @@ namespace TaskManagmentSystem.Models
         }
         public string ViewHistory()
         {
-            return string.Join($"{Environment.NewLine}", eventLogs.Select(x => x.ViewInfo()));
+            return string.Join($"{Environment.NewLine}", eventLogs.OrderByDescending(x => x.EventTime).Select(x => x.ViewInfo()));
         }
         public override string ToString()
         {

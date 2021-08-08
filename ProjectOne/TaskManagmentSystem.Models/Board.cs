@@ -60,8 +60,8 @@ namespace TaskManagmentSystem.Models
         public string ViewHistory()
         {
             var sb = new StringBuilder();
-            sb.Append(string.Join($"{Environment.NewLine}", eventLogs.Select(x => x.ViewInfo())));
-            sb.Append(string.Join($"{Environment.NewLine}", tasks.Select(x => x.ViewHistory())));
+            sb.Append(string.Join($"{Environment.NewLine}", eventLogs.OrderByDescending(x => x.EventTime).Select(x => x.ViewInfo())));
+            sb.Append(string.Join($"{Environment.NewLine}", tasks.OrderBy(x => x.Id).Select(x => x.ViewHistory())));
             return sb.ToString().Trim();
         }
         public override string ToString()

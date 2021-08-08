@@ -53,7 +53,8 @@ namespace TaskManagmentSystem.Models
         {
             Validator.ValidateObjectIsNotNULL(assignee, string.Format(Constants.ITEM_NULL_ERR, "Assignee"));
             this.Assignee = assignee;
-            AddEvent(new EventLog($"Assignee {assignee.Id} was assigneed to ID: {this.Id}, Story {this.Title}"));
+            AddEvent(new EventLog($"Story with Id: {this.Id} was assigned to {assignee.Name}"));
+
         }
 
         public void ChangeSize()

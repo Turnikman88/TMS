@@ -23,7 +23,7 @@ namespace TaskManagmentSystem.Core.Commands
             var team = this.Repository.GetTeam(teamName);
             var user = this.Repository.GetUser(userIdentificator);
 
-            if (!this.Repository.IsTeamMember(team, user))
+            if (!this.Repository.IsTeamMember(team, this.Repository.LoggedUser))
             {
                 throw new UserInputException(string.Format(Constants.MEMBER_NOT_IN_TEAM, this.Repository.LoggedUser.Name));
             }

@@ -106,7 +106,8 @@ namespace TaskManagmentSystem.Core
 
         public IBoardItem FindTaskByID(int id)
         {
-            return this.tasks.FirstOrDefault(x => x.Id == id);
+            return this.tasks.FirstOrDefault(x => x.Id == id)
+                ?? throw new UserInputException(string.Format(Constants.TASK_DOESNT_EXSIST, $"with Id: {id}"));
         }
         public ITeam FindTeamById(int id)
         {

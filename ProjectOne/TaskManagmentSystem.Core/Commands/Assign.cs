@@ -41,7 +41,7 @@ namespace TaskManagmentSystem.Core.Commands
 
             user.AddTask(task);
 
-            return $"User {userNameOrID} was assigned to {task.GetType().Name} task with ID: {id}";
+            return $"User {user.Name} was assigned to {task.GetType().Name} with ID: {id}";
         }
     }
 }

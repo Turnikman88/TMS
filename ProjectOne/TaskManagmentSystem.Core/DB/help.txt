@@ -9,7 +9,7 @@
 		assign....................[teamname/id] [username/id] [taskID] - Assign’s task to given member of the team
 		createboard...............[boardname] [teamname/id] - Creates new board in team
 		createtask................[tasktype] [board name/id to be into][tasktitle] [taskdescription] - Creates new task in given board
-		(bug can accept list of steps separeted by whitespace; feedback can accept rating [0-100])
+		..........................(bug can accept list of steps separeted by whitespace; feedback can accept rating [0-100])
 		createteam................[teamname] - Creates new team
 		createuser................[username] [password] - Creates new user
 		teamjoin..................[username/id] [teamname/id] - Adds user into a team

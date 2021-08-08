@@ -87,9 +87,9 @@ namespace TaskManagmentSystem.Core
         }
         private void SaveSuccsessfullCommands(string command)
         {
-
-            var regex = new Regex(@"(show)|(help)|(exit)");
-            if (!regex.IsMatch(command))
+            string commandName = command.Split()[0];
+            var regex = new Regex(@"(show)|(help)|(exit)|(erasehistory)|(exporthistory)");
+            if (!regex.IsMatch(commandName))
             {
                 commandWriter.WriteLine(command);
             }

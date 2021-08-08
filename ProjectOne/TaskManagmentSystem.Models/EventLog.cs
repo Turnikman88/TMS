@@ -8,8 +8,8 @@ namespace TaskManagmentSystem.Models
     //ToDo: Implement later!
     {
         //fields
-        const string logDateFormat = "yyyyMMdd";
-        const string logTimeFormat = "HH:mm:ss.FFFF";
+        const string logDateFormat = "yyyy/MM/dd";
+        const string logTimeFormat = "HH:mm:ss";
         private string description;
         //private DateTime eventDate;
 
@@ -38,7 +38,7 @@ namespace TaskManagmentSystem.Models
         //methods
         public string ViewInfo()
         {
-            return $"[{EventTime.Date.ToString(logDateFormat)}|{EventTime.ToString(logTimeFormat)}]{Description}" + Environment.NewLine;
+            return $"[ {EventTime.Date.ToString(logDateFormat)} | {EventTime.ToString(logTimeFormat)} ]{Description}" + Environment.NewLine;
         }
     }
 }

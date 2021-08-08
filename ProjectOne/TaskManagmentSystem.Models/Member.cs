@@ -53,7 +53,6 @@ namespace TaskManagmentSystem.Models
                 this.role = value;
             }
         }
-        //ToDo: event logging?
         public IList<IEventLog> EventLogs
             => new List<IEventLog>(this.eventLogs);
 

@@ -19,9 +19,10 @@ namespace TaskManagmentSystem.Core.Commands
             Validator.ValidateParametersCount(numberOfParameters, CommandParameters.Count);
 
             string teamName = CommandParameters[0];
-            string boardIdentifier = CommandParameters[1];
-            var team = this.Repository.GetTeam(teamName);
+            string boardID = CommandParameters[1];
 
+            var team = this.Repository.GetTeam(teamName);
+            var board = this.Repository.GetBoard(boardID);
 
             if (!this.Repository.IsTeamMember(team, this.Repository.LoggedUser))
             {

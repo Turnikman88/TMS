@@ -15,13 +15,13 @@ namespace TaskManagmentSystem.Core
     {
         private readonly ICommandFactory commandFactory;
         private readonly IWriter writer;
-        private  IWriter commandWriter;
+        private IWriter commandWriter;
 
 
         public Engine(ICommandFactory commandFactory, IWriter writer)
         {
             this.commandFactory = commandFactory;
-            this.writer = writer;  
+            this.writer = writer;
             this.commandWriter = new FileWriter(Constants.PATH_TO_DATABASE + "CommandHistory.txt");
         }
         public void Start()
@@ -74,9 +74,9 @@ namespace TaskManagmentSystem.Core
 
         }
         private void ApplicationPrepearing()
-        {           
+        {
             var commands = File.ReadAllText(Constants.PATH_TO_DATABASE + "CommandHistory.txt")
-                .Split('\n').Where(x => !string.IsNullOrWhiteSpace(x)).Select(x => x.Substring(0, x.Length -1)).ToList();
+                .Split('\n').Where(x => !string.IsNullOrWhiteSpace(x)).Select(x => x.Substring(0, x.Length - 1)).ToList();
             if (commands.Count > 0)
             {
                 commands.ForEach(x => ProcessCommand(x));
@@ -88,7 +88,7 @@ namespace TaskManagmentSystem.Core
         private void SaveSuccsessfullCommands(string command)
         {
             string commandName = command.Split()[0];
-            var regex = new Regex(@"(show)|(help)|(exit)");
+            var regex = new Regex(@"(show)|(help)|(exit)|(erasehistory)|(exporthistory)");
             if (!regex.IsMatch(commandName))
             {
                 commandWriter.WriteLine(command);

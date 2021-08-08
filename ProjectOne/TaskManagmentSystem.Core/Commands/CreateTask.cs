@@ -22,11 +22,11 @@ namespace TaskManagmentSystem.Core.Commands
 
             string taskType = CommandParameters[0];
 
-            string taskTitle = CommandParameters[1];
+            string boardIdentifier = CommandParameters[1];
 
-            string taskDescription = CommandParameters[2];
+            string taskTitle = CommandParameters[2];
 
-            string boardIdentifier = CommandParameters[3];
+            string taskDescription = CommandParameters[3];
 
             var board = this.Repository.GetBoard(boardIdentifier);
 

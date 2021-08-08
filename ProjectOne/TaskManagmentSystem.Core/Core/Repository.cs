@@ -50,11 +50,11 @@ namespace TaskManagmentSystem.Core
         public IMember CreateUser(string username, string password)
         {
             var user = new Member(++nextId, username, password);
-            this.users.Add(user);
             if (this.exsitingNames.Contains(username))
             {
                 throw new UserInputException(Constants.NAME_MUST_BE_UNIQUE);
             }
+            this.users.Add(user);            
             this.exsitingNames.Add(username);
             return user;
         }
@@ -63,11 +63,11 @@ namespace TaskManagmentSystem.Core
             var team = new Team(++nextId, teamName);
             team.AddMember(LoggedUser);
             team.AddAdministrator(LoggedUser);
-            this.teams.Add(team);
             if (this.exsitingNames.Contains(teamName))
             {
                 throw new UserInputException(Constants.NAME_MUST_BE_UNIQUE);
             }
+            this.teams.Add(team);            
             this.exsitingNames.Add(teamName);
             return team;
         }
@@ -211,6 +211,27 @@ namespace TaskManagmentSystem.Core
                 .SelectMany(x => x.GetTypes())
                 .Where(x => x.FullName.Contains(Constants.MODELS_ASSEMBLY_KEY)
                          && x.BaseType == typeof(BoardItem)).ToList();
+        }
+
+        public void RemoveUser(IMember user)
+        {
+            this.exsitingNames.RemoveAll(x => x == user.Name);
+            this.users.Remove(user);
+        }
+
+        public void RemoveTeam(ITeam team)
+        {
+            this.exsitingNames.RemoveAll(x => x == team.Name);
+            this.teams.Remove(team);
+        }
+
+        public void LeaveTeam(ITeam team)
+        {
+            team.RemoveMember(this.LoggedUser);
+            if (team.Administrators.Any(x => x.Id == this.LoggedUser.Id))
+            {
+                team.RemoveAdministrator(this.LoggedUser);
+            }
         }
     }
 }

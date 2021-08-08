@@ -21,7 +21,7 @@ namespace TaskManagmentSystem.Core.Commands
 
             string teamName = CommandParameters[0];
             int itemID = ParseIntParameter(CommandParameters[1]);
-            string statusType = CommandParameters[2];
+            string statusType = CommandParameters[2].ToLower();
 
 
             if (!this.Repository.IsTeamMember(this.Repository.GetTeam(teamName), this.Repository.LoggedUser))

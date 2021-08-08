@@ -17,7 +17,6 @@ namespace TaskManagmentSystem.Core.Contracts
         IMember CreateUser(string username, string password);
         IBoardItem CreateTask(Type type, string title, string description, IBoard board, params string[] parameters);
         IBoard CreateBoard(string name);
-
         IBoardItem FindTaskByID(int id);
         ITeam FindTeamById(int id);
         ITeam FindTeamByName(string name);
@@ -29,7 +28,8 @@ namespace TaskManagmentSystem.Core.Contracts
         IMember GetUser(string userIdentificator);
         IBoard GetBoard(string boardIdentificator);
         bool IsTeamMember(ITeam team, IMember user);
-
-
+        void RemoveUser(IMember user);
+        void RemoveTeam(ITeam team);
+        void LeaveTeam(ITeam team);
     }
 }

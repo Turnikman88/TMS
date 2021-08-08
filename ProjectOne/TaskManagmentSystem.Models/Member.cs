@@ -76,16 +76,9 @@ namespace TaskManagmentSystem.Models
             this.tasks.Remove(task);
             AddEvent(new EventLog($"{task.GetType().Name} '{task.Title}' with ID {task.Id} was unassigned from '{this.Name}'"));
         }
-        public string ChangePass(string newPass)
+        public void ChangePass(string newPass)
         {
-            Console.WriteLine("Please enter your old password"); //ToDo: maybe in constants ? // I think event log for password is stupid idea
-            string oldPass = Console.ReadLine();
-            if (this.Password == oldPass)
-            {
-                this.Password = newPass;
-                return string.Format(Constants.PASSWORD_CHANGED_SUCC, oldPass, newPass);
-            }
-            return Constants.PASSWORD_CHANGE_ERR;
+            this.Password = newPass;
         }
         public void ChangeRole(string role)
         {

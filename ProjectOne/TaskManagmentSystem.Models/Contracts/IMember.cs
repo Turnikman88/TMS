@@ -12,7 +12,7 @@ namespace TaskManagmentSystem.Models.Contracts
         IList<IBoardItem> Tasks { get; }
         void AddTask(IBoardItem task);
         void RemoveTask(IBoardItem task);
-        string ChangePass(string newPass);
+        void ChangePass(string newPass);
         void ChangeRole(string role);
         string ViewHistory();
     }

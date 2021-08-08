@@ -1,0 +1,11 @@
+login superuser th1$i$4dmiN
+createteam morence
+createuser gosho th1$i$4dmiN
+teamjoin gosho morence
+logout
+login gosho th1$i$4dmiN
+teamleave morence
+logout
+login superuser th1$i$4dmiN
+createboard moreto morence
+createtask feedback moreto dfddddddddddd dddddddddddddddddd 76

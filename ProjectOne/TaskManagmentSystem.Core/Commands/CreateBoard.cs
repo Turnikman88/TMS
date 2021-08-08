@@ -22,7 +22,7 @@ namespace TaskManagmentSystem.Core.Commands
             string boardName = CommandParameters[0];
             string teamIdentificator = CommandParameters[1];
 
-            ITeam team = this.Repository.GetTeam(teamIdentificator);
+            var team = this.Repository.GetTeam(teamIdentificator);
 
             if (!this.Repository.IsTeamMember(team, this.Repository.LoggedUser))
             {
@@ -35,7 +35,7 @@ namespace TaskManagmentSystem.Core.Commands
             var board = this.Repository.CreateBoard(boardName);
             team.AddBoard(board);
 
-            return $"Board with name {board.Name}, ID: {board.Id} was created";
+            return $"Board with name {board.Name}, ID: {board.Id} was created!";
         }
 
 

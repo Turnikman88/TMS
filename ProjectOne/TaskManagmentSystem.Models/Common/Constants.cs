@@ -43,14 +43,14 @@
         public const string STATUS_REVERT_ERROR = "Status cannot be Reverted! Current status {0}!";
 
         public const string PARSE_INT_ERR = "Invalid value for {0}. Should be an integer number!";
-        public const string NUM_OF_PARAMETERS_ERR = "Invalid number of arguments. Expected: {0}, Received: {1}";
-        public const string TASK_TYPE_ERR = "Task of type {0} doesnt exist";
+        public const string NUM_OF_PARAMETERS_ERR = "Invalid number of arguments. Expected: {0}, Received: {1}!";
+        public const string TASK_TYPE_ERR = "Task of type {0} doesnt exist!";
         public const string PRINT_INFO_SEPARATOR = "--------------";
         public const string INVALID_COMMAND_ERR = "Command with name: {0} doesn't exist!";
 
         public const string PASSWORD_PATTERN = @"^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$";
         public const string PASSWORD_CHANGE_ERR = "Password doesn't match!";
-        public const string PASSWORD_CHANGED_SUCC = "Password succsessfully changed from {0} to {1}";
+        public const string PASSWORD_CHANGED_SUCC = "Password succsessfully changed!";
         public const string WRONG_PASSWORD = "Wrong password!";
         public const string PASSWORD_PATTERN_ERR = "Password must be at least 8 characters long and containse at least one upper-case, special symbol and digit!";
 
@@ -66,8 +66,10 @@
         public const string USER_NOT_ROOT = "You are not the owner!";
 
         public const string MEMBER_NOT_IN_TEAM = "User {0} is not member of the team!";
-        public const string MEMBER_ALREADY_IN_TEAM = "User {0} is already member of the team";
+        public const string MEMBER_ALREADY_IN_TEAM = "User {0} is already member of the team!";
         public const string MEMBER_NOT_ALLOWED_JOINING = "You are not allowed to join!";
+
+        public const string YOU_ARE_NOT_ALLOWED_TO_REMOVE = "You are not allowed to remove it!";
 
         public const string TEAM_DOESNT_EXSIST = "Team {0} doesn't exsist!";
         public const string BOARD_DOESNT_EXSIST = "Board {0} doesn't exsist!";

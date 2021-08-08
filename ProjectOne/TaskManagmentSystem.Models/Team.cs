@@ -7,12 +7,14 @@ using TaskManagmentSystem.Models.Contracts;
 
 namespace TaskManagmentSystem.Models
 {
-    public class Team : ITeam
+    public class Team : ITeam, IActivityLog
     {
         private string name;
         private IList<IMember> members = new List<IMember>();
         private IList<IBoard> boards = new List<IBoard>();
         private IList<IMember> administrators = new List<IMember>();
+        private IList<IEventLog> eventLogs = new List<IEventLog>();
+
 
         public Team(int id, string name)
         {
@@ -37,24 +39,32 @@ namespace TaskManagmentSystem.Models
              => new List<IBoard>(this.boards);
         public IList<IMember> Administrators
             => new List<IMember>(administrators);
+        public IList<IEventLog> EventLogs
+            => new List<IEventLog>(this.eventLogs);
         public void AddBoard(IBoard board)
         {
             Validator.ValidateObjectIsNotNULL(board, string.Format(Constants.ITEM_NULL_ERR, "Board"));
             this.boards.Add(board);
+            AddEvent(new EventLog($"Board {board.Name}, Id: {board.Id} was created!"));
+
         }
         public void AddMember(IMember member)
         {
             Validator.ValidateObjectIsNotNULL(member, string.Format(Constants.ITEM_NULL_ERR, "Member"));
             this.members.Add(member);
+            AddEvent(new EventLog($"User {member.Name}, Id: {member.Id} joined team {this.Name}!"));
         }
         public void AddAdministrator(IMember admin)
         {
             Validator.ValidateObjectIsNotNULL(admin, string.Format(Constants.ITEM_NULL_ERR, "Admin"));
             this.administrators.Add(admin);
+            AddEvent(new EventLog($"User {admin.Name}, Id: {admin.Id} is admin of team {this.Name}!"));
+
         }
         public string ViewHistory()
         {
             var sb = new StringBuilder();
+            sb.Append(string.Join($"{Environment.NewLine}", eventLogs.OrderByDescending(x => x.EventTime).Select(x => x.ViewInfo())));
             sb.Append(string.Join($"{Environment.NewLine}", members.Select(x => x.ViewHistory())));
             sb.Append(string.Join($"{Environment.NewLine}", boards.Select(x => x.ViewHistory())));
             return sb.ToString().Trim();
@@ -75,6 +85,26 @@ namespace TaskManagmentSystem.Models
             sb.AppendLine("         Boards:");
             sb.AppendLine($"                {boards}");
             return sb.ToString().Trim();
+        }
+        protected void AddEvent(IEventLog eventLog)
+        {
+            this.eventLogs.Add(eventLog);
+        }
+        public void RemoveMember(IMember member)
+        {
+            this.members.Remove(member);
+            AddEvent(new EventLog($"User {member.Name}, Id: {member.Id} left team {this.Name}!"));
+        }
+
+        public void RemoveAdministrator(IMember admin)
+        {
+            this.administrators.Remove(admin);
+        }
+
+        public void RemoveBoard(IBoard board)
+        {
+            this.boards.Remove(board);
+            AddEvent(new EventLog($"Board {board.Name}, Id: {board.Id} was removed!"));
         }
     }
 }

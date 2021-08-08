@@ -17,6 +17,8 @@
 
         public const string NAME_MUST_BE_UNIQUE = "Name must be unique!";
         public const string GIVEN_TYPE_ERR = "Given {0} type doesn't exsits!";
+        public const string GIVEN_STATUS_TYPE_ERR = "Status of type {0} doesn't exist!";
+
         public const int TEAM_NAME_MIN_SYMBOLS = 5;
         public const int TEAM_NAME_MAX_SYMBOLS = 15;
 

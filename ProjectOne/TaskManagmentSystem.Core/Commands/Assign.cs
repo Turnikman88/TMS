@@ -20,31 +20,26 @@ namespace TaskManagmentSystem.Core.Commands
             Validator.ValidateParametersCount(numberOfParameters, CommandParameters.Count);
             string teamNameOrID = CommandParameters[0];
             string userNameOrID = CommandParameters[1];
-            int id = int.Parse(CommandParameters[2]);
+            int id = ParseIntParameter(CommandParameters[2]);
 
             var team = this.Repository.GetTeam(teamNameOrID);
             var user = this.Repository.GetUser(userNameOrID);
 
-            if (!this.Repository.IsTeamMember(team, this.Repository.LoggedUser) || !team.Members.Contains(user))
+            if (!this.Repository.IsTeamMember(team, this.Repository.LoggedUser))
             {
                 throw new UserInputException(string.Format(Constants.MEMBER_NOT_IN_TEAM, this.Repository.LoggedUser.Name));
             }
+            if (!team.Members.Contains(user))
+            {
+                throw new UserInputException(string.Format(Constants.MEMBER_NOT_IN_TEAM, user.Name));
+            }
 
             var task = this.Repository.FindTaskByID(id);
-            if (task is Bug)
-            {
-                var bug = (Bug)task;
-                bug.AddAssignee(user);
-            }
-            else if (task is Story)
-            {
-                var story = (Story)task;
-                story.AddAssignee(user);
-            }
-            else
-            {
-                throw new UserInputException("Feedbacks cannot be assigned");
-            }
+            var type = task.GetType();
+            var method = type.GetMethod("AddAssignee") ?? throw new UserInputException("Feedbacks cannot be assigned");
+            method.Invoke(task, new object[] {user});
+
+            user.AddTask(task);
 
             return $"User {userNameOrID} was assigned to {task.GetType().Name} task with ID: {id}";
         }

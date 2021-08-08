@@ -36,7 +36,7 @@ namespace TaskManagmentSystem.Models
         }
         public override void ChangeStatus()
         {
-            this.status = this.status != Status.Done ? status++ : Status.New;
+            _ = this.status != Status.Done ? status++ : status = Status.New;
             AddEvent(new EventLog($"Status for ID {this.Id} {this.Title} was changed to {this.Status}"));
         }
         public void ChangeRating(int number)

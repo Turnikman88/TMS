@@ -1,0 +1,4 @@
+login superuser th1$i$4dmiN
+createteam morence
+createboard moreto morence
+createtask bug moreto ddddddddddd dddddddddddddchange morence 3 severity

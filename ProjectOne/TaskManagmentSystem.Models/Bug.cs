@@ -10,6 +10,7 @@ namespace TaskManagmentSystem.Models
     {
         private Priority priority;
         private Severity severity;
+        
         private Status status;
         private readonly IList<string> steps = new List<string>();
 
@@ -36,7 +37,7 @@ namespace TaskManagmentSystem.Models
                 this.severity = value;
             }
         }
-
+        
         public Status Status
         {
             get => this.status;
@@ -55,12 +56,13 @@ namespace TaskManagmentSystem.Models
 
         public void ChangePriority()
         {
-            this.priority = this.priority != Priority.High ? priority++ : Priority.Low;
+            _ = this.priority != Priority.High ? priority++ : priority = Priority.Low;
             AddEvent(new EventLog($"Priority for ID {this.Id} {this.Title} was changed to {this.Priority}"));
         }
         public void ChangeSeverity()
         {
-            this.severity = this.severity != Severity.Critical ? severity++ : Severity.Minor;
+            _ = severity != Severity.Critical ? severity++ : severity = Severity.Minor;
+
             AddEvent(new EventLog($"Saverity for ID {this.Id} {this.Title} was changed to {this.Severity}"));
         }
         public override void ChangeStatus()

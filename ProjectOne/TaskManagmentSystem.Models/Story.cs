@@ -58,7 +58,7 @@ namespace TaskManagmentSystem.Models
 
         public void ChangeSize()
         {
-            this.size = this.size != Size.Large ? size++ : Size.Small;
+            _ = this.size != Size.Large ? size++ : size = Size.Small;
             AddEvent(new EventLog($"Size for ID {this.Id} {this.Title} was changed to {this.Size}"));
         }
 
@@ -70,7 +70,7 @@ namespace TaskManagmentSystem.Models
 
         public override void ChangeStatus()
         {
-            this.status = this.status != Status.Done ? status++ : Status.NotDone;
+            _ = this.status != Status.Done ? status++ : status = Status.NotDone;
             AddEvent(new EventLog($"Status for ID {this.Id} {this.Title} was changed to {this.Status}"));
         }
 

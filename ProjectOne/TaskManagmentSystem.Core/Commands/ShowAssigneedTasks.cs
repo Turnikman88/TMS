@@ -30,15 +30,27 @@ namespace TaskManagmentSystem.Core.Commands
             }
 
             var board = this.Repository.GetBoard(boardIdentifier);
-
-            var result = board.Tasks.Where(x => x.GetType() == typeof(Bug) || x.GetType() == typeof(Story));
+            var resultBugs = board.Tasks.Where(x => x.GetType() == typeof(Bug)).Select(x => x as Bug);
 
             StringBuilder sb = new StringBuilder();
-            foreach (var item in result)
+            foreach (var item in resultBugs)
             {
-                sb.Append(item.ViewHistory());
+                if (item.Assignee != null)
+                {
+                    sb.Append(item.ToString());
+                }
             }
-            return sb.ToString();
+
+            var resultStory = board.Tasks.Where(x => x.GetType() == typeof(Story)).Select(x => x as Story);
+
+            foreach (var item in resultStory)
+            {
+                if (item.Assignee != null)
+                {
+                    sb.Append(item.ToString());
+                }
+            }
+            return sb.ToString().Trim();
         }
     }
 }

@@ -25,7 +25,6 @@ namespace TaskManagmentSystem.Core
 
         public Repository()
         {
-
             this.nextId = 0;
             this.coreClassTypes = GetCoreCommandTypes();
             this.modelsClassTypes = GetModelsClassTypes();

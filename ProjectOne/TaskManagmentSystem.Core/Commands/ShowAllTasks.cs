@@ -47,7 +47,7 @@ namespace TaskManagmentSystem.Core.Commands
                 throw new UserInputException("showalltasks command needs four keywords [teamname/id] ([filter] [title] or [sortby] title)");
             }
 
-            return string.Join(Environment.NewLine, result);
+            return string.Join(Environment.NewLine, result.ToString());
 
         }
     }

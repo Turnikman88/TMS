@@ -17,14 +17,15 @@ namespace TaskManagmentSystem.Core.Commands
         public override string Execute()
         {
             Validator.ValidateParametersCount(numberOfParameters, CommandParameters.Count);
-            string teamName = CommandParameters[0];
 
-            if (!this.Repository.IsTeamMember(this.Repository.GetTeam(teamName), this.Repository.LoggedUser))
+            string teamIdentifier = CommandParameters[0];
+
+            var team = this.Repository.GetTeam(teamIdentifier);
+
+            if (!this.Repository.IsTeamMember(team, this.Repository.LoggedUser))
             {
                 throw new UserInputException(string.Format(Constants.MEMBER_NOT_IN_TEAM, this.Repository.LoggedUser.Name));
             }
-
-            var team = this.Repository.GetTeam(teamName);
 
             var sb = new StringBuilder();
 

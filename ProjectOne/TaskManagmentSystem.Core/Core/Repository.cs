@@ -54,7 +54,7 @@ namespace TaskManagmentSystem.Core
             {
                 throw new UserInputException(Constants.NAME_MUST_BE_UNIQUE);
             }
-            this.users.Add(user);            
+            this.users.Add(user);
             this.exsitingNames.Add(username);
             return user;
         }
@@ -67,12 +67,12 @@ namespace TaskManagmentSystem.Core
             {
                 throw new UserInputException(Constants.NAME_MUST_BE_UNIQUE);
             }
-            this.teams.Add(team);            
+            this.teams.Add(team);
             this.exsitingNames.Add(teamName);
             return team;
         }
 
-        public IBoardItem CreateTask(Type type, string title, string description, IBoard board,  params string[] parameters)
+        public IBoardItem CreateTask(Type type, string title, string description, IBoard board, params string[] parameters)
         {
             IBoardItem task = null;
             switch (type.Name)
@@ -99,7 +99,7 @@ namespace TaskManagmentSystem.Core
         }
 
         public IBoard CreateBoard(string name)
-        {            
+        {
             var board = new Board(++nextId, name);
             return board;
         }
@@ -155,11 +155,11 @@ namespace TaskManagmentSystem.Core
             }
             else
             {
-                user = this.FindUserByName(userIdentificator) 
+                user = this.FindUserByName(userIdentificator)
                     ?? throw new UserInputException(string.Format(Constants.USER_DOESNT_EXSIST, userIdentificator));
             }
 
-            return user; 
+            return user;
 
         }
 
@@ -195,6 +195,12 @@ namespace TaskManagmentSystem.Core
 
             return board;
         }
+
+        public IList<IBoardItem> GetTasks()
+        {
+            return new List<IBoardItem>(this.tasks);
+        }
+
         private static List<Type> GetCoreCommandTypes()
         {
             return Assembly.GetExecutingAssembly()

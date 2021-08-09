@@ -1,19 +1,20 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using TaskManagmentSystem.Core.Contracts;
+using TaskManagmentSystem.Models;
 using TaskManagmentSystem.Models.Common;
 
 namespace TaskManagmentSystem.Core.Commands
 {
-    public class ShowBoardActivity : BaseCommand
+    public class ShowAssigneedTasks : BaseCommand
     {
         private const int numberOfParameters = 2;
-        //showboardactivity [teamname] [boardID]
-        public ShowBoardActivity(IList<string> commandParameters, IRepository repository)
-            : base(commandParameters, repository)
+        //showassigneedtasks [teamid/name] [boardid/name]
+        public ShowAssigneedTasks(IList<string> commandParameters, IRepository repository) : base(commandParameters, repository)
         {
-
         }
+
         public override string Execute()
         {
             Validator.ValidateParametersCount(numberOfParameters, CommandParameters.Count);
@@ -30,7 +31,14 @@ namespace TaskManagmentSystem.Core.Commands
 
             var board = this.Repository.GetBoard(boardIdentifier);
 
-            return team.Boards.FirstOrDefault(x => x.Id == board.Id).ViewHistory();
+            var result = board.Tasks.Where(x => x.GetType() == typeof(Bug) || x.GetType() == typeof(Story));
+
+            StringBuilder sb = new StringBuilder();
+            foreach (var item in result)
+            {
+                sb.Append(item.ViewHistory());
+            }
+            return sb.ToString();
         }
     }
 }

@@ -151,7 +151,7 @@ namespace TaskManagmentSystem.Tests.Commands
         public void CreateBoard_ShouldCreateBoard_WhenCorrectInput()
         {
             //Arrange
-            string result = $"Board with name {BOARD}, ID: 3 was created";
+            string result = $"Board with name {BOARD}, ID: 3 was created!";
 
             IList<string> parameters = new List<string> { TEAM };
             IList<string> parametersBoard = new List<string> { BOARD, TEAM };

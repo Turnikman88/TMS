@@ -7,7 +7,6 @@ namespace TaskManagmentSystem.Core.Commands
     public class LogIn : BaseCommand
     {
         private const int numberOfParameters = 2;
-        private IList<string> parametersLogin;
 
         public LogIn(IList<string> commandParameters, IRepository repository)
             : base(commandParameters, repository)

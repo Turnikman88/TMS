@@ -199,7 +199,7 @@ namespace TaskManagmentSystem.Core
         {
             return new List<IBoardItem>(this.tasks);
         }
-        public IBoardItem GetTask(int id)
+        public IBoardItem GetTaskById(int id)
         {
             return this.tasks.FirstOrDefault(x => x.Id == id) 
                 ?? throw new UserInputException(string.Format(Constants.TASK_DOESNT_EXSIST, $"with Id: {id}"));
@@ -221,7 +221,11 @@ namespace TaskManagmentSystem.Core
                 .Where(x => x.FullName.Contains(Constants.MODELS_ASSEMBLY_KEY)
                          && x.BaseType == typeof(BoardItem)).ToList();
         }
-
+        public Type GetModelTypeByName(string taskType)
+        {
+           return this.ModelsClassTypes.FirstOrDefault(x => x.Name.ToLower() == taskType)
+                ?? throw new UserInputException(string.Format(Constants.TASK_TYPE_ERR, taskType));
+        }
         public void RemoveUser(IMember user)
         {
             this.exsitingNames.RemoveAll(x => x == user.Name);

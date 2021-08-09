@@ -33,7 +33,7 @@ namespace TaskManagmentSystem.Core
             catch (Exception)
             {
                 writer.WriteLine("Something went wrong... Data may be lost!");
-                Console.WriteLine(Model.GenerateLogo());
+                Console.WriteLine(Banner.GenerateLogo());
                 Console.ForegroundColor = ConsoleColor.Cyan;
             }
             while (true)
@@ -82,7 +82,7 @@ namespace TaskManagmentSystem.Core
                 commands.ForEach(x => ProcessCommand(x));
             }
             Console.Clear();
-            Console.WriteLine(Model.GenerateLogo());
+            Console.WriteLine(Banner.GenerateLogo());
             Console.ForegroundColor = ConsoleColor.Cyan;
         }
         private void SaveSuccsessfullCommands(string command)

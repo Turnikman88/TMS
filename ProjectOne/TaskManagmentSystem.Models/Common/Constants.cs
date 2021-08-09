@@ -74,6 +74,7 @@
         public const string TEAM_DOESNT_EXSIST = "Team {0} doesn't exsist!";
         public const string BOARD_DOESNT_EXSIST = "Board {0} doesn't exsist!";
         public const string TASK_DOESNT_EXSIST = "Task {0} doesn't exsist!";
+        public const string TASK_NOT_ASSIGNED = "Task is not assigned to {0}!";
 
         public const string BOARS_ALREADY_EXIST = "Board {0} already exist. Choose a different name!";
 

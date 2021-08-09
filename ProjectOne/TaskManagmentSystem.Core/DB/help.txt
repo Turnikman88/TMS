@@ -10,6 +10,7 @@
 		changepass................[old password] [new password] - Changes the password of the logged user
 		change....................[teamname/id] [id] [statusToAdvance] - Changes given enumeration of task (Status, Priority, Severity…)
 		assign....................[teamname/id] [username/id] [taskID] - Assign’s task to given member of the team
+		unassign..................[teamname/id] [taskID] - Unassign’s task from logged member of the team
 
 		createboard...............[boardname] [teamname/id] - Creates new board in team
 		createtask................[tasktype] [board name/id to be into][tasktitle] [taskdescription] - Creates new task in given board

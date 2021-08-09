@@ -54,7 +54,11 @@ namespace TaskManagmentSystem.Models
             Validator.ValidateObjectIsNotNULL(assignee, string.Format(Constants.ITEM_NULL_ERR, "Assignee"));
             this.Assignee = assignee;
             AddEvent(new EventLog($"Story with Id: {this.Id} was assigned to {assignee.Name}"));
-
+        }
+        public void RemoveAssignee()
+        {
+            this.Assignee = null;
+            AddEvent(new EventLog($"{this.GetType().Name} with Id: {this.Id} was unassigned!"));
         }
 
         public void ChangeSize()
@@ -81,7 +85,8 @@ namespace TaskManagmentSystem.Models
         }
         protected override string AddAdditionalInfo()
         {
-            return $"Assignee {this.Assignee.Name} {Environment.NewLine} Status: {this.Status} {Environment.NewLine} Priority: {this.Priority} {Environment.NewLine} Size: {this.Size} ";
+            var assignee = this.Assignee is null ? "No assignee" : this.Assignee.Name;
+            return $"Assignee {assignee} {Environment.NewLine} Status: {this.Status} {Environment.NewLine} Priority: {this.Priority} {Environment.NewLine} Size: {this.Size} ";
         }
     }
 }

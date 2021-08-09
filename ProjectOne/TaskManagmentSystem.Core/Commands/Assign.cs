@@ -20,7 +20,7 @@ namespace TaskManagmentSystem.Core.Commands
             Validator.ValidateParametersCount(numberOfParameters, CommandParameters.Count);
             string teamNameOrID = CommandParameters[0];
             string userNameOrID = CommandParameters[1];
-            int id = ParseIntParameter(CommandParameters[2]);
+            int taskId = ParseIntParameter(CommandParameters[2]);
 
             var team = this.Repository.GetTeam(teamNameOrID);
             var user = this.Repository.GetUser(userNameOrID);
@@ -34,14 +34,14 @@ namespace TaskManagmentSystem.Core.Commands
                 throw new UserInputException(string.Format(Constants.MEMBER_NOT_IN_TEAM, user.Name));
             }
 
-            var task = this.Repository.FindTaskByID(id);
+            var task = this.Repository.FindTaskByID(taskId);
             var type = task.GetType();
             var method = type.GetMethod("AddAssignee") ?? throw new UserInputException("Feedbacks cannot be assigned");
             method.Invoke(task, new object[] {user});
 
             user.AddTask(task);
 
-            return $"User {user.Name} was assigned to {task.GetType().Name} with ID: {id}";
+            return $"User {user.Name} was assigned to {task.GetType().Name} with ID: {taskId}";
         }
     }
 }

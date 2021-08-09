@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using TaskManagmentSystem.Models.Common;
 using TaskManagmentSystem.Models.Contracts;
 using TaskManagmentSystem.Models.Enums;
 using TaskManagmentSystem.Models.Enums.Bug;
@@ -72,8 +73,14 @@ namespace TaskManagmentSystem.Models
         }
         public void AddAssignee(IMember assignee)
         {
+            Validator.ValidateObjectIsNotNULL(assignee, string.Format(Constants.ITEM_NULL_ERR, "Assignee"));
             this.Assignee = assignee;
             AddEvent(new EventLog($"Bug with Id: {this.Id} was assigned to {assignee.Name}"));
+        }
+        public void RemoveAssignee()
+        {
+            this.Assignee = null;
+            AddEvent(new EventLog($"{this.GetType().Name} with Id: {this.Id} was unassigned!"));
         }
         public override string ToString()
         {
@@ -81,7 +88,7 @@ namespace TaskManagmentSystem.Models
         }
         protected override string AddAdditionalInfo()
         {
-            var assignee = this.Assignee is null ? "" : this.Assignee.Name;
+            var assignee = this.Assignee is null ? "No assignee" : this.Assignee.Name;
             return $"Assignee {assignee} {Environment.NewLine} Status: {this.Status} {Environment.NewLine} Priority: {this.Priority} {Environment.NewLine} Saverity: {this.Severity} {Environment.NewLine} Steps to reproduce: {Environment.NewLine}" + String.Join(Environment.NewLine, this.steps);
         }
     }

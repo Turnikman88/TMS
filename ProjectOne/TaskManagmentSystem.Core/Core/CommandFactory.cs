@@ -83,7 +83,7 @@ namespace TaskManagmentSystem.Core
             if (this.repository.LoggedUser == null && commandName.ToLower() != "createuser" && commandName.ToLower() != "login"
                 && commandName.ToLower() != "help")
             {
-                throw new UserInputException(Constants.USER_NOT_LOGGED_IN); //ToDo: fix error message when type login 
+                throw new UserInputException(Constants.USER_NOT_LOGGED_IN);
             }
         }
     }

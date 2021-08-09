@@ -28,6 +28,7 @@ namespace TaskManagmentSystem.Core.Contracts
         IMember GetUser(string userIdentificator);
         IBoard GetBoard(string boardIdentificator);
         IList<IBoardItem> GetTasks();
+        IBoardItem GetTask(int id);
         bool IsTeamMember(ITeam team, IMember user);
         void RemoveUser(IMember user);
         void RemoveTeam(ITeam team);

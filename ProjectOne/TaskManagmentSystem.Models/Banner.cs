@@ -4,11 +4,11 @@ using TaskManagmentSystem.Models.Common;
 
 namespace TaskManagmentSystem.Models
 {
-    public static class Model
+    public static class Banner
     {
         public static string GenerateLogo()
         {
-            Console.SetWindowSize(150, 35);
+            Console.SetWindowSize(170, 35);
             Console.ForegroundColor = ConsoleColor.Magenta;
             string end = "Type 'help' to see list of all commands...";
             var logo = File.ReadAllText(Constants.PATH_TO_DATABASE + "logos.txt").Split(',');

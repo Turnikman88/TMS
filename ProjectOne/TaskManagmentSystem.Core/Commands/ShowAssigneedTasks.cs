@@ -36,7 +36,7 @@ namespace TaskManagmentSystem.Core.Commands
             StringBuilder sb = new StringBuilder();
             foreach (var item in result)
             {
-                sb.Append(item.ViewHistory());
+                sb.Append(item.ToString());
             }
             return sb.ToString();
         }

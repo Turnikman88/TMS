@@ -151,7 +151,7 @@ namespace TaskManagmentSystem.Core
             if (int.TryParse(userIdentificator, out int userId))
             {
                 user = this.FindUserById(userId)
-                    ?? throw new UserInputException(string.Format(Constants.USER_DOESNT_EXSIST, $"with ID: {userIdentificator}"));
+                    ?? throw new UserInputException(string.Format(Constants.USER_DOESNT_EXSIST, $"with Id: {userIdentificator}"));
             }
             else
             {
@@ -169,7 +169,7 @@ namespace TaskManagmentSystem.Core
             if (int.TryParse(teamIdentificator, out int temaId))
             {
                 team = this.FindTeamById(temaId)
-                    ?? throw new UserInputException(string.Format(Constants.TEAM_DOESNT_EXSIST, $"with ID: {teamIdentificator}"));
+                    ?? throw new UserInputException(string.Format(Constants.TEAM_DOESNT_EXSIST, $"with Id: {teamIdentificator}"));
             }
             else
             {
@@ -200,7 +200,11 @@ namespace TaskManagmentSystem.Core
         {
             return new List<IBoardItem>(this.tasks);
         }
-
+        public IBoardItem GetTask(int id)
+        {
+            return this.tasks.FirstOrDefault(x => x.Id == id) 
+                ?? throw new UserInputException(string.Format(Constants.TASK_DOESNT_EXSIST, $"with Id: {id}"));
+        }
         private static List<Type> GetCoreCommandTypes()
         {
             return Assembly.GetExecutingAssembly()

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using TaskManagmentSystem.Core.Contracts;
 using TaskManagmentSystem.Models;
@@ -12,7 +11,12 @@ namespace TaskManagmentSystem.Core.Commands
     {
         private const int numberOfParameters = 3;
         //ShowTaskByType [typeoftask] (keyword)[1.filter / 2.sort][1.status / assignee][2.title / priority / severity / size / rating]
-        //showtaskbytype bug filter status active
+        //showtaskbytype bug filter status active/fixed
+        //showtaskbytype bug filter asignee NAME
+        //showtaskbytype bug sort status active
+        //List bugs/stories/feedback only.
+        //Filter by status and/or assignee  
+        //Sort by title/priority/severity/size/rating (depending on the task type)
 
 
         public ShowTaskByType(IList<string> commandParameters, IRepository repository) : base(commandParameters, repository)
@@ -31,44 +35,22 @@ namespace TaskManagmentSystem.Core.Commands
             var listTask = this.Repository.GetTasks();
             var filteredList = GetOnlyOneTypeOfTasks(listTask, typeOfTask);
 
-            switch (keyword)
+
+            if (keyword == "filter")
             {
-                case "filter":
-                    {
-                        if (typeOfTask == "bug")
-                        {
-                            var bugList = filteredList.Select(x => (Bug)x);
-                            if (parameter1 == "statusactive")
-                            {
-                                bugList = bugList.Where(x => x.Status == Models.Enums.Bug.Status.Active);
-                            }
-                            else if (parameter1 == "statusfixed")
-                            {
-                                bugList = bugList.Where(x => x.Status == Models.Enums.Bug.Status.Fixed);
-                            }
-                            else
-                            {
-                                throw new UserInputException("Bug has only two status Statuses Active and Fixed");
-                            }
-                        }
-                    }
-                    break;
-                case "sort":
-                    if (parameter1 == "title")
-                    {
-                        filteredList = filteredList.OrderBy(x => x.Title);
-                    }
-                    else if (parameter1 == "status")
-                    {
+                filteredList = FilterBy(typeOfTask, parameter1, parameter2, filteredList);
+            }
+            else if (keyword == "sort")
+            {
 
-
-                    }
-                    break;
-                default:
-                    throw new UserInputException("You can only filter or sort tasks, please use keyword 'filter' or 'sort'");
+            }
+            else
+            {
+                throw new UserInputException("You can only filter or sort tasks, please use keyword 'filter' or 'sort'");
             }
 
-            throw new NotImplementedException();
+            return $"";
+
         }
 
         private IEnumerable<IBoardItem> GetOnlyOneTypeOfTasks(IList<IBoardItem> list, string taskType)
@@ -83,7 +65,41 @@ namespace TaskManagmentSystem.Core.Commands
                     return list.Where(x => x.GetType() == typeof(Feedback));
                 default:
                     throw new UserInputException("No Search results match the specified criteria.");
+            }
+        }
 
+        private IEnumerable<IBoardItem> FilterBy(string typeOfTask, string parameter, string parameter2, IEnumerable<IBoardItem> list)
+        {
+            switch (typeOfTask, parameter, parameter2)
+            {
+                case ("bug", "status", "active"):
+                    return list.Select(x => x as Bug).Where(x => x.Status == Models.Enums.Bug.Status.Active);
+                case ("bug", "status", "fixed"):
+                    return list.Select(x => x as Bug).Where(x => x.Status == Models.Enums.Bug.Status.Fixed);
+                case ("bug", "asignee", "ascending"):
+                    return list.Select(x => x as Bug).OrderBy(x => x.Assignee.Name);
+                case ("bug", "asignee", "descending"):
+                    return list.Select(x => x as Bug).OrderByDescending(x => x.Assignee.Name);
+                case ("story", "status", "notdone"):
+                    return list.Select(x => x as Story).Where(x => x.Status == Models.Enums.Story.Status.NotDone);
+                case ("story", "status", "done"):
+                    return list.Select(x => x as Story).Where(x => x.Status == Models.Enums.Story.Status.Done);
+                case ("story", "status", "inprogress"):
+                    return list.Select(x => x as Story).Where(x => x.Status == Models.Enums.Story.Status.InProgress);
+                case ("story", "asignee", "ascending"):
+                    return list.Select(x => x as Story).OrderBy(x => x.Assignee.Name);
+                case ("story", "asignee", "descending"):
+                    return list.Select(x => x as Story).OrderByDescending(x => x.Assignee.Name);
+                case ("feedback", "status", "new"):
+                    return list.Select(x => x as Feedback).Where(x => x.Status == Models.Enums.Feedback.Status.New);
+                case ("feedback", "status", "done"):
+                    return list.Select(x => x as Feedback).Where(x => x.Status == Models.Enums.Feedback.Status.Done);
+                case ("feedback", "status", "unschedule"):
+                    return list.Select(x => x as Feedback).Where(x => x.Status == Models.Enums.Feedback.Status.Unscheduled);
+                case ("feedback", "status", "schedule"):
+                    return list.Select(x => x as Feedback).Where(x => x.Status == Models.Enums.Feedback.Status.Scheduled);
+                default:
+                    throw new UserInputException("");
             }
         }
 

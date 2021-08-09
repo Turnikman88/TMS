@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using TaskManagmentSystem.Core.Contracts;
 using TaskManagmentSystem.Models.Common;
-using TaskManagmentSystem.Models.Contracts;
 
 namespace TaskManagmentSystem.Core.Commands
 {
@@ -29,7 +26,7 @@ namespace TaskManagmentSystem.Core.Commands
             }
 
             this.Repository.LeaveTeam(team);
-            return $"User with name {user.Name} successfully leaved team {team.Name}";
+            return $"User with name {user.Name} successfully left team {team.Name}";
         }
     }
 }

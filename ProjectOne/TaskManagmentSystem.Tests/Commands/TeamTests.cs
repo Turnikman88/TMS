@@ -29,12 +29,10 @@ namespace TaskManagmentSystem.Tests.Commands
         [TestMethod]
         public void JoinTeamShouldThrowException_WhenCreatorOfTheTeamWantsToJoinTheTeam()
         {
-            string expected = $"User with name {USER} was successfully added to team {TEAM}";
-
             IList<string> parametersTeam = new List<string> { USER, TEAM };
-            TeamJoin team = new TeamJoin(parametersTeam, this.repository);
+            TeamJoin sut = new TeamJoin(parametersTeam, this.repository);
 
-            Assert.ThrowsException<UserInputException>(() => team.Execute());
+            Assert.ThrowsException<UserInputException>(() => sut.Execute());
         }
 
         [TestMethod]
@@ -44,9 +42,33 @@ namespace TaskManagmentSystem.Tests.Commands
             this.repository.CreateUser("Pesho", PASSWORD);
 
             IList<string> parametersTeam = new List<string> { "Pesho", TEAM };
-            TeamJoin team = new TeamJoin(parametersTeam, this.repository);
+            TeamJoin sut = new TeamJoin(parametersTeam, this.repository);
 
-            Assert.AreEqual(expected, team.Execute());
+            Assert.AreEqual(expected, sut.Execute());
         }
+
+        [TestMethod]
+        public void LeaveTeam_ShouldSuccess_WhenMemberRequests()
+        {
+            string expected = $"User with name {USER} successfully left team {TEAM}";
+
+            IList<string> parametersTeam = new List<string> { TEAM };
+            TeamLeave sut = new TeamLeave(parametersTeam, this.repository);
+
+            Assert.AreEqual(expected, sut.Execute());
+        }
+
+        [TestMethod]
+        public void LeaveTeam_ShouldThrowException_WhenLoggedUserIsNotMember()
+        {
+            string expected = $"User with name {USER} successfully left team {TEAM}";
+
+            IList<string> parametersTeam = new List<string> { TEAM };
+            TeamLeave sut = new TeamLeave(parametersTeam, this.repository);
+            sut.Execute();
+
+            Assert.ThrowsException<UserInputException>(() => sut.Execute());
+        }
+
     }
 }

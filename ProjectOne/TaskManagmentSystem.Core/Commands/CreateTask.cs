@@ -33,7 +33,7 @@ namespace TaskManagmentSystem.Core.Commands
 
             string[] parameters = CommandParameters.Skip(4).ToArray();
 
-            var type = this.Repository.ModelsClassTypes.FirstOrDefault(x => x.Name.ToLower() == taskType) ?? throw new UserInputException(string.Format(Constants.TASK_TYPE_ERR, taskType));
+            var type = this.Repository.GetModelTypeByName(taskType);
             var task = this.Repository.CreateTask(type, taskTitle, taskDescription, board, parameters);
             return $"{task.GetType().Name} {task.Title}, ID: {task.Id} was created!";
         }

@@ -23,7 +23,7 @@ namespace TaskManagmentSystem.Core.Commands
             int taskId = ParseIntParameter(CommandParameters[1]);
 
             var board = this.Repository.GetBoard(boardIdentifier);
-            var task = this.Repository.GetTask(taskId);
+            var task = this.Repository.GetTaskById(taskId);
             var user = this.Repository.LoggedUser;
             board.RemoveTask(task);
             if (user.Tasks.Any(x => x.Id == task.Id)) 

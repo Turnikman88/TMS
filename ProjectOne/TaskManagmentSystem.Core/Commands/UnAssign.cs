@@ -26,7 +26,7 @@ namespace TaskManagmentSystem.Core.Commands
 
             var team = this.Repository.GetTeam(teamNameOrID);
             var user = this.Repository.LoggedUser;
-            var task = this.Repository.GetTask(taskId);
+            var task = this.Repository.GetTaskById(taskId);
 
             if (!this.Repository.IsTeamMember(team, user))
             {

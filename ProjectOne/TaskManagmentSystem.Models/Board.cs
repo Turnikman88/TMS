@@ -67,7 +67,7 @@ namespace TaskManagmentSystem.Models
         public override string ToString()
         {
             var tasks = this.Tasks.Count == 0 ? "No tasks" :
-                string.Join(Environment.NewLine, this.Tasks.OrderBy(x => x.Id).Select(x => x.ToString()));
+                $"{this.Tasks.Count}\n" + string.Join(Environment.NewLine, this.Tasks.OrderBy(x => x.Id).Select(x => x.ToString()));
             return $"Name: {this.Name}, ID: {this.Id}, Number of tasks: {tasks}";
         }
     }

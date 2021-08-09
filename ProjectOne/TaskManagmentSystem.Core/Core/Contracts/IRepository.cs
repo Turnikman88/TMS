@@ -33,5 +33,6 @@ namespace TaskManagmentSystem.Core.Contracts
         void RemoveUser(IMember user);
         void RemoveTeam(ITeam team);
         void LeaveTeam(ITeam team);
+        void RemoveTask(IBoardItem task);
     }
 }

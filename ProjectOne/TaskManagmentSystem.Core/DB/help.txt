@@ -4,7 +4,7 @@
 
 		List of all commands:
 
-		addcommenttotask..........[teamname/id] [id] [comment] [author] - Adds comment to task
+		addcommenttotask..........[teamname/id] [task id] [comment] [author] - Adds comment to task
 
 		teamjoin..................[username/id] [teamname/id] - Adds user into a team
 		changepass................[old password] [new password] - Changes the password of the logged user
@@ -19,6 +19,7 @@
 		createuser................[username] [password] - Creates new user
 
 		removeboard...............[boardname/id] [teamname/id] - Removes new board from team
+		removetask................[boardname/id] [task id] - Removes task from given board
 		removeuser................[username/id] - Removes user from the application (root only)
 		removeteam................[teamname/id] - Removes team from the application (must be admin or root)
 

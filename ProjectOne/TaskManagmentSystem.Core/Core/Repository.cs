@@ -234,7 +234,11 @@ namespace TaskManagmentSystem.Core
             this.exsitingNames.RemoveAll(x => x == team.Name);
             this.teams.Remove(team);
         }
-
+        public void RemoveTask(IBoardItem task)
+        {
+            this.tasks.Remove(task);
+        }
+        
         public void LeaveTeam(ITeam team)
         {
             team.RemoveMember(this.LoggedUser);

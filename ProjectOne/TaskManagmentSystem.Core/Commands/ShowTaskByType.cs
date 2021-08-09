@@ -14,6 +14,10 @@ namespace TaskManagmentSystem.Core.Commands
         //ShowTaskByType [typeoftask] (keyword)[1.filter / 2.sort][1.status / assignee][2.title / priority / severity / size / rating]
         //showtaskbytype bug filter status active
 
+        //List bugs/stories/feedback only.
+        // Filter by status and/or assignee  
+        // Sort by title/priority/severity/size/rating (depending on the task type)
+
 
         public ShowTaskByType(IList<string> commandParameters, IRepository repository) : base(commandParameters, repository)
         {
@@ -30,6 +34,20 @@ namespace TaskManagmentSystem.Core.Commands
 
             var listTask = this.Repository.GetTasks();
             var filteredList = GetOnlyOneTypeOfTasks(listTask, typeOfTask);
+
+
+            if (keyword == "filter")
+            {
+                filteredList = FilterBy(typeOfTask, parameter1, filteredList);
+            }
+            else if (keyword == "sort")
+            {
+
+            }
+            else
+            {
+                throw new UserInputException("You can only filter or sort tasks, please use keyword 'filter' or 'sort'");
+            }
 
             switch (keyword)
             {
@@ -84,6 +102,16 @@ namespace TaskManagmentSystem.Core.Commands
                 default:
                     throw new UserInputException("No Search results match the specified criteria.");
 
+            }
+        }
+
+        private IEnumerable<IBoardItem> FilterBy(string typeOfTask, string parameter, IEnumerable<IBoardItem> list)
+        {
+            switch (typeOfTask, parameter)
+            {
+                case ("bug", "status"):
+                    break;
+                default:
             }
         }
 

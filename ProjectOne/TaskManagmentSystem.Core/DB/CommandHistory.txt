@@ -1,6 +1,0 @@
-login superuser th1$i$4dmiN
-createteam morence
-createboard moreto morence
-createtask story moreto hhhhhhhhhhhhh hhhhhhhhhhhhhh
-assign morence 0 3
-unassign morence 3

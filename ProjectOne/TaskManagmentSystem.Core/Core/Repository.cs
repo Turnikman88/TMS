@@ -201,7 +201,7 @@ namespace TaskManagmentSystem.Core
         }
         public IBoardItem GetTaskById(int id)
         {
-            return this.tasks.FirstOrDefault(x => x.Id == id) 
+            return this.tasks.FirstOrDefault(x => x.Id == id)
                 ?? throw new UserInputException(string.Format(Constants.TASK_DOESNT_EXSIST, $"with Id: {id}"));
         }
         private static List<Type> GetCoreCommandTypes()
@@ -223,8 +223,8 @@ namespace TaskManagmentSystem.Core
         }
         public Type GetModelTypeByName(string taskType)
         {
-           return this.ModelsClassTypes.FirstOrDefault(x => x.Name.ToLower() == taskType)
-                ?? throw new UserInputException(string.Format(Constants.TASK_TYPE_ERR, taskType));
+            return this.ModelsClassTypes.FirstOrDefault(x => x.Name.ToLower() == taskType.ToLower())
+                 ?? throw new UserInputException(string.Format(Constants.TASK_TYPE_ERR, taskType));
         }
         public void RemoveUser(IMember user)
         {
@@ -241,7 +241,7 @@ namespace TaskManagmentSystem.Core
         {
             this.tasks.Remove(task);
         }
-        
+
         public void LeaveTeam(ITeam team)
         {
             team.RemoveMember(this.LoggedUser);

@@ -11,6 +11,7 @@ namespace TaskManagmentSystem.Core.providers
         }
         public void WriteLine(string value)
         {
+            Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine(value);
         }
     }

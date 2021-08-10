@@ -93,6 +93,20 @@ namespace TaskManagmentSystem.Tests
             Assert.ThrowsException<UserInputException>(() => login2.Execute());
         }
 
+        [TestMethod]
+        public void ShouldThrowException_WhenAlreadyLogedOut()
+        {
+            //Arrange
+            IList<string> parameters = new List<string> { USER, PASSWORD };
+            LogIn login = new LogIn(parameters, this.repository);
+            login.Execute();
+
+            LogOut logout = new LogOut(new List<string>(), this.repository);
+            logout.Execute();
+
+            //Act and Assert
+            Assert.ThrowsException<UserInputException>(() => logout.Execute());
+        }
     }
 }
 

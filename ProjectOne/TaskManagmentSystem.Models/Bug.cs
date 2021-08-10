@@ -11,7 +11,7 @@ namespace TaskManagmentSystem.Models
     {
         private Priority priority;
         private Severity severity;
-        
+
         private Status status;
         private readonly IList<string> steps = new List<string>();
 
@@ -38,7 +38,7 @@ namespace TaskManagmentSystem.Models
                 this.severity = value;
             }
         }
-        
+
         public Status Status
         {
             get => this.status;
@@ -89,7 +89,7 @@ namespace TaskManagmentSystem.Models
         protected override string AddAdditionalInfo()
         {
             var assignee = this.Assignee is null ? "No assignee" : this.Assignee.Name;
-            return $"Assignee {assignee} {Environment.NewLine} Status: {this.Status} {Environment.NewLine} Priority: {this.Priority} {Environment.NewLine} Saverity: {this.Severity} {Environment.NewLine} Steps to reproduce: {Environment.NewLine}" + String.Join(Environment.NewLine, this.steps);
+            return $"Assignee {assignee} {Environment.NewLine} Status: {this.Status} {Environment.NewLine} Priority: {this.Priority} {Environment.NewLine} Saverity: {this.Severity} {Environment.NewLine} How to reproduce: {Environment.NewLine}" + String.Join(' ', this.steps);
         }
     }
 }

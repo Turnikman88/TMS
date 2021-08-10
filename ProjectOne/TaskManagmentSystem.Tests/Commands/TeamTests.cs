@@ -38,10 +38,11 @@ namespace TaskManagmentSystem.Tests.Commands
         [TestMethod]
         public void JoinTeam_ShouldSuccess_WhenNewMemberJoinTeam()
         {
-            string expected = $"User with name Pesho was successfully added to team {TEAM}";
-            this.repository.CreateUser("Pesho", PASSWORD);
+            string newUser = "Pesho";
+            string expected = $"User with name {newUser} was successfully added to team {TEAM}";
+            this.repository.CreateUser(newUser, PASSWORD);
 
-            IList<string> parametersTeam = new List<string> { "Pesho", TEAM };
+            IList<string> parametersTeam = new List<string> { newUser, TEAM };
             TeamJoin sut = new TeamJoin(parametersTeam, this.repository);
 
             Assert.AreEqual(expected, sut.Execute());

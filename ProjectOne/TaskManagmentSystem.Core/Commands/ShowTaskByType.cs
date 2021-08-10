@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using TaskManagmentSystem.Core.Contracts;
 using TaskManagmentSystem.Models;
 using TaskManagmentSystem.Models.Common;
@@ -13,7 +14,7 @@ namespace TaskManagmentSystem.Core.Commands
         //ShowTaskByType [typeoftask] (keyword)[1.filter / 2.sort][1.status / assignee][2.title / priority / severity / size / rating]
         //showtaskbytype bug filter status active/fixed
         //showtaskbytype bug filter asignee NAME
-        //showtaskbytype bug sort status active
+        //showtaskbytype bug sort title
         //List bugs/stories/feedback only.
         //Filter by status and/or assignee  
         //Sort by title/priority/severity/size/rating (depending on the task type)
@@ -25,31 +26,42 @@ namespace TaskManagmentSystem.Core.Commands
 
         public override string Execute()
         {
-            Validator.ValidateParametersCount(numberOfParameters, CommandParameters.Count);
+            if (CommandParameters.Count < 3 || CommandParameters.Count > 4)
+            {
+                Validator.ValidateParametersCount(numberOfParameters, CommandParameters.Count);
+            }
 
             string typeOfTask = CommandParameters[0].ToLower();
-            string keyword = CommandParameters[1].ToLower();
-            string parameter1 = CommandParameters[2].ToLower();
-            string parameter2 = CommandParameters[3].ToLower();
+            string action = CommandParameters[1].ToLower();
+            string parameter = CommandParameters[2].ToLower();
 
             var listTask = this.Repository.GetTasks();
             var filteredList = GetOnlyOneTypeOfTasks(listTask, typeOfTask);
 
 
-            if (keyword == "filter")
+            if (action == "filter")
             {
-                filteredList = FilterBy(typeOfTask, parameter1, parameter2, filteredList);
-            }
-            else if (keyword == "sort")
-            {
+                Validator.ValidateParametersCount(numberOfParameters + 1, CommandParameters.Count);
 
+                string parameter2 = CommandParameters[3].ToLower();
+                filteredList = FilterBy(typeOfTask, parameter, parameter2, filteredList);
+            }
+            else if (action == "sort")
+            {
+                filteredList = SortBy(typeOfTask, parameter, filteredList);
             }
             else
             {
                 throw new UserInputException("You can only filter or sort tasks, please use keyword 'filter' or 'sort'");
             }
 
-            return $"";
+            StringBuilder sb = new StringBuilder();
+
+            foreach (var item in filteredList)
+            {
+                sb.Append(item.ToString());
+            }
+            return sb.ToString().Trim();
 
         }
 
@@ -99,9 +111,31 @@ namespace TaskManagmentSystem.Core.Commands
                 case ("feedback", "status", "schedule"):
                     return list.Select(x => x as Feedback).Where(x => x.Status == Models.Enums.Feedback.Status.Scheduled);
                 default:
-                    throw new UserInputException("");
+                    throw new UserInputException("You can only filter by status or asignee, take in mind Status does not have asignees");
             }
         }
+        private IEnumerable<IBoardItem> SortBy(string typeOfTask, string parameter, IEnumerable<IBoardItem> list)
+        {
+            switch (typeOfTask, parameter)
+            {
+                case ("bug", "title"):
+                case ("feedback", "title"):
+                case ("story", "title"):
+                    return list.OrderBy(x => x.Title);
+                case ("bug", "priority"):
+                    return list.Select(x => x as Bug).OrderBy(x => x.Priority);
+                case ("bug", "severity"):
+                    return list.Select(x => x as Bug).OrderBy(x => x.Severity);
+                case ("feedback", "rating"):
+                    return list.Select(x => x as Feedback).OrderBy(x => x.Rating);
+                case ("story", "priority"):
+                    return list.Select(x => x as Story).OrderBy(x => x.Priority);
+                case ("story", "size"):
+                    return list.Select(x => x as Story).OrderBy(x => x.Size);
+                default:
+                    throw new UserInputException("You can only sort by Title, Priority[for Bug or Story], Severity[Bug], Size[Story] or Rating[Feedback]. Take in mind that some of the items have only one of these criteria.");
 
+            }
+        }
     }
 }

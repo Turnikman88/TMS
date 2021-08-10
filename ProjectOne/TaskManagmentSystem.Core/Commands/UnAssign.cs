@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using TaskManagmentSystem.Core.Contracts;
 using TaskManagmentSystem.Models.Common;
 
@@ -21,7 +19,7 @@ namespace TaskManagmentSystem.Core.Commands
         {
             Validator.ValidateParametersCount(numberOfParameters, CommandParameters.Count);
             string teamNameOrID = CommandParameters[0];
-            
+
             int taskId = ParseIntParameter(CommandParameters[1]);
 
             var team = this.Repository.GetTeam(teamNameOrID);
@@ -38,7 +36,7 @@ namespace TaskManagmentSystem.Core.Commands
             }
 
             var type = task.GetType();
-            var method = type.GetMethod("RemoveAssignee") ?? throw new UserInputException("Feedbacks cannot be assigned");
+            var method = type.GetMethod("RemoveAssignee");
             method.Invoke(task, null);
 
             user.RemoveTask(task);

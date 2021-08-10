@@ -40,6 +40,7 @@ namespace TaskManagmentSystem.Core
             {
                 try
                 {
+                    Console.ForegroundColor = ConsoleColor.Cyan;
                     string inputLine = Console.ReadLine().Trim();
 
                     if (inputLine.ToLower() == Constants.TerminationCommand)
@@ -83,7 +84,6 @@ namespace TaskManagmentSystem.Core
             }
             Console.Clear();
             Console.WriteLine(Banner.GenerateLogo());
-            Console.ForegroundColor = ConsoleColor.Cyan;
         }
         private void SaveSuccsessfullCommands(string command)
         {

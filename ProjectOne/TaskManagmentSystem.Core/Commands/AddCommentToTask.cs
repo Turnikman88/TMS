@@ -1,12 +1,11 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using TaskManagmentSystem.Core.Contracts;
 using TaskManagmentSystem.Models;
 using TaskManagmentSystem.Models.Common;
 
 namespace TaskManagmentSystem.Core.Commands
 {
-    class AddCommentToTask : BaseCommand
+    public class AddCommentToTask : BaseCommand
     {
         private const int numberOfParameters = 4;
         //addcommenttotask [teamname] [id] [comment] [author]
@@ -25,9 +24,7 @@ namespace TaskManagmentSystem.Core.Commands
 
             string teamNameOrID = CommandParameters[0];
             int itemID = ParseIntParameter(CommandParameters[1]);
-
             string content = CommandParameters[2];
-
             string author = CommandParameters[3];
 
             if (!this.Repository.IsTeamMember(this.Repository.GetTeam(teamNameOrID), this.Repository.LoggedUser))

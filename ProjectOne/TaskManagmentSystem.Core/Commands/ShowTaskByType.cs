@@ -82,26 +82,31 @@ namespace TaskManagmentSystem.Core.Commands
 
         private IEnumerable<IBoardItem> FilterBy(string typeOfTask, string parameter, string parameter2, IEnumerable<IBoardItem> list)
         {
+            if (parameter == "assignee" && (typeOfTask == "bug" || typeOfTask == "story"))
+            {
+                switch (typeOfTask)
+                {
+                    case "bug":
+                        return list.Select(x => x as Bug).Where(x => x.Assignee.Name == parameter2);
+                    case "story":
+                        return list.Select(x => x as Story).Where(x => x.Assignee.Name == parameter2);
+                    default:
+                        throw new UserInputException($"Name {parameter2} does not have any tasks assigneed");
+                }
+            }
+
             switch (typeOfTask, parameter, parameter2)
             {
                 case ("bug", "status", "active"):
                     return list.Select(x => x as Bug).Where(x => x.Status == Models.Enums.Bug.Status.Active);
                 case ("bug", "status", "fixed"):
                     return list.Select(x => x as Bug).Where(x => x.Status == Models.Enums.Bug.Status.Fixed);
-                case ("bug", "asignee", "ascending"):
-                    return list.Select(x => x as Bug).OrderBy(x => x.Assignee.Name);
-                case ("bug", "asignee", "descending"):
-                    return list.Select(x => x as Bug).OrderByDescending(x => x.Assignee.Name);
                 case ("story", "status", "notdone"):
                     return list.Select(x => x as Story).Where(x => x.Status == Models.Enums.Story.Status.NotDone);
                 case ("story", "status", "done"):
                     return list.Select(x => x as Story).Where(x => x.Status == Models.Enums.Story.Status.Done);
                 case ("story", "status", "inprogress"):
                     return list.Select(x => x as Story).Where(x => x.Status == Models.Enums.Story.Status.InProgress);
-                case ("story", "asignee", "ascending"):
-                    return list.Select(x => x as Story).OrderBy(x => x.Assignee.Name);
-                case ("story", "asignee", "descending"):
-                    return list.Select(x => x as Story).OrderByDescending(x => x.Assignee.Name);
                 case ("feedback", "status", "new"):
                     return list.Select(x => x as Feedback).Where(x => x.Status == Models.Enums.Feedback.Status.New);
                 case ("feedback", "status", "done"):

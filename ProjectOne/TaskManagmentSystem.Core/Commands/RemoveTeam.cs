@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using TaskManagmentSystem.Core.Contracts;
 using TaskManagmentSystem.Models.Common;
 using TaskManagmentSystem.Models.Enums;
@@ -25,7 +23,7 @@ namespace TaskManagmentSystem.Core.Commands
             var team = this.Repository.GetTeam(teamIdentifier);
             var user = this.Repository.LoggedUser;
 
-            if (user.Role != Role.Root || !team.Administrators.Any(x => x.Id == user.Id))
+            if (user.Role == Role.Normal && !team.Administrators.Any(x => x.Id == user.Id))
             {
                 throw new UserInputException(Constants.YOU_ARE_NOT_ALLOWED_TO_REMOVE);
             }

@@ -12,6 +12,8 @@ namespace TaskManagmentSystem.Tests.Commands
         private const string USER = "TestUser";
         private const string PASSWORD = "S7r0nGP@$$Word";
         private const string TEAM = "TestTeam";
+        private const string adminName = "superuser";
+        private const string adminPass = "th1$i$4dmiN";
         private readonly IList<string> parametersUser = new List<string> { USER, PASSWORD };
 
         private Repository repository;
@@ -69,6 +71,34 @@ namespace TaskManagmentSystem.Tests.Commands
             sut.Execute();
 
             Assert.ThrowsException<UserInputException>(() => sut.Execute());
+        }
+        [TestMethod]
+        public void RemoveTeam_ShouldThrowException_WhenNotOwner()
+        {
+            LogOut logout = new LogOut(new List<string> { }, this.repository);
+            logout.Execute();
+            string userNotInTeam = "NotInTeam";
+            this.repository.CreateUser(userNotInTeam, PASSWORD);
+            LogIn userNotInTeamLogin = new LogIn(new List<string> { userNotInTeam, PASSWORD }, this.repository);
+            userNotInTeamLogin.Execute();
+
+            IList<string> parametersTeam = new List<string> { TEAM };
+            RemoveTeam sut = new RemoveTeam(parametersTeam, this.repository);
+
+            Assert.ThrowsException<UserInputException>(() => sut.Execute());
+        }
+        [TestMethod]
+        public void RemoveTeam_ShouldRemoveTeam()
+        {
+            string teamToRemove = "RemoveTest";
+            this.repository.CreateTeam(teamToRemove);
+            string expected = $"Team with name {teamToRemove}, ID: {this.repository.GetTeam(teamToRemove).Id} was removed";
+
+            IList<string> parametersTeam = new List<string> { teamToRemove };
+            RemoveTeam sut = new RemoveTeam(parametersTeam, this.repository);
+
+            Assert.AreEqual(expected, sut.Execute());
+            Assert.AreEqual(1, this.repository.Teams.Count);
         }
 
     }

@@ -35,7 +35,7 @@ namespace TaskManagmentSystem.Core.Commands
 
             method.Invoke(task, null);
 
-            return $"{statusType} of item {task.GetType().Name} ID: {itemID} was changed!";
+            return $"{statusType} of item {task.GetType().Name} ID: {itemID} was changed";
         }
     }
 }

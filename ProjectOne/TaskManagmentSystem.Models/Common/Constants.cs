@@ -87,6 +87,7 @@
         public const string TASK_DOESNT_EXSIST = "Task {0} doesn't exsist!";
         public const string TASK_NOT_ASSIGNED = "Task is not assigned to {0}!";
         public const string BOARS_ALREADY_EXIST = "Board {0} already exist. Choose a different name!";
+        public const string COMMENT_NOT_FOUND = "Comment not found!";
 
         //==================PATHS===================//
 

@@ -14,7 +14,8 @@ namespace TaskManagmentSystem.Core.Commands
         }
         public override string Execute()
         {
-            //ToDo: Add validation? Anyone can erase? Huh?
+            CheckIsRoot();
+
             using (StreamWriter writer = new StreamWriter(Constants.PATH_TO_DATABASE + @"\CommandHistory.txt"))
             {
 

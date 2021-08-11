@@ -43,7 +43,7 @@ namespace TaskManagmentSystem.Core
         private void CreateAdmin()
         {
             var admin = new Member(0, adminName, adminPass);
-            admin.ChangeRole("root");
+            admin.ChangeRole();
             this.users.Add(admin);
         }
         public IMember CreateUser(string username, string password)

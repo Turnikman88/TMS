@@ -8,6 +8,7 @@
 
 		teamjoin..................[username/id] [teamname/id] - Adds user into a team
 		changepass................[old password] [new password] - Changes the password of the logged user
+		changerole................[username/id] - Chanages the role of user (must be root)
 		change....................[teamname/id] [id] [statusToAdvance] - Changes given enumeration of task (Status, Priority, Severity…)
 		assign....................[teamname/id] [username/id] [taskID] - Assign’s task to given member of the team
 		unassign..................[teamname/id] [taskID] - Unassign’s task from logged member of the team

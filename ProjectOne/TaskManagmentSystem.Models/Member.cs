@@ -80,9 +80,9 @@ namespace TaskManagmentSystem.Models
         {
             this.Password = newPass;
         }
-        public void ChangeRole(string role)
+        public void ChangeRole()
         {
-            this.Role = Validator.ParseRole(role);
+            this.role = this.role == Role.Normal ? Role.Root : Role.Normal;
             AddEvent(new EventLog($"User {this.Name} with ID: {this.Id} changed his role to {this.Role}"));
         }
         public string ViewHistory()

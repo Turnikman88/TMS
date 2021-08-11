@@ -30,7 +30,6 @@ namespace TaskManagmentSystem.Core.Commands
 
             var board = this.Repository.GetBoard(boardIdentifier);
 
-
             string[] parameters = CommandParameters.Skip(4).ToArray();
 
             var type = this.Repository.GetModelTypeByName(taskType);

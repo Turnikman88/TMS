@@ -1,0 +1,5 @@
+login superuser th1$i$4dmiN
+createteam morence
+createboard moreto morence
+createtask story moreto "New Storyyy" "Without description"
+addcommenttotask 1 3 "fefefefef efefefefef feefe"

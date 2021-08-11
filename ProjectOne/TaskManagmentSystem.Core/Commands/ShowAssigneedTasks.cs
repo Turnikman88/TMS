@@ -50,6 +50,7 @@ namespace TaskManagmentSystem.Core.Commands
                     sb.Append(item.ToString());
                 }
             }
+
             return sb.ToString().Trim();
         }
     }

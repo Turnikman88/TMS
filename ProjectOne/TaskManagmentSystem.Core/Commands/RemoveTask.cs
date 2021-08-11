@@ -23,12 +23,16 @@ namespace TaskManagmentSystem.Core.Commands
             var board = this.Repository.GetBoard(boardIdentifier);
             var task = this.Repository.GetTaskById(taskId);
             var user = this.Repository.LoggedUser;
+
             board.RemoveTask(task);
+
             if (user.Tasks.Any(x => x.Id == task.Id)) 
             {
                 user.RemoveTask(task);
             }
+
             this.Repository.RemoveTask(task);
+
             return $"{task.GetType().Name} {task.Title}, ID: {task.Id} was removed!";
         }
     }

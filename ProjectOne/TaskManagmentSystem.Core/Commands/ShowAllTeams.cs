@@ -15,6 +15,7 @@ namespace TaskManagmentSystem.Core.Commands
         public override string Execute()
         {
             CheckIsRoot();
+
             if (this.Repository.Teams.Count > 0)
             {
                 var sb = new StringBuilder();

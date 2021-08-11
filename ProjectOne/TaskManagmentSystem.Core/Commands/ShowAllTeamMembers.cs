@@ -34,6 +34,7 @@ namespace TaskManagmentSystem.Core.Commands
                 sb.AppendLine(member.ToString());
                 sb.AppendLine(Constants.PRINT_INFO_SEPARATOR);
             }
+
             return sb.ToString().Trim();
         }
     }

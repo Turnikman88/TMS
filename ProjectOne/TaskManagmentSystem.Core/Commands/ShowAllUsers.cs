@@ -16,6 +16,7 @@ namespace TaskManagmentSystem.Core.Commands
         public override string Execute()
         {
             CheckIsRoot();
+
             if (this.Repository.Users.Count > 0)
             {
                 var sb = new StringBuilder();
@@ -27,6 +28,7 @@ namespace TaskManagmentSystem.Core.Commands
                 }
                 return sb.ToString().Trim();
             }
+
             return "There are no registered users.";
         }
     }

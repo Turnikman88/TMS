@@ -4,7 +4,7 @@
 
 		List of all commands:
 
-		addcommenttotask..........[teamname/id] [task id] [comment] [author] - Adds comment to task
+		addcommenttotask..........[teamname/id] [task id] [comment] - Adds comment to task
 
 		teamjoin..................[username/id] [teamname/id] - Adds user into a team
 		changepass................[old password] [new password] - Changes the password of the logged user

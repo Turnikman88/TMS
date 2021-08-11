@@ -32,6 +32,7 @@ namespace TaskManagmentSystem.Core.Commands
             var methodName = this.GetType().Name + char.ToUpper(statusType[0]) + statusType.Substring(1);
             var method = type.GetMethod(methodName)
                 ?? throw new UserInputException(string.Format(Constants.GIVEN_STATUS_TYPE_ERR, statusType));
+
             method.Invoke(task, null);
 
             return $"{statusType} of item {task.GetType().Name} ID: {itemID} was changed!";

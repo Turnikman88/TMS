@@ -25,6 +25,7 @@ namespace TaskManagmentSystem.Core.Commands
             var user = this.Repository.GetUser(userIdentificator);
 
             user.ChangeRole();
+
             return $"User {user.Name} with ID: {user.Id} changed his role to {user.Role}";
         }
     }

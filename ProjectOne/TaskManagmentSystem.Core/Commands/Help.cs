@@ -15,6 +15,7 @@ namespace TaskManagmentSystem.Core.Commands
         public override string Execute()
         {
             var help = File.ReadAllText(Constants.PATH_TO_DATABASE + "help.txt");
+
             return help;
         }
     }

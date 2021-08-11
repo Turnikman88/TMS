@@ -17,6 +17,7 @@ namespace TaskManagmentSystem.Core.Commands
         public override string Execute()
         {
             Validator.ValidateParametersCount(numberOfParameters, CommandParameters.Count);
+
             string username = CommandParameters[0];
             string password = CommandParameters[1];
             

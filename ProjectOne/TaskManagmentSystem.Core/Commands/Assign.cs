@@ -17,6 +17,7 @@ namespace TaskManagmentSystem.Core.Commands
         public override string Execute()
         {
             Validator.ValidateParametersCount(numberOfParameters, CommandParameters.Count);
+
             string teamNameOrID = CommandParameters[0];
             string userNameOrID = CommandParameters[1];
             int taskId = ParseIntParameter(CommandParameters[2]);
@@ -36,6 +37,7 @@ namespace TaskManagmentSystem.Core.Commands
             var task = this.Repository.FindTaskByID(taskId);
             var type = task.GetType();
             var method = type.GetMethod("AddAssignee") ?? throw new UserInputException(Constants.FEEDBACKS_CANNOT_BE_ASSIGNED_ERR);
+
             method.Invoke(task, new object[] { user });
 
             user.AddTask(task);

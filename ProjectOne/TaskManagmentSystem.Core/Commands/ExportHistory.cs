@@ -21,6 +21,7 @@ namespace TaskManagmentSystem.Core.Commands
         {
             string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
             string teamNameOrID = CommandParameters[0];
+
             var team = this.Repository.GetTeam(teamNameOrID);
             string file = string.Format(nameFile, team.Name);
 

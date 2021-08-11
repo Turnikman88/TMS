@@ -14,11 +14,15 @@ namespace TaskManagmentSystem.Core.Commands
         }
         public override string Execute()
         {
-            Validator.ValidateParametersCount(numberOfParameters, CommandParameters.Count);
             CheckIsRoot();
+            Validator.ValidateParametersCount(numberOfParameters, CommandParameters.Count);
+
             string userIdentificator = CommandParameters[0];
+
             var user = this.Repository.GetUser(userIdentificator);
+
             this.Repository.RemoveUser(user);
+
             return $"User with username {user.Name}, ID: {user.Id} was removed";
         }
     }

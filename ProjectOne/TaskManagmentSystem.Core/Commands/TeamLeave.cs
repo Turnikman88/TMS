@@ -26,6 +26,7 @@ namespace TaskManagmentSystem.Core.Commands
             }
 
             this.Repository.LeaveTeam(team);
+
             return $"User with name {user.Name} successfully left team {team.Name}";
         }
     }

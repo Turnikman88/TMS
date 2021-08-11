@@ -26,7 +26,7 @@ namespace TaskManagmentSystem.Core.Commands
                 throw new UserInputException(Constants.USER_NOT_ROOT);
             }
         }
-        protected int ParseIntParameter(string value) // ToDo: we have the same method in models validator
+        protected int ParseIntParameter(string value)
         {
             if (int.TryParse(value, out int result))
             {

@@ -32,6 +32,7 @@ namespace TaskManagmentSystem.Core.Commands
             {
                 sb.AppendLine(board.ToString());
             }
+
             return sb.ToString().TrimEnd();
         }
     }

@@ -31,7 +31,9 @@ namespace TaskManagmentSystem.Core.Commands
             {
                 throw new UserInputException(string.Format(Constants.MEMBER_ALREADY_IN_TEAM, user.Name));
             }
+
             team.AddMember(user);
+
             return $"User with name {user.Name} was successfully added to team {team.Name}";
         }
     }

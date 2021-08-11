@@ -16,14 +16,19 @@ namespace TaskManagmentSystem.Core.Commands
         public override string Execute()
         {
             Validator.ValidateParametersCount(numberOfParameters, CommandParameters.Count);
+
             string oldPass = CommandParameters[0];
             string newPass = CommandParameters[1];
+
             var user = this.Repository.LoggedUser;
+
             if (user.Password != oldPass)
             {
                 throw new UserInputException(Constants.PASSWORD_CHANGE_ERR);
             }
+
             user.ChangePass(newPass);
+
             return Constants.PASSWORD_CHANGED_SUCC;
         }
     }

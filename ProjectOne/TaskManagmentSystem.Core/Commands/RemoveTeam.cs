@@ -19,7 +19,9 @@ namespace TaskManagmentSystem.Core.Commands
         public override string Execute()
         {
             Validator.ValidateParametersCount(numberOfParameters, CommandParameters.Count);
+
             string teamIdentifier = this.CommandParameters[0];
+
             var team = this.Repository.GetTeam(teamIdentifier);
             var user = this.Repository.LoggedUser;
 
@@ -29,6 +31,7 @@ namespace TaskManagmentSystem.Core.Commands
             }
 
             this.Repository.RemoveTeam(team);
+
             return $"Team with name {team.Name}, ID: {team.Id} was removed";
         }
     }

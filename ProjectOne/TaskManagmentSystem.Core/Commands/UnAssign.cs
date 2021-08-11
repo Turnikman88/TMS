@@ -18,8 +18,8 @@ namespace TaskManagmentSystem.Core.Commands
         public override string Execute()
         {
             Validator.ValidateParametersCount(numberOfParameters, CommandParameters.Count);
-            string teamNameOrID = CommandParameters[0];
 
+            string teamNameOrID = CommandParameters[0];
             int taskId = ParseIntParameter(CommandParameters[1]);
 
             var team = this.Repository.GetTeam(teamNameOrID);
@@ -37,12 +37,12 @@ namespace TaskManagmentSystem.Core.Commands
 
             var type = task.GetType();
             var method = type.GetMethod("RemoveAssignee");
+
             method.Invoke(task, null);
 
             user.RemoveTask(task);
 
             return $"User {user.Name} was unassigned from {task.GetType().Name} with ID: {taskId}";
-
         }
     }
 }

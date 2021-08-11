@@ -17,6 +17,7 @@ namespace TaskManagmentSystem.Core.Commands
         public override string Execute()
         {
             Validator.ValidateParametersCount(numberOfParameters, CommandParameters.Count);
+
             string boardIdentificator = CommandParameters[0];
             string teamIdentificator = CommandParameters[1];
 
@@ -28,7 +29,9 @@ namespace TaskManagmentSystem.Core.Commands
             }
 
             var board = this.Repository.GetBoard(boardIdentificator);
+
             team.RemoveBoard(board);
+
             return $"Board with name {board.Name}, ID: {board.Id} was removed!";
         }
     }

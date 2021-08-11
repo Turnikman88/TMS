@@ -20,6 +20,7 @@ namespace TaskManagmentSystem.Core.Commands
             {
 
             }
+
             return Constants.DATABASE_HISTORY_DELETED;
         }
     }

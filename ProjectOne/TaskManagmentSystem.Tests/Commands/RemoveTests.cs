@@ -65,7 +65,7 @@ namespace TaskManagmentSystem.Tests.Commands
 
             string expected = $"User with username {usernametoremove}, ID: {userToRemove.Id} was removed";
 
-            this.user.ChangeRole("root");
+            this.user.ChangeRole();
 
             RemoveUser sut = new RemoveUser(new List<string> { usernametoremove }, this.repository);
 

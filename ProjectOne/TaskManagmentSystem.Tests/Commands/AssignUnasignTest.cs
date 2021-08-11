@@ -15,17 +15,20 @@ namespace TaskManagmentSystem.Tests.Commands
         private const string PASSWORD = "S7r0nGP@$$Word";
         private const string TEAM = "TestTeam";
         private const string BOARD = "TestBoard";
-        private const string TASKTYPE = "Bug";
-        private const string TASKTITLE = "TestTitleBug";
-        private const string TASKDESCRIPTION = "TaskDescriptionTest";
+        private const string TASKTYPE_BUG = "Bug";
+        private const string TASKTYPE_STORY = "Story";
+        private const string TASKTITLE_BUG = "TestTitleBug";
+        private const string TASKDESCRIPTION_BUG = "TaskDescriptionTestBug";
+        private const string TASKTITLE_FEEDBACK = "TestTitleFeedback";
+        private const string TASKDESCRIPTION_FEEDBACK = "TaskDescriptionTestFeedback";
+        private const string TASKTITLE_STORY = "TestTitleStory";
+        private const string TASKDESCRIPTION_STORY = "TaskDescriptionTestStory";
 
         private IBoard board;
         private IMember user;
-        private IBoardItem task;
-
-        private readonly IList<string> parametersUser = new List<string> { USER, PASSWORD };
-        private readonly IList<string> parametersBoard = new List<string> { BOARD, TEAM };
-        private readonly IList<string> parametersTask = new List<string> { TASKTYPE, BOARD, TASKTITLE, TASKDESCRIPTION };
+        private IBoardItem taskBug;
+        private IBoardItem taskFeedback;
+        private IBoardItem taskStory;
 
         private Repository repository = new Repository();
 
@@ -38,14 +41,16 @@ namespace TaskManagmentSystem.Tests.Commands
             var team = this.repository.CreateTeam(TEAM);
             this.board = this.repository.CreateBoard(BOARD);
             team.AddBoard(board);
-            this.task = this.repository.CreateTask(typeof(Bug), TASKTITLE, TASKDESCRIPTION, board);
+            this.taskBug = this.repository.CreateTask(typeof(Bug), TASKTITLE_BUG, TASKDESCRIPTION_BUG, board);
+            this.taskFeedback = this.repository.CreateTask(typeof(Feedback), TASKTITLE_FEEDBACK, TASKDESCRIPTION_FEEDBACK, board, "11");
+            this.taskStory = this.repository.CreateTask(typeof(Story), TASKTITLE_STORY, TASKDESCRIPTION_STORY, board);
         }
 
         [TestMethod]
-        public void AssignTask_ShouldSuccessfulAddAssignee_WhenCorrectParametersAreSet()
+        public void AssignTask_ShouldSuccessfulAddAssignee_WhenCorrectParametersAreSetForBug()
         {
             //Arrange
-            string expected = $"User {USER} was assigned to {TASKTYPE} with ID: 4";
+            string expected = $"User {USER} was assigned to {TASKTYPE_BUG} with ID: 4";
 
             //Act
             Assign sut = new Assign(new List<string> { TEAM, USER, "4" }, this.repository);
@@ -55,10 +60,23 @@ namespace TaskManagmentSystem.Tests.Commands
         }
 
         [TestMethod]
-        public void AssignTask_ShouldThrowException_WhenFeedbackTypeOfTask()
+        public void AssignTask_ShouldSuccessfulAddAssignee_WhenCorrectParametersAreSetForStory()
         {
             //Arrange
-            this.repository.CreateTask(typeof(Feedback), TASKTITLE, TASKDESCRIPTION, this.board, "11");
+            string expected = $"User {USER} was assigned to {TASKTYPE_STORY} with ID: 6";
+
+            //Act
+            Assign sut = new Assign(new List<string> { TEAM, USER, "6" }, this.repository);
+
+            //Assert
+            Assert.AreEqual(expected, sut.Execute());
+        }
+
+        [TestMethod]
+        public void AssignTask_ShouldThrowException_WhenFeedbackTypeOfTaskAlreadyExsists()
+        {
+            //Arrange
+            this.repository.CreateTask(typeof(Feedback), TASKTITLE_FEEDBACK, TASKDESCRIPTION_FEEDBACK, this.board, "11");
 
             //Act
             Assign sut = new Assign(new List<string> { TEAM, USER, "5" }, this.repository);
@@ -96,13 +114,26 @@ namespace TaskManagmentSystem.Tests.Commands
         }
 
         [TestMethod]
-        public void UnassignTask_ShouldUnassignMember_FromGivenTaskSuccessful()
+        public void UnassignTask_ShouldUnassignMember_FromGivenBugTaskSuccessful()
         {
             //Arrange & Act
-            string expect = $"User {USER} was unassigned from {TASKTYPE} with ID: 4";
-            this.user.AddTask(this.task);
+            string expect = $"User {USER} was unassigned from {TASKTYPE_BUG} with ID: 4";
+            this.user.AddTask(this.taskBug);
 
             UnAssign sut = new UnAssign(new List<string> { TEAM, "4" }, this.repository);
+
+            //Assert
+            Assert.AreEqual(expect, sut.Execute());
+        }
+
+        [TestMethod]
+        public void UnassignTask_ShouldUnassignMember_FromGivenStoryTaskSuccessful()
+        {
+            //Arrange & Act
+            string expect = $"User {USER} was unassigned from {TASKTYPE_STORY} with ID: 6";
+            this.user.AddTask(this.taskStory);
+
+            UnAssign sut = new UnAssign(new List<string> { TEAM, "6" }, this.repository);
 
             //Assert
             Assert.AreEqual(expect, sut.Execute());
@@ -125,7 +156,7 @@ namespace TaskManagmentSystem.Tests.Commands
         {
             //Arrange
             string username = "NewUser";
-            this.user.AddTask(task);
+            this.user.AddTask(taskBug);
             //Act           
             var testTeam = repository.CreateTeam("NewUserTeam");
             var userTest = repository.CreateUser(username, PASSWORD);
@@ -134,7 +165,6 @@ namespace TaskManagmentSystem.Tests.Commands
 
             //Assert
             Assert.ThrowsException<UserInputException>(() => sut.Execute());
-
         }
     }
 }

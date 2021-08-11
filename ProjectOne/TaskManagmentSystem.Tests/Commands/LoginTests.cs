@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TaskManagmentSystem.Core;
 using TaskManagmentSystem.Core.Commands;
 using TaskManagmentSystem.Models.Common;
+using TaskManagmentSystem.Models.Contracts;
 
 namespace TaskManagmentSystem.Tests
 {
@@ -12,29 +13,28 @@ namespace TaskManagmentSystem.Tests
         private const string USER = "TestUser";
         private const string PASSWORD = "S7r0nGP@$$Word";
 
+        private IMember user;
         private Repository repository;
 
         [TestInitialize]
         public void Prepare()
         {
             this.repository = new Repository();
-            this.repository.CreateUser(USER, PASSWORD);
+            this.user = this.repository.CreateUser(USER, PASSWORD);
         }
 
         [TestMethod]
         public void ShouldCreateUserSuccessfuly_WhenCorrectParametersInput()
         {
             //Arrange
+            //Act
             string expected = $"User {USER} successfully logged in!";
 
             IList<string> parameters = new List<string> { USER, PASSWORD };
             LogIn login = new LogIn(parameters, this.repository);
 
-            //Act
-            string result = login.Execute();
-
             //Assert
-            Assert.AreEqual(expected, result);
+            Assert.AreEqual(expected, login.Execute());
         }
 
         [TestMethod]
@@ -80,26 +80,22 @@ namespace TaskManagmentSystem.Tests
         {
             //Arrange
             string username = "NewUser";
-            repository.CreateUser(username, PASSWORD);
-
-            IList<string> parameters = new List<string> { USER, PASSWORD };
-            LogIn login = new LogIn(parameters, this.repository);
-            login.Execute();
-
-            IList<string> parameters2 = new List<string> { username, PASSWORD };
-            LogIn login2 = new LogIn(parameters2, this.repository);
+            var anotheruser = repository.CreateUser(username, PASSWORD);
+            this.repository.LoggedUser = user;
 
             //Act and Assert
-            Assert.ThrowsException<UserInputException>(() => login2.Execute());
+            IList<string> parameters2 = new List<string> { username, PASSWORD };
+            LogIn sut = new LogIn(parameters2, this.repository);
+
+            Assert.ThrowsException<UserInputException>(() => sut.Execute());
         }
 
         [TestMethod]
         public void ShouldThrowException_WhenAlreadyLogedOut()
         {
             //Arrange
-            IList<string> parameters = new List<string> { USER, PASSWORD };
-            LogIn login = new LogIn(parameters, this.repository);
-            login.Execute();
+
+            this.repository.LoggedUser = user;
 
             LogOut logout = new LogOut(new List<string>(), this.repository);
             logout.Execute();

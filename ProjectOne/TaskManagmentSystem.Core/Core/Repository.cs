@@ -88,9 +88,7 @@ namespace TaskManagmentSystem.Core
                     break;
                 case nameof(Story):
                     task = Activator.CreateInstance(type, ++nextId, title, description) as IBoardItem;
-                    break;
-                default:
-                    throw new UserInputException(string.Format(Constants.GIVEN_TYPE_ERR, type.Name));
+                    break;                
             }
             board.AddTask(task);
             tasks.Add(task);

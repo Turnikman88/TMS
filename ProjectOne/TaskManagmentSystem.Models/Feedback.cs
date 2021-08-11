@@ -12,7 +12,7 @@ namespace TaskManagmentSystem.Models
         public Feedback(int id, string title, string description, int rating)
             : base(id, title, description, "Feedback")
         {
-            this.rating = rating;
+            this.Rating = rating;
             this.Status = Status.New;
         }
 

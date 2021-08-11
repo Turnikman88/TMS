@@ -250,76 +250,58 @@ namespace TaskManagmentSystem.Tests.Commands
 
             //Arrange            
 
-            IList<string> parameters = new List<string> { TEAM };
-            IList<string> parametersBoard = new List<string> { BOARD, TEAM };
-            IList<string> parametersBug = new List<string> { "bug", BOARD, TASK_TITLE, TASK_DESCRIPTION };
+            IList<string> parametersTask = new List<string> { "bug", BOARD, TASK_TITLE, TASK_DESCRIPTION };
 
             //Act and Assert
-            LogIn login = new LogIn(PARAMETERS_USER, this.repository);
-            login.Execute();
+            this.repository.LoggedUser = user;
+            var team = this.repository.CreateTeam(TEAM);
+            var board = this.repository.CreateBoard(BOARD);
 
-            var team = new CreateTeam(parameters, this.repository);
-            team.Execute();
+            team.AddBoard(board);
 
-            var board = new CreateBoard(parametersBoard, this.repository);
-            board.Execute();
-
-            var sut = new CreateTask(parametersBug, this.repository);
-
-
+            var sut = new CreateTask(parametersTask, this.repository);
+            
             Assert.AreEqual(result, sut.Execute());
         }
         [TestMethod]
         public void CreateTask_ShouldCreateStory()
         {
-            var expectedResult = $"Story {TASK_TITLE}, ID: 4 was created!";
+            var result = $"Story {TASK_TITLE}, ID: 4 was created!";
 
             //Arrange            
 
-            IList<string> parameters = new List<string> { TEAM };
-            IList<string> parametersBoard = new List<string> { BOARD, TEAM };
-            IList<string> parametersBug = new List<string> { "story", BOARD, TASK_TITLE, TASK_DESCRIPTION };
+            IList<string> parametersTask = new List<string> { "story", BOARD, TASK_TITLE, TASK_DESCRIPTION };
 
             //Act and Assert
-            LogIn login = new LogIn(PARAMETERS_USER, this.repository);
-            login.Execute();
+            this.repository.LoggedUser = user;
+            var team = this.repository.CreateTeam(TEAM);
+            var board = this.repository.CreateBoard(BOARD);
 
-            var team = new CreateTeam(parameters, this.repository);
-            team.Execute();
+            team.AddBoard(board);
 
-            var board = new CreateBoard(parametersBoard, this.repository);
-            board.Execute();
+            var sut = new CreateTask(parametersTask, this.repository);
 
-            var sut = new CreateTask(parametersBug, this.repository);
-
-            var result = sut.Execute();
-            Assert.AreEqual(expectedResult, result);
+            Assert.AreEqual(result, sut.Execute());
         }
         [TestMethod]
         public void CreateTask_ShouldCreateFeedback()
         {
-            var expectedResult = $"Feedback {TASK_TITLE}, ID: 4 was created!";
+            var result = $"Feedback {TASK_TITLE}, ID: 4 was created!";
 
             //Arrange            
 
-            IList<string> parameters = new List<string> { TEAM };
-            IList<string> parametersBoard = new List<string> { BOARD, TEAM };
-            IList<string> parametersBug = new List<string> { "feedback", BOARD, TASK_TITLE, TASK_DESCRIPTION, "100" };
+            IList<string> parametersTask = new List<string> { "feedback", BOARD, TASK_TITLE, TASK_DESCRIPTION, "100"};
 
             //Act and Assert
-            LogIn login = new LogIn(PARAMETERS_USER, this.repository);
-            login.Execute();
+            this.repository.LoggedUser = user;
+            var team = this.repository.CreateTeam(TEAM);
+            var board = this.repository.CreateBoard(BOARD);
 
-            var team = new CreateTeam(parameters, this.repository);
-            team.Execute();
+            team.AddBoard(board);
 
-            var board = new CreateBoard(parametersBoard, this.repository);
-            board.Execute();
+            var sut = new CreateTask(parametersTask, this.repository);
 
-            var sut = new CreateTask(parametersBug, this.repository);
-
-            var result = sut.Execute();
-            Assert.AreEqual(expectedResult, result);
+            Assert.AreEqual(result, sut.Execute());
         }
         [TestMethod]
         public void CreateTask__ShouldThrowError_WhenTypeIsWrong()
@@ -327,48 +309,55 @@ namespace TaskManagmentSystem.Tests.Commands
 
             //Arrange            
 
-            IList<string> parameters = new List<string> { TEAM };
-            IList<string> parametersBoard = new List<string> { BOARD, TEAM };
-            IList<string> parametersBug = new List<string> { "type", BOARD, TASK_TITLE, TASK_DESCRIPTION };
+            IList<string> parametersTask = new List<string> { "type", BOARD, TASK_TITLE, TASK_DESCRIPTION };
 
             //Act and Assert
-            LogIn login = new LogIn(PARAMETERS_USER, this.repository);
-            login.Execute();
+            this.repository.LoggedUser = user;
+            var team = this.repository.CreateTeam(TEAM);
+            var board = this.repository.CreateBoard(BOARD);
 
-            var team = new CreateTeam(parameters, this.repository);
-            team.Execute();
+            team.AddBoard(board);
 
-            var board = new CreateBoard(parametersBoard, this.repository);
-            board.Execute();
-
-            var sut = new CreateTask(parametersBug, this.repository);
-
+            var sut = new CreateTask(parametersTask, this.repository);
 
             Assert.ThrowsException<UserInputException>(() => sut.Execute());
         }
-
         [TestMethod]
-        public void CreateTask__ShouldThrowError_WhenTitleIsShort()
+        public void CreateTask__ShouldThrowError_WhenNumOfParamsIsWrong()
         {
 
             //Arrange            
 
-            IList<string> parameters = new List<string> { TEAM };
-            IList<string> parametersBoard = new List<string> { BOARD, TEAM };
-            IList<string> parametersBug = new List<string> { "bug", BOARD, "f", TASK_DESCRIPTION };
+            IList<string> parametersTask = new List<string> { "type", BOARD, TASK_TITLE};
 
             //Act and Assert
-            LogIn login = new LogIn(PARAMETERS_USER, this.repository);
-            login.Execute();
+            this.repository.LoggedUser = user;
+            var team = this.repository.CreateTeam(TEAM);
+            var board = this.repository.CreateBoard(BOARD);
 
-            var team = new CreateTeam(parameters, this.repository);
-            team.Execute();
+            team.AddBoard(board);
 
-            var board = new CreateBoard(parametersBoard, this.repository);
-            board.Execute();
+            var sut = new CreateTask(parametersTask, this.repository);
 
-            var sut = new CreateTask(parametersBug, this.repository);
+            Assert.ThrowsException<UserInputException>(() => sut.Execute());
+        }
+        [TestMethod]
+        public void CreateTask__ShouldThrowError_WhenTitleIsShort()
+        {
+            var result = $"Story {TASK_TITLE}, ID: 4 was created!";
 
+            //Arrange            
+
+            IList<string> parametersTask = new List<string> { "story", BOARD, "t", TASK_DESCRIPTION };
+
+            //Act and Assert
+            this.repository.LoggedUser = user;
+            var team = this.repository.CreateTeam(TEAM);
+            var board = this.repository.CreateBoard(BOARD);
+
+            team.AddBoard(board);
+
+            var sut = new CreateTask(parametersTask, this.repository);          
 
             Assert.ThrowsException<TargetInvocationException>(() => sut.Execute());
         }
@@ -378,24 +367,75 @@ namespace TaskManagmentSystem.Tests.Commands
 
             //Arrange            
 
-            IList<string> parameters = new List<string> { TEAM };
-            IList<string> parametersBoard = new List<string> { BOARD, TEAM };
-            IList<string> parametersBug = new List<string> { "bug", BOARD, TASK_TITLE, "d" };
+            IList<string> parametersTask = new List<string> { "story", BOARD, TASK_TITLE, "d" };
 
             //Act and Assert
-            LogIn login = new LogIn(PARAMETERS_USER, this.repository);
-            login.Execute();
+            this.repository.LoggedUser = user;
+            var team = this.repository.CreateTeam(TEAM);
+            var board = this.repository.CreateBoard(BOARD);
 
-            var team = new CreateTeam(parameters, this.repository);
-            team.Execute();
+            team.AddBoard(board);
 
-            var board = new CreateBoard(parametersBoard, this.repository);
-            board.Execute();
-
-            var sut = new CreateTask(parametersBug, this.repository);
-
+            var sut = new CreateTask(parametersTask, this.repository);
 
             Assert.ThrowsException<TargetInvocationException>(() => sut.Execute());
+        }
+        [TestMethod]
+        public void CreateTask__ShouldThrowError_WhenRatingIsBelowMinimum()
+        {
+
+            //Arrange            
+
+            IList<string> parametersTask = new List<string> { "feedback", BOARD, TASK_TITLE, TASK_DESCRIPTION, "-1" };
+
+            //Act and Assert
+            this.repository.LoggedUser = user;
+            var team = this.repository.CreateTeam(TEAM);
+            var board = this.repository.CreateBoard(BOARD);
+
+            team.AddBoard(board);
+
+            var sut = new CreateTask(parametersTask, this.repository);
+
+            Assert.ThrowsException<TargetInvocationException>(() => sut.Execute());
+        }
+        [TestMethod]
+        public void CreateTask__ShouldThrowError_WhenRatingIsAboveMaximum()
+        {
+
+            //Arrange            
+
+            IList<string> parametersTask = new List<string> { "feedback", BOARD, TASK_TITLE, TASK_DESCRIPTION, "101" };
+
+            //Act and Assert
+            this.repository.LoggedUser = user;
+            var team = this.repository.CreateTeam(TEAM);
+            var board = this.repository.CreateBoard(BOARD);
+
+            team.AddBoard(board);
+
+            var sut = new CreateTask(parametersTask, this.repository);
+
+            Assert.ThrowsException<TargetInvocationException>(() => sut.Execute());
+        }
+        [TestMethod]
+        public void CreateTask__ShouldThrowError_WhenRatingIsNotNumber()
+        {
+
+            //Arrange            
+
+            IList<string> parametersTask = new List<string> { "feedback", BOARD, TASK_TITLE, TASK_DESCRIPTION, "h" };
+
+            //Act and Assert
+            this.repository.LoggedUser = user;
+            var team = this.repository.CreateTeam(TEAM);
+            var board = this.repository.CreateBoard(BOARD);
+
+            team.AddBoard(board);
+
+            var sut = new CreateTask(parametersTask, this.repository);
+
+            Assert.ThrowsException<UserInputException>(() => sut.Execute());
         }
     }
 }

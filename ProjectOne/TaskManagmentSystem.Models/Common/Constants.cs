@@ -36,7 +36,7 @@
         public const int DESCRIPTION_MAX_SYMBOLS = 500;
 
         public const int RATING_MIN_VALUE = 0;
-        public const int RATING_MAX_VALUE = 101;
+        public const int RATING_MAX_VALUE = 100;
         public static string RATING_OUTOFRANGE_ERR = $"Rating must be between {RATING_MIN_VALUE} and {RATING_MAX_VALUE}";
 
         public const string STATUS_ADVANCE_ERROR = "Status cannot be Advanced! Current status {0}!";

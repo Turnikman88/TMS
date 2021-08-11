@@ -9,7 +9,8 @@
 		teamjoin..................[username/id] [teamname/id] - Adds user into a team
 		changepass................[old password] [new password] - Changes the password of the logged user
 		changerole................[username/id] - Chanages the role of user (must be root)
-		change....................[teamname/id] [id] [statusToAdvance] - Changes given enumeration of task (Status, Priority, Severity…)
+		change....................[teamname/id] [id] [statusToAdvance] ?[rating] - Changes given enumeration of task (Status, Priority, Severity, Size)
+		..........................(But if rating is passed this commands chnages the rating of given feedback)
 		assign....................[teamname/id] [username/id] [taskID] - Assign’s task to given member of the team
 		unassign..................[teamname/id] [taskID] - Unassign’s task from logged member of the team
 
@@ -20,6 +21,7 @@
 		createuser................[username] [password] - Creates new user
 
 		removeboard...............[boardname/id] [teamname/id] - Removes new board from team
+		removecomment.............[teamname/id] [task id] [unique comment content] - Removes comment from task
 		removetask................[boardname/id] [task id] - Removes task from given board
 		removeuser................[username/id] - Removes user from the application (root only)
 		removeteam................[teamname/id] - Removes team from the application (must be admin or root)

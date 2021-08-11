@@ -39,9 +39,9 @@ namespace TaskManagmentSystem.Models
             _ = this.status != Status.Done ? status++ : status = Status.New;
             AddEvent(new EventLog($"Status for ID {this.Id} {this.Title} was changed to {this.Status}"));
         }
-        public void ChangeRating(int number)
+        public void ChangeRating(string number)
         {
-            this.Rating = number;
+            this.Rating = Validator.ParseIntParameter(number);
             AddEvent(new EventLog($"Rating for ID {this.Id} {this.Title} was changed to {this.Rating}"));
         }
 

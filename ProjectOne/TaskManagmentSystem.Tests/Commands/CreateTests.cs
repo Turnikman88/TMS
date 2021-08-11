@@ -250,7 +250,7 @@ namespace TaskManagmentSystem.Tests.Commands
 
             //Arrange            
 
-            IList<string> parametersTask = new List<string> { "bug", BOARD, TASK_TITLE, TASK_DESCRIPTION };
+            IList<string> parametersTask = new List<string> { "bug", BOARD, TASK_TITLE, TASK_DESCRIPTION, "step1", "step2" };
 
             //Act and Assert
             this.repository.LoggedUser = user;

@@ -57,7 +57,6 @@ namespace TaskManagmentSystem.Tests.Commands
 
             //Assert
             Assert.AreEqual(expected, sut.Execute());
-
         }
 
         [TestMethod]
@@ -101,19 +100,21 @@ namespace TaskManagmentSystem.Tests.Commands
             Assert.AreEqual(expected, sut.Execute());
 
         }
-        //[TestMethod] //TODO: change rating?
-        //public void ShouldChangeRatingSuccessfullyForFeedbackTasks()
-        //{
-        //    //Arrange
-        //    string expected = "rating of item Feedback ID: 5 was changed!";
-        //
-        //    //Act
-        //    Change sut = new Change(new List<string> { TEAM, "5", "Rating", "25" }, this.repository);
-        //
-        //    //Assert
-        //    Assert.AreEqual(expected, sut.Execute());
-        //
-        //}
+
+        [TestMethod] //TODO: change rating?
+        public void ShouldChangeRatingSuccessfullyForFeedbackTasks()
+        {
+            //Arrange
+            string expected = "rating of item Feedback ID: 5 was changed!";
+
+            //Act
+            Change sut = new Change(new List<string> { TEAM, "5", "Rating", "25" }, this.repository);
+
+            //Assert
+            Assert.AreEqual(expected, sut.Execute());
+            Assert.AreEqual(true, taskFeedback.ToString().Contains("Rating: 25"));
+
+        }
 
         [TestMethod]
         public void ShouldChangeStatusSuccessfullyForStoryTasks()
@@ -126,8 +127,9 @@ namespace TaskManagmentSystem.Tests.Commands
 
             //Assert
             Assert.AreEqual(expected, sut.Execute());
-
+            Assert.AreEqual(true, taskStory.ToString().Contains("Status: InProgress"));
         }
+
         [TestMethod]
         public void ShouldChangeSizeSuccessfullyForStoryTasks()
         {
@@ -193,6 +195,19 @@ namespace TaskManagmentSystem.Tests.Commands
 
             //Assert
             Assert.ThrowsException<UserInputException>(() => sut.Execute());
+        }
+
+        [TestMethod]
+        public void ChangeRole_ShouldChangeRoleOfGivenUser()
+        {
+            this.user.ChangeRole();
+            var sutUser = this.repository.CreateUser("UserNotAdmin", PASSWORD);
+            string expected = $"User {sutUser.Name} with ID: {sutUser.Id} changed his role to {sutUser.Role + 1}";
+
+            ChangeRole sut = new ChangeRole(new List<string> { sutUser.Name }, this.repository);
+
+            Assert.AreEqual(expected, sut.Execute());
+            Assert.AreEqual("Root", sutUser.Role.ToString());
         }
     }
 }

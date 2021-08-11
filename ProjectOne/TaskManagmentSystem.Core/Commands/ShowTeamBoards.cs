@@ -28,6 +28,7 @@ namespace TaskManagmentSystem.Core.Commands
             }
 
             StringBuilder sb = new StringBuilder();
+            sb.AppendLine($"Boards on this team: {team.Boards.Count}");
             foreach (var board in team.Boards)
             {
                 sb.AppendLine(board.ToString());

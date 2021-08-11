@@ -17,19 +17,14 @@ namespace TaskManagmentSystem.Core.Commands
         {
             CheckIsRoot();
 
-            if (this.Repository.Users.Count > 0)
+            var sb = new StringBuilder();
+            sb.AppendLine($"Users count: {this.Repository.Users.Count}");
+            foreach (var user in this.Repository.Users)
             {
-                var sb = new StringBuilder();
-
-                foreach (var user in this.Repository.Users) 
-                {
-                    sb.AppendLine(user.ToString());
-                    sb.AppendLine(Constants.PRINT_INFO_SEPARATOR);
-                }
-                return sb.ToString().Trim();
+                sb.AppendLine(user.ToString());
+                sb.AppendLine(Constants.PRINT_INFO_SEPARATOR);
             }
-
-            return "There are no registered users.";
+            return sb.ToString().Trim();
         }
     }
 }

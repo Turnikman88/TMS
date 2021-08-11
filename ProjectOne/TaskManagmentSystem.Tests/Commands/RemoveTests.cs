@@ -36,7 +36,7 @@ namespace TaskManagmentSystem.Tests.Commands
             string expected = $"Team with name {teamtoremove.Name}, ID: {teamtoremove.Id} was removed";
 
             RemoveTeam sut = new RemoveTeam(new List<string> { teamToRemovename }, this.repository);
-
+            user.ChangeRole();
             Assert.AreEqual(expected, sut.Execute());
             Assert.AreEqual(1, this.repository.Teams.Count);
         }

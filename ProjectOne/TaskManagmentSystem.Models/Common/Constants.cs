@@ -64,6 +64,7 @@
         public const string HISTORY_FILE_CREATED = "History for the team was created as text-file on your desktop under name {0}-{1}.txt";
         public const string DATABASE_HISTORY_DELETED = "Database history was deleted successfully";
         public const string EVENT_WAS_CREATED = "{0} event with ID: {1} was created!";
+        public const string MEMBER_WAS_CREATED = "{0} with ID: {1} was created!";
         public const string NAME_MUST_BE_UNIQUE = "This name already exists! Please, choose another one!";
         public const string PASSWORD_CHANGED_SUCC = "Password succsessfully changed!";
         public const string WRONG_PASSWORD = "Wrong password!";

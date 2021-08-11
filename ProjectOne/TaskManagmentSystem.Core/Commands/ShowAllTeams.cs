@@ -19,6 +19,7 @@ namespace TaskManagmentSystem.Core.Commands
             if (this.Repository.Teams.Count > 0)
             {
                 var sb = new StringBuilder();
+                sb.AppendLine($"Teams count: {this.Repository.Teams.Count}");
                 foreach (var team in this.Repository.Teams)
                 {
                     sb.AppendLine(team.ToString());

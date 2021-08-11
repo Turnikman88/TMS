@@ -28,7 +28,7 @@ namespace TaskManagmentSystem.Core.Commands
             }
 
             var sb = new StringBuilder();
-
+            sb.AppendLine("Members count: " + team.Members.Count);
             foreach (var member in team.Members)
             {
                 sb.AppendLine(member.ToString());

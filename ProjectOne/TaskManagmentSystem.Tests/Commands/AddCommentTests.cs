@@ -68,7 +68,7 @@ namespace TaskManagmentSystem.Tests.Commands
         public void AddCommentToTask_ShouldThrowException_WhenNotEnoughParameters()
         {
             //Arrange & Act
-            IList<string> sutParameters = new List<string>() { TEAM, "4"};
+            IList<string> sutParameters = new List<string>() { TEAM, "4" };
             AddCommentToTask sut = new AddCommentToTask(sutParameters, this.repository);
 
             //Assert
@@ -84,7 +84,7 @@ namespace TaskManagmentSystem.Tests.Commands
             this.repository.LoggedUser = anotheruser;
 
             //Act
-            IList<string> sutParameters = new List<string>() { TEAM, "4", "This is test content", "AuthorTest" };
+            IList<string> sutParameters = new List<string>() { TEAM, "4", "This is test content" };
             AddCommentToTask sut = new AddCommentToTask(sutParameters, this.repository);
 
             //Assert

@@ -1,6 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using TaskManagmentSystem.Core.Contracts;
 using TaskManagmentSystem.Models.Common;
 using TaskManagmentSystem.Models.Contracts;
@@ -35,18 +35,24 @@ namespace TaskManagmentSystem.Core.Commands
 
             if (keyword == "filter")
             {
-                result = this.Repository.GetTasks().Where(x => x.Title.Contains(title));
+                result = this.Repository.GetTasks().Where(x => x.Title.Contains(title)).ToList();
             }
             else if (keyword == "sortby")
             {
-                result = this.Repository.GetTasks().OrderBy(x => x.Title);
+                result = this.Repository.GetTasks().OrderBy(x => x.Title).ToList();
             }
             else
             {
                 throw new UserInputException(Constants.SHOWALLTASK_COMMAND_ERR);
             }
 
-            return string.Join(Environment.NewLine, result.ToString());
+            StringBuilder sb = new StringBuilder();
+            foreach (var item in result)
+            {
+                sb.AppendLine(item.ToString());
+            }
+
+            return sb.ToString().TrimEnd();
         }
     }
 }

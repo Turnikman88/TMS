@@ -22,7 +22,7 @@ namespace TaskManagmentSystem.Models
             this.Name = name;
             this.Password = password;
             this.Role = Role.Normal;
-            AddEvent(new EventLog(string.Format(Constants.EVENT_WAS_CREATED, "Member", id)));
+            AddEvent(new EventLog(string.Format(Constants.MEMBER_WAS_CREATED, "Member", id)));
         }
         public int Id { get; }
         public string Name

@@ -8,7 +8,7 @@
 
 		teamjoin..................[username/id] [teamname/id] - Adds user into a team
 		changepass................[old password] [new password] - Changes the password of the logged user
-		changerole................[username/id] - Chanages the role of user (must be root)
+		changerole................[username/id] - Changes the role of user (root only)
 		change....................[teamname/id] [id] [statusToAdvance] ?[rating] - Changes given enumeration of task (Status, Priority, Severity, Size)
 		..........................(But if rating is passed this commands chnages the rating of given feedback)
 		assign....................[teamname/id] [username/id] [taskID] - Assign’s task to given member of the team
@@ -24,7 +24,7 @@
 		removecomment.............[teamname/id] [task id] [unique comment content] - Removes comment from task
 		removetask................[boardname/id] [task id] - Removes task from given board
 		removeuser................[username/id] - Removes user from the application (root only)
-		removeteam................[teamname/id] - Removes team from the application (must be admin or root)
+		removeteam................[teamname/id] - Removes team from the application (root only)
 
 		showallteammembers........[teamname] - shows all team members
 		showboardactivity.........[teamname/id] [boardname/id] - shows board activity
@@ -34,11 +34,11 @@
 		showalltasks..............[teamname/id] (keyword)[filter/sort] [titleName] - shows all tasks in team sort/filtered by title
 		showtaskbytype............[teamid / name][typeoftask] (keyword)[1.filter / 2.sort][1.status / assignee][2.title / priority / severity / size / rating]
 		showassigneedtasks........[teamid/name] [boardid/name] - shows tasks in board that has assignee
-		showallteams..............No parameters needed
-		showallusers..............No parameters needed
+		showallteams..............No parameters needed (root only)
+		showallusers..............No parameters needed (root only)
 
 		exporthistory.............[teamname/id] (optional type[board or user] [board/userID]) - exports history events to desktop
-		erasehistory..............No parameters needed - deletes database
+		erasehistory..............No parameters needed - deletes database (root only)
 
 		help......................No parameters needed
 		login.....................[username] [password] - Login

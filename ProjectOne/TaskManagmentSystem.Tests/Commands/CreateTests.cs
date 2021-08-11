@@ -1,12 +1,10 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
-using System;
 using System.Collections.Generic;
 using System.Reflection;
 using TaskManagmentSystem.Core;
 using TaskManagmentSystem.Core.Commands;
-using TaskManagmentSystem.Models;
 using TaskManagmentSystem.Models.Common;
+using TaskManagmentSystem.Models.Contracts;
 
 namespace TaskManagmentSystem.Tests.Commands
 {
@@ -21,14 +19,17 @@ namespace TaskManagmentSystem.Tests.Commands
         private const string TASK_DESCRIPTION = "TaskDescription";
 
         private readonly IList<string> PARAMETERS_USER = new List<string> { USER, PASSWORD };
+        private IMember user;
+
 
         private Repository repository;
+
 
         [TestInitialize]
         public void Prepare()
         {
             this.repository = new Repository();
-            this.repository.CreateUser(USER, PASSWORD);
+            user = this.repository.CreateUser(USER, PASSWORD);
         }
         [TestMethod]
         public void CreateUser_ShouldThrowException_WhenUsernameAlreadyexists()
@@ -85,8 +86,7 @@ namespace TaskManagmentSystem.Tests.Commands
             IList<string> parameters = new List<string> { TEAM };
 
             //Act and Assert
-            LogIn login = new LogIn(PARAMETERS_USER, this.repository);
-            login.Execute();
+            this.repository.LoggedUser = user;
 
             var sut = new CreateTeam(parameters, this.repository);
             Assert.AreEqual(result, sut.Execute());
@@ -111,11 +111,9 @@ namespace TaskManagmentSystem.Tests.Commands
             IList<string> parameters = new List<string> { TEAM };
 
             //Act and Assert
-            LogIn login = new LogIn(PARAMETERS_USER, this.repository);
-            login.Execute();
+            this.repository.LoggedUser = user;
 
-            var sut1 = new CreateTeam(parameters, this.repository);
-            sut1.Execute();
+            this.repository.CreateTeam(TEAM);
 
             var sut = new CreateTeam(parameters, this.repository);
             Assert.ThrowsException<UserInputException>(() => sut.Execute());
@@ -130,8 +128,8 @@ namespace TaskManagmentSystem.Tests.Commands
             IList<string> parameters = new List<string> { team };
 
             //Act and Assert
-            LogIn login = new LogIn(PARAMETERS_USER, this.repository);
-            login.Execute();
+            this.repository.LoggedUser = user;
+
 
             var sut = new CreateTeam(parameters, this.repository);
             Assert.ThrowsException<UserInputException>(() => sut.Execute());
@@ -146,8 +144,7 @@ namespace TaskManagmentSystem.Tests.Commands
             IList<string> parameters = new List<string> { team };
 
             //Act and Assert
-            LogIn login = new LogIn(PARAMETERS_USER, this.repository);
-            login.Execute();
+            this.repository.LoggedUser = user;
 
             var sut = new CreateTeam(parameters, this.repository);
             Assert.ThrowsException<UserInputException>(() => sut.Execute());
@@ -159,15 +156,11 @@ namespace TaskManagmentSystem.Tests.Commands
             //Arrange
             string result = $"Board with name {BOARD}, ID: 3 was created!";
 
-            IList<string> parameters = new List<string> { TEAM };
             IList<string> parametersBoard = new List<string> { BOARD, TEAM };
 
             //Act and Assert
-            LogIn login = new LogIn(PARAMETERS_USER, this.repository);
-            login.Execute();
-
-            var team = new CreateTeam(parameters, this.repository);
-            team.Execute();
+            this.repository.LoggedUser = user;
+            this.repository.CreateTeam(TEAM);
 
             var sut = new CreateBoard(parametersBoard, this.repository);
 
@@ -180,15 +173,12 @@ namespace TaskManagmentSystem.Tests.Commands
             //Arrange
             string boardname = "Bord";
 
-            IList<string> parameters = new List<string> { TEAM };
             IList<string> parametersBoard = new List<string> { boardname, TEAM };
 
             //Act and Assert
-            LogIn login = new LogIn(PARAMETERS_USER, this.repository);
-            login.Execute();
+            this.repository.LoggedUser = user;
+            this.repository.CreateTeam(TEAM);
 
-            var team = new CreateTeam(parameters, this.repository);
-            team.Execute();
 
             var sut = new CreateBoard(parametersBoard, this.repository);
 
@@ -201,15 +191,11 @@ namespace TaskManagmentSystem.Tests.Commands
             //Arrange
             string boardname = "BordNameIsTooLongForThisTest";
 
-            IList<string> parameters = new List<string> { TEAM };
             IList<string> parametersBoard = new List<string> { boardname, TEAM };
 
             //Act and Assert
-            LogIn login = new LogIn(PARAMETERS_USER, this.repository);
-            login.Execute();
-
-            var team = new CreateTeam(parameters, this.repository);
-            team.Execute();
+            this.repository.LoggedUser = user;
+            this.repository.CreateTeam(TEAM);
 
             var sut = new CreateBoard(parametersBoard, this.repository);
 
@@ -220,19 +206,14 @@ namespace TaskManagmentSystem.Tests.Commands
         public void CreateBoard_ShouldThrowError_WhenNameIsNotUnique()
         {
             //Arrange
-
-            IList<string> parameters = new List<string> { TEAM };
             IList<string> parametersBoard = new List<string> { BOARD, TEAM };
 
             //Act and Assert
-            LogIn login = new LogIn(PARAMETERS_USER, this.repository);
-            login.Execute();
+            this.repository.LoggedUser = user;
+            var team = this.repository.CreateTeam(TEAM);
 
-            var team = new CreateTeam(parameters, this.repository);
-            team.Execute();
-
-            var testboard = new CreateBoard(parametersBoard, this.repository);
-            testboard.Execute();
+            var board = this.repository.CreateBoard(BOARD);
+            team.AddBoard(board);
 
             var sut = new CreateBoard(parametersBoard, this.repository);
 
@@ -251,24 +232,16 @@ namespace TaskManagmentSystem.Tests.Commands
             IList<string> parametersAnother = new List<string> { anotherUser, password };
 
             //Act and Assert
-            LogIn login = new LogIn(PARAMETERS_USER, this.repository);
-            login.Execute();
+            this.repository.LoggedUser = user;
+            var team = this.repository.CreateTeam(TEAM);
 
-            var team = new CreateTeam(parameters, this.repository);
-            team.Execute();
-
-            LogOut logout = new LogOut(PARAMETERS_USER, this.repository);
-            logout.Execute();
-
-            this.repository.CreateUser(anotherUser, password);
-            LogIn loginanother = new LogIn(parametersAnother, this.repository);
-            loginanother.Execute();
+            var anotheruser = this.repository.CreateUser(anotherUser, password);
+            this.repository.LoggedUser = anotheruser;
 
             var sut = new CreateBoard(parametersBoard, this.repository);
 
             Assert.ThrowsException<UserInputException>(() => sut.Execute());
         }
-
 
         [TestMethod]
         public void CreateTask_ShouldCreateBug()
@@ -279,7 +252,7 @@ namespace TaskManagmentSystem.Tests.Commands
 
             IList<string> parameters = new List<string> { TEAM };
             IList<string> parametersBoard = new List<string> { BOARD, TEAM };
-            IList<string> parametersBug = new List<string> { "bug", BOARD, TASK_TITLE, TASK_DESCRIPTION};
+            IList<string> parametersBug = new List<string> { "bug", BOARD, TASK_TITLE, TASK_DESCRIPTION };
 
             //Act and Assert
             LogIn login = new LogIn(PARAMETERS_USER, this.repository);
@@ -370,7 +343,7 @@ namespace TaskManagmentSystem.Tests.Commands
 
             var sut = new CreateTask(parametersBug, this.repository);
 
-            
+
             Assert.ThrowsException<UserInputException>(() => sut.Execute());
         }
 

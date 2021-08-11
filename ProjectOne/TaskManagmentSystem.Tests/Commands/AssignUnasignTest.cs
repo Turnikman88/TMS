@@ -22,6 +22,7 @@ namespace TaskManagmentSystem.Tests.Commands
         private IBoard board;
         private IMember user;
         private IBoardItem task;
+
         private readonly IList<string> parametersUser = new List<string> { USER, PASSWORD };
         private readonly IList<string> parametersBoard = new List<string> { BOARD, TEAM };
         private readonly IList<string> parametersTask = new List<string> { TASKTYPE, BOARD, TASKTITLE, TASKDESCRIPTION };

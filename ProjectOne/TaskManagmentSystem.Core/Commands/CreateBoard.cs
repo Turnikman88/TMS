@@ -2,7 +2,6 @@
 using System.Linq;
 using TaskManagmentSystem.Core.Contracts;
 using TaskManagmentSystem.Models.Common;
-using TaskManagmentSystem.Models.Contracts;
 
 namespace TaskManagmentSystem.Core.Commands
 {

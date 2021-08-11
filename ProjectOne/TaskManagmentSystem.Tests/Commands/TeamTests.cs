@@ -84,34 +84,6 @@ namespace TaskManagmentSystem.Tests.Commands
 
             Assert.ThrowsException<UserInputException>(() => sut.Execute());
         }
-        //[TestMethod]
-        //public void RemoveTeam_ShouldThrowException_WhenNotOwner()
-        //{
-        //    LogOut logout = new LogOut(new List<string> { }, this.repository);
-        //    logout.Execute();
-        //    string userNotInTeam = "NotInTeam";
-        //    this.repository.CreateUser(userNotInTeam, PASSWORD);
-        //    LogIn userNotInTeamLogin = new LogIn(new List<string> { userNotInTeam, //PASSWORD }, this.repository);
-        //    userNotInTeamLogin.Execute();
-        //
-        //    IList<string> parametersTeam = new List<string> { TEAM };
-        //    RemoveTeam sut = new RemoveTeam(parametersTeam, this.repository);
-        //
-        //    Assert.ThrowsException<UserInputException>(() => sut.Execute());
-        //}
-        //[TestMethod]
-        //public void RemoveTeam_ShouldRemoveTeam()
-        //{
-        //    string teamToRemove = "RemoveTest";
-        //    this.repository.CreateTeam(teamToRemove);
-        //    string expected = $"Team with name {teamToRemove}, ID: //{this.repository.GetTeam(teamToRemove).Id} was removed";
-        //
-        //    IList<string> parametersTeam = new List<string> { teamToRemove };
-        //    RemoveTeam sut = new RemoveTeam(parametersTeam, this.repository);
-        //
-        //    Assert.AreEqual(expected, sut.Execute());
-        //    Assert.AreEqual(1, this.repository.Teams.Count);
-        //}
 
     }
 }

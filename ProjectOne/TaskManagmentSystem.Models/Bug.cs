@@ -91,7 +91,8 @@ namespace TaskManagmentSystem.Models
         protected override string AddAdditionalInfo()
         {
             var assignee = this.Assignee is null ? "No assignee" : this.Assignee.Name;
-            return $"Assignee {assignee} {Environment.NewLine} Status: {this.Status} {Environment.NewLine} Priority: {this.Priority} {Environment.NewLine} Saverity: {this.Severity} {Environment.NewLine} How to reproduce: {Environment.NewLine}" + String.Join(' ', this.steps);
+
+            return $"Assignee {assignee} {Environment.NewLine} Status: {this.Status} {Environment.NewLine} Priority: {this.Priority} {Environment.NewLine} Saverity: {this.Severity} {Environment.NewLine} How to reproduce: {Environment.NewLine}" + string.Join(' ', this.steps);
         }
     }
 }

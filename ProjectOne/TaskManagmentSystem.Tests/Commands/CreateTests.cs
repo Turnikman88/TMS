@@ -32,6 +32,16 @@ namespace TaskManagmentSystem.Tests.Commands
             user = this.repository.CreateUser(USER, PASSWORD);
         }
         [TestMethod]
+        public void CreateUser_ShouldCreateUser()
+        {
+            string sutUser = "newUsername";
+            string expected = $"User with username {sutUser}, ID: 2 was created";
+            CreateUser sut = new CreateUser(new List<string> { sutUser, PASSWORD }, this.repository);
+            //Act and Assert
+            Assert.AreEqual(expected, sut.Execute());
+        }
+
+        [TestMethod]
         public void CreateUser_ShouldThrowException_WhenUsernameAlreadyexists()
         {
             //Act and Assert
@@ -260,7 +270,7 @@ namespace TaskManagmentSystem.Tests.Commands
             team.AddBoard(board);
 
             var sut = new CreateTask(parametersTask, this.repository);
-            
+
             Assert.AreEqual(result, sut.Execute());
         }
         [TestMethod]
@@ -290,7 +300,7 @@ namespace TaskManagmentSystem.Tests.Commands
 
             //Arrange            
 
-            IList<string> parametersTask = new List<string> { "feedback", BOARD, TASK_TITLE, TASK_DESCRIPTION, "100"};
+            IList<string> parametersTask = new List<string> { "feedback", BOARD, TASK_TITLE, TASK_DESCRIPTION, "100" };
 
             //Act and Assert
             this.repository.LoggedUser = user;
@@ -328,7 +338,7 @@ namespace TaskManagmentSystem.Tests.Commands
 
             //Arrange            
 
-            IList<string> parametersTask = new List<string> { "type", BOARD, TASK_TITLE};
+            IList<string> parametersTask = new List<string> { "type", BOARD, TASK_TITLE };
 
             //Act and Assert
             this.repository.LoggedUser = user;
@@ -357,7 +367,7 @@ namespace TaskManagmentSystem.Tests.Commands
 
             team.AddBoard(board);
 
-            var sut = new CreateTask(parametersTask, this.repository);          
+            var sut = new CreateTask(parametersTask, this.repository);
 
             Assert.ThrowsException<TargetInvocationException>(() => sut.Execute());
         }

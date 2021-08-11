@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Text;
 using TaskManagmentSystem.Core.providers.Contracts;
-using TaskManagmentSystem.Models.Common;
 
 namespace TaskManagmentSystem.Core.providers
 {

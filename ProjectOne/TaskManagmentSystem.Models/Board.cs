@@ -42,7 +42,7 @@ namespace TaskManagmentSystem.Models
         public void AddTask(IBoardItem task)
         {
             this.tasks.Add(task);
-            AddEvent(new EventLog($"{task.GetType().Name} '{task.Title}' with ID {task.Id} was pinned to board '{this.Name}'"));
+            AddEvent(new EventLog($"{task.GetType().Name} '{task.Title}' with ID: {task.Id} was pinned to board '{this.Name}'"));
         }
         public void RemoveTask(IBoardItem task)
         {
@@ -51,7 +51,7 @@ namespace TaskManagmentSystem.Models
                 throw new UserInputException(string.Format(Constants.ITEM_NULL_ERR, "Task"));
             }
             this.tasks.Remove(task);
-            AddEvent(new EventLog($"{task.GetType().Name} '{task.Title}' with ID {task.Id} was unpinned from board '{this.Name}'"));
+            AddEvent(new EventLog($"{task.GetType().Name} '{task.Title}' with ID: {task.Id} was unpinned from board '{this.Name}'"));
         }
         protected void AddEvent(IEventLog eventLog)
         {

@@ -33,7 +33,6 @@ namespace TaskManagmentSystem.Core.Commands
                 throw new UserInputException(string.Format(Constants.MEMBER_NOT_IN_TEAM, this.Repository.LoggedUser.Name));
             }
 
-
             if (keyword == "filter")
             {
                 result = this.Repository.GetTasks().Where(x => x.Title.Contains(title));
@@ -44,11 +43,10 @@ namespace TaskManagmentSystem.Core.Commands
             }
             else
             {
-                throw new UserInputException("showalltasks command needs four keywords [teamname/id] ([filter] [title] or [sortby] title)");
+                throw new UserInputException(Constants.SHOWALLTASK_COMMAND_ERR);
             }
 
             return string.Join(Environment.NewLine, result.ToString());
-
         }
     }
 }

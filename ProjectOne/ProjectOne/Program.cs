@@ -1,10 +1,7 @@
-﻿using System;
-using TaskManagmentSystem.Core;
+﻿using TaskManagmentSystem.Core;
 using TaskManagmentSystem.Core.Contracts;
 using TaskManagmentSystem.Core.providers;
 using TaskManagmentSystem.Core.providers.Contracts;
-using TaskManagmentSystem.Models;
-using TaskManagmentSystem.Models.Contracts;
 
 
 namespace TaskManagmentSystem.CLI

@@ -19,7 +19,7 @@ namespace TaskManagmentSystem.Core.Commands
             {
 
             }
-            return $"Database history was deleted successfully";
+            return Constants.DATABASE_HISTORY_DELETED;
         }
     }
 }

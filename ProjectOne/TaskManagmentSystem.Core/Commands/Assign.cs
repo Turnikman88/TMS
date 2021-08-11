@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using TaskManagmentSystem.Core.Contracts;
-using TaskManagmentSystem.Models;
 using TaskManagmentSystem.Models.Common;
 
 namespace TaskManagmentSystem.Core.Commands
@@ -36,8 +35,8 @@ namespace TaskManagmentSystem.Core.Commands
 
             var task = this.Repository.FindTaskByID(taskId);
             var type = task.GetType();
-            var method = type.GetMethod("AddAssignee") ?? throw new UserInputException("Feedbacks cannot be assigned");
-            method.Invoke(task, new object[] {user});
+            var method = type.GetMethod("AddAssignee") ?? throw new UserInputException(Constants.FEEDBACKS_CANNOT_BE_ASSIGNED_ERR);
+            method.Invoke(task, new object[] { user });
 
             user.AddTask(task);
 

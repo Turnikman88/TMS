@@ -31,7 +31,7 @@ namespace TaskManagmentSystem.Core.Commands
                     writer.Write(team.ViewHistory());
                 }
                 fileNum++;
-                return $"History for the team was created as text-file on your desktop under name {file}-{fileNum - 1}.txt";
+                return string.Format(Constants.HISTORY_FILE_CREATED, file, fileNum - 1);
             }
             else if (CommandParameters.Count == 3 && CommandParameters[1].ToLower() == "board")
             {
@@ -49,7 +49,7 @@ namespace TaskManagmentSystem.Core.Commands
                 }
 
                 fileNum++;
-                return $"History for the team was created as text-file on your desktop under name {file}-{board.Name}-{fileNum - 1}.txt";
+                return string.Format(Constants.HISTORY_FILE_CREATED, $"{file}-{board.Name}", fileNum - 1);
             }
             else if (CommandParameters.Count == 3 && CommandParameters[1].ToLower() == "user")
             {
@@ -65,11 +65,11 @@ namespace TaskManagmentSystem.Core.Commands
                 }
 
                 fileNum++;
-                return $"History for the team was created as text-file on your desktop under name {file}-{user.Name}-{fileNum - 1}.txt";
+                return string.Format(Constants.HISTORY_FILE_CREATED, $"{file}-{user.Name}", fileNum - 1);
             }
             else
             {
-                throw new UserInputException("Execute command needs [teamname/id] (optional type[board or user] [board/userID]) - exports history events to desktop");
+                throw new UserInputException(Constants.EXPORT_COMMAND_ERR);
             }
         }
     }

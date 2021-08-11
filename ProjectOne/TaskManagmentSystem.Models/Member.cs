@@ -68,13 +68,13 @@ namespace TaskManagmentSystem.Models
         {
             Validator.ValidateObjectIsNotNULL(task, string.Format(Constants.ITEM_NULL_ERR, "Task"));
             this.tasks.Add(task);
-            AddEvent(new EventLog($"{task.GetType().Name} '{task.Title}' with ID {task.Id} was assigned on '{this.Name}'"));
+            AddEvent(new EventLog($"{task.GetType().Name} '{task.Title}' with ID: {task.Id} was assigned on '{this.Name}'"));
         }
         public void RemoveTask(IBoardItem task)
         {
             Validator.ValidateObjectIsNotNULL(task, string.Format(Constants.ITEM_NULL_ERR, "Task"));
             this.tasks.Remove(task);
-            AddEvent(new EventLog($"{task.GetType().Name} '{task.Title}' with ID {task.Id} was unassigned from '{this.Name}'"));
+            AddEvent(new EventLog($"{task.GetType().Name} '{task.Title}' with ID: {task.Id} was unassigned from '{this.Name}'"));
         }
         public void ChangePass(string newPass)
         {
@@ -83,7 +83,7 @@ namespace TaskManagmentSystem.Models
         public void ChangeRole(string role)
         {
             this.Role = Validator.ParseRole(role);
-            AddEvent(new EventLog($"User {this.Name} with ID {this.Id} changed his role to {this.Role}"));
+            AddEvent(new EventLog($"User {this.Name} with ID: {this.Id} changed his role to {this.Role}"));
         }
         public string ViewHistory()
         {

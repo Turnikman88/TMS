@@ -67,7 +67,7 @@ namespace TaskManagmentSystem.Core
 
         private void ProcessCommand(string commandLine)
         {
-            Validator.ValidateObjectIsNotNULL(commandLine.Trim(), Constants.EmptyCommandError);
+            Validator.ValidateObjectIsNotNULL(commandLine.Trim(), Constants.EMPTY_COMMAND_ERR);
 
             ICommand command = this.commandFactory.Create(commandLine);
             string result = command.Execute();

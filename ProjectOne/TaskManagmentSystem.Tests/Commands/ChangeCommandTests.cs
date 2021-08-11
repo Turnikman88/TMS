@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TaskManagmentSystem.Core;
 using TaskManagmentSystem.Core.Commands;
 using TaskManagmentSystem.Models;
+using TaskManagmentSystem.Models.Common;
 using TaskManagmentSystem.Models.Contracts;
 
 namespace TaskManagmentSystem.Tests.Commands
@@ -24,13 +25,10 @@ namespace TaskManagmentSystem.Tests.Commands
 
         private IBoard board;
         private IMember user;
+        private ITeam team;
         private IBoardItem taskBug;
         private IBoardItem taskFeedback;
         private IBoardItem taskStory;
-
-        private readonly IList<string> parametersUser = new List<string> { USER, PASSWORD };
-        private readonly IList<string> parametersBoard = new List<string> { BOARD, TEAM };
-        //private readonly IList<string> parametersTask = new List<string> { TASKTYPE, BOARD, TASKTITLE, TASKDESCRIPTION };
 
         private Repository repository = new Repository();
 
@@ -40,7 +38,7 @@ namespace TaskManagmentSystem.Tests.Commands
             this.repository = new Repository();
             this.user = this.repository.CreateUser(USER, PASSWORD);
             this.repository.LoggedUser = user;
-            var team = this.repository.CreateTeam(TEAM);
+            this.team = this.repository.CreateTeam(TEAM);
             this.board = this.repository.CreateBoard(BOARD);
             team.AddBoard(board);
             this.taskBug = this.repository.CreateTask(typeof(Bug), TASKTITLE_BUG, TASKDESCRIPTION_BUG, board);
@@ -103,7 +101,7 @@ namespace TaskManagmentSystem.Tests.Commands
             Assert.AreEqual(expected, sut.Execute());
 
         }
-        //[TestMethod] TODO: change rating?
+        //[TestMethod] //TODO: change rating?
         //public void ShouldChangeRatingSuccessfullyForFeedbackTasks()
         //{
         //    //Arrange
@@ -155,6 +153,46 @@ namespace TaskManagmentSystem.Tests.Commands
             //Assert
             Assert.AreEqual(expected, sut.Execute());
 
+        }
+
+        [TestMethod]
+        public void ShouldThrowException_WhenUserNotInTeam()
+        {
+            //Arrange
+            this.team.RemoveMember(this.user);
+
+            //Act
+            Change sut = new Change(new List<string> { TEAM, "4", "Status" }, this.repository);
+
+            //Assert
+            Assert.ThrowsException<UserInputException>(() => sut.Execute());
+        }
+
+        [TestMethod]
+        public void ChangePass_ShouldChangePassword_Correct()
+        {
+            //Arrange
+            string expected = "Password succsessfully changed!";
+            string newpass = "New$up3r$7r0NgPa$$";
+
+            //Act
+            ChangePass sut = new ChangePass(new List<string> { PASSWORD, newpass }, this.repository);
+
+            //Assert
+            Assert.AreEqual(expected, sut.Execute());
+        }
+
+        [TestMethod]
+        public void ChangePass_ShouldThrowError_WhenWrongPasswordInput()
+        {
+            //Arrange
+            string wrongPassword = PASSWORD + "wrong";
+
+            //Act
+            ChangePass sut = new ChangePass(new List<string> { wrongPassword, PASSWORD }, this.repository);
+
+            //Assert
+            Assert.ThrowsException<UserInputException>(() => sut.Execute());
         }
     }
 }

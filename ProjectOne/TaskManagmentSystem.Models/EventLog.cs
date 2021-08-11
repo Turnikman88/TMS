@@ -28,7 +28,7 @@ namespace TaskManagmentSystem.Models
             {
                 if (string.IsNullOrEmpty(value))
                 {
-                    throw new UserInputException("Please provide a non-empty description");
+                    throw new UserInputException(Constants.NON_EMPTY_DESCRIPTION);
                 }
                 this.description = value;
             }

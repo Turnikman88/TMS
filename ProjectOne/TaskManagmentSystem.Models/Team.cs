@@ -45,20 +45,20 @@ namespace TaskManagmentSystem.Models
         {
             Validator.ValidateObjectIsNotNULL(board, string.Format(Constants.ITEM_NULL_ERR, "Board"));
             this.boards.Add(board);
-            AddEvent(new EventLog($"Board {board.Name}, Id: {board.Id} was created!"));
+            AddEvent(new EventLog($"Board {board.Name}, ID: {board.Id} was created!"));
 
         }
         public void AddMember(IMember member)
         {
             Validator.ValidateObjectIsNotNULL(member, string.Format(Constants.ITEM_NULL_ERR, "Member"));
             this.members.Add(member);
-            AddEvent(new EventLog($"User {member.Name}, Id: {member.Id} joined team {this.Name}!"));
+            AddEvent(new EventLog($"User {member.Name}, ID: {member.Id} joined team {this.Name}!"));
         }
         public void AddAdministrator(IMember admin)
         {
             Validator.ValidateObjectIsNotNULL(admin, string.Format(Constants.ITEM_NULL_ERR, "Admin"));
             this.administrators.Add(admin);
-            AddEvent(new EventLog($"User {admin.Name}, Id: {admin.Id} is admin of team {this.Name}!"));
+            AddEvent(new EventLog($"User {admin.Name}, ID: {admin.Id} is admin of team {this.Name}!"));
 
         }
         public string ViewHistory()
@@ -67,7 +67,7 @@ namespace TaskManagmentSystem.Models
             sb.Append(string.Join($"{Environment.NewLine}", eventLogs.OrderByDescending(x => x.EventTime).Select(x => x.ViewInfo())));
             sb.Append(string.Join($"{Environment.NewLine}", members.Select(x => x.ViewHistory())));
             sb.Append(string.Join($"{Environment.NewLine}", boards.Select(x => x.ViewHistory())));
-            return sb.ToString().Trim();
+            return sb.ToString().TrimEnd();
         }
 
         public override string ToString()
@@ -84,7 +84,7 @@ namespace TaskManagmentSystem.Models
             sb.AppendLine(Constants.PRINT_INFO_SEPARATOR);
             sb.AppendLine("         Boards:");
             sb.AppendLine($"                {boards}");
-            return sb.ToString().Trim();
+            return sb.ToString().TrimEnd();
         }
         protected void AddEvent(IEventLog eventLog)
         {
@@ -93,7 +93,7 @@ namespace TaskManagmentSystem.Models
         public void RemoveMember(IMember member)
         {
             this.members.Remove(member);
-            AddEvent(new EventLog($"User {member.Name}, Id: {member.Id} left team {this.Name}!"));
+            AddEvent(new EventLog($"User {member.Name}, ID: {member.Id} left team {this.Name}!"));
         }
 
         public void RemoveAdministrator(IMember admin)
@@ -104,7 +104,7 @@ namespace TaskManagmentSystem.Models
         public void RemoveBoard(IBoard board)
         {
             this.boards.Remove(board);
-            AddEvent(new EventLog($"Board {board.Name}, Id: {board.Id} was removed!"));
+            AddEvent(new EventLog($"Board {board.Name}, ID: {board.Id} was removed!"));
         }
     }
 }

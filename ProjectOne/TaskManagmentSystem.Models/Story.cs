@@ -53,30 +53,30 @@ namespace TaskManagmentSystem.Models
         {
             Validator.ValidateObjectIsNotNULL(assignee, string.Format(Constants.ITEM_NULL_ERR, "Assignee"));
             this.Assignee = assignee;
-            AddEvent(new EventLog($"Story with Id: {this.Id} was assigned to {assignee.Name}"));
+            AddEvent(new EventLog($"Story with ID: {this.Id} was assigned to {assignee.Name}"));
         }
         public void RemoveAssignee()
         {
             this.Assignee = null;
-            AddEvent(new EventLog($"{this.GetType().Name} with Id: {this.Id} was unassigned!"));
+            AddEvent(new EventLog($"{this.GetType().Name} with ID: {this.Id} was unassigned!"));
         }
 
         public void ChangeSize()
         {
             _ = this.size != Size.Large ? size++ : size = Size.Small;
-            AddEvent(new EventLog($"Size for ID {this.Id} {this.Title} was changed to {this.Size}"));
+            AddEvent(new EventLog($"Size for ID: {this.Id} {this.Title} was changed to {this.Size}"));
         }
 
         public void ChangePriority()
         {
             this.priority = this.priority != Priority.High ? priority++ : Priority.Low;
-            AddEvent(new EventLog($"Priority for ID {this.Id} {this.Title} was changed to {this.Priority}"));
+            AddEvent(new EventLog($"Priority for ID: {this.Id} {this.Title} was changed to {this.Priority}"));
         }
 
         public override void ChangeStatus()
         {
             _ = this.status != Status.Done ? status++ : status = Status.NotDone;
-            AddEvent(new EventLog($"Status for ID {this.Id} {this.Title} was changed to {this.Status}"));
+            AddEvent(new EventLog($"Status for ID: {this.Id} {this.Title} was changed to {this.Status}"));
         }
 
         public override string ToString()

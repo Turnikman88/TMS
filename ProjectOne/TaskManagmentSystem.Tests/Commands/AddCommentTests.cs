@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using TaskManagmentSystem.Core;
 using TaskManagmentSystem.Core.Commands;
+using TaskManagmentSystem.Models;
 using TaskManagmentSystem.Models.Common;
+using TaskManagmentSystem.Models.Contracts;
 
 namespace TaskManagmentSystem.Tests.Commands
 {
@@ -18,21 +20,23 @@ namespace TaskManagmentSystem.Tests.Commands
         private readonly IList<string> parametersBoard = new List<string> { BOARD, TEAM };
         private readonly IList<string> parametersTask = new List<string> { "Bug", BOARD, "TestTitleBug", "TaskDescriptionTest" };
 
+        private IBoard board;
+        private IMember user;
+        private IBoardItem task;
+        private ITeam team;
+
         private Repository repository;
 
         [TestInitialize]
         public void Prepare()
         {
             this.repository = new Repository();
-            CreateUser testUser = new CreateUser(parametersUser, this.repository);
-            testUser.Execute();
-            LogIn login = new LogIn(parametersUser, this.repository);
-            login.Execute();
-            this.repository.CreateTeam(TEAM);
-            CreateBoard testBoard = new CreateBoard(parametersBoard, this.repository);
-            testBoard.Execute();
-            CreateTask testTask = new CreateTask(parametersTask, this.repository);
-            testTask.Execute();
+            this.user = this.repository.CreateUser(USER, PASSWORD);
+            this.repository.LoggedUser = user;
+            this.team = this.repository.CreateTeam(TEAM);
+            this.board = this.repository.CreateBoard(BOARD);
+            this.team.AddBoard(board);
+            this.task = this.repository.CreateTask(typeof(Bug), "TestTitleBug", "TaskDescriptionTest", this.board);
         }
 
         [TestMethod]
@@ -76,13 +80,10 @@ namespace TaskManagmentSystem.Tests.Commands
         {
             //Arrange
             string username = "NewUser";
-            repository.CreateUser(username, PASSWORD);
+            var anotheruser = repository.CreateUser(username, PASSWORD);
+            this.repository.LoggedUser = anotheruser;
 
             //Act
-            LogOut logout = new LogOut(new List<string>(), this.repository);
-            logout.Execute();
-            LogIn login = new LogIn(new List<string>() { username, PASSWORD }, this.repository);
-            login.Execute();
             IList<string> sutParameters = new List<string>() { TEAM, "4", "This is test content", "AuthorTest" };
             AddCommentToTask sut = new AddCommentToTask(sutParameters, this.repository);
 

@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using TaskManagmentSystem.Core.Contracts;
-using TaskManagmentSystem.Models;
 using TaskManagmentSystem.Models.Common;
 
 namespace TaskManagmentSystem.Core.Commands
@@ -29,14 +27,14 @@ namespace TaskManagmentSystem.Core.Commands
                 throw new UserInputException(string.Format(Constants.MEMBER_NOT_IN_TEAM, this.Repository.LoggedUser.Name));
             }
 
-            var task = this.Repository.FindTaskByID(itemID);            
+            var task = this.Repository.FindTaskByID(itemID);
             var type = task.GetType();
             var methodName = this.GetType().Name + char.ToUpper(statusType[0]) + statusType.Substring(1);
             var method = type.GetMethod(methodName)
                 ?? throw new UserInputException(string.Format(Constants.GIVEN_STATUS_TYPE_ERR, statusType));
             method.Invoke(task, null);
 
-            return $"{statusType} of item {itemID} was changed!";
+            return $"{statusType} of item {task.GetType().Name} ID: {itemID} was changed!";
         }
     }
 }

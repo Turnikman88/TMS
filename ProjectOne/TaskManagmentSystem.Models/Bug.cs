@@ -19,6 +19,8 @@ namespace TaskManagmentSystem.Models
             : base(id, title, description, "Bug")
         {
             this.Priority = Priority.Low;
+            this.Status = Status.Active;
+            this.Severity = Severity.Minor;
             this.steps = steps;
         }
         public Priority Priority
@@ -64,7 +66,7 @@ namespace TaskManagmentSystem.Models
         {
             _ = severity != Severity.Critical ? severity++ : severity = Severity.Minor;
 
-            AddEvent(new EventLog($"Saverity for ID {this.Id} {this.Title} was changed to {this.Severity}"));
+            AddEvent(new EventLog($"Severity for ID {this.Id} {this.Title} was changed to {this.Severity}"));
         }
         public override void ChangeStatus()
         {

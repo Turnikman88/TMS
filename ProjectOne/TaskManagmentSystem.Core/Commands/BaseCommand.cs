@@ -7,7 +7,7 @@ using TaskManagmentSystem.Models.Enums;
 namespace TaskManagmentSystem.Core.Commands
 {
     public abstract class BaseCommand : ICommand
-    {        
+    {
         protected BaseCommand(IList<string> commandParameters, IRepository repository)
         {
             this.CommandParameters = commandParameters;
@@ -16,7 +16,6 @@ namespace TaskManagmentSystem.Core.Commands
 
         public IList<string> CommandParameters { get; }
         public IRepository Repository { get; }
-
         public abstract string Execute();
 
         protected void CheckIsRoot()
@@ -26,6 +25,7 @@ namespace TaskManagmentSystem.Core.Commands
                 throw new UserInputException(Constants.USER_NOT_ROOT);
             }
         }
+
         protected int ParseIntParameter(string value)
         {
             if (int.TryParse(value, out int result))

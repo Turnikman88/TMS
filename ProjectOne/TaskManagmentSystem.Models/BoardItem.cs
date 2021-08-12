@@ -57,6 +57,7 @@ namespace TaskManagmentSystem.Models
             this.comments.Add(comment);
             AddEvent(new EventLog($"New comment was added, Author: {comment.Author}"));
         }
+
         public void RemoveComment(IComment comment)
         {
             Validator.ValidateObjectIsNotNULL(comment, string.Format(Constants.ITEM_NULL_ERR, "Comment"));
@@ -65,6 +66,7 @@ namespace TaskManagmentSystem.Models
             AddEvent(new EventLog($"Comment was deleted '{comment.Content.Substring(0, length)} ...'"));
 
         }
+
         public string ViewHistory()
         {
             return string.Join($"{Environment.NewLine}", eventLogs.OrderByDescending(x => x.EventTime).Select(x => x.ViewInfo()));
@@ -76,13 +78,16 @@ namespace TaskManagmentSystem.Models
         }
 
         public abstract void ChangeStatus();
+
         protected abstract string AddAdditionalInfo();
+
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
             sb.Append($"{this.Title} {Environment.NewLine} " +
                 $"Descritpion: {this.Description} {Environment.NewLine} ");
             sb.AppendLine(AddAdditionalInfo());
+
             if (comments.Count > 0)
             {
                 sb.AppendLine(Constants.PRINT_INFO_SEPARATOR);

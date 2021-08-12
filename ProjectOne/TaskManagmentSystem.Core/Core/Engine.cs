@@ -71,7 +71,7 @@ namespace TaskManagmentSystem.Core
 
             ICommand command = this.commandFactory.Create(commandLine);
             string result = command.Execute();
-            writer.WriteLine(result.Trim());
+            writer.WriteLine(result.TrimEnd());
 
         }
         private void ApplicationPrepearing()

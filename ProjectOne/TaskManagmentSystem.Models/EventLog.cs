@@ -38,7 +38,7 @@ namespace TaskManagmentSystem.Models
         //methods
         public string ViewInfo()
         {
-            return $"[ {EventTime.Date.ToString(logDateFormat)} | {EventTime.ToString(logTimeFormat)} ]{Description}" + Environment.NewLine;
+            return $"[ {EventTime.Date.ToString(logDateFormat)} | {EventTime.ToString(logTimeFormat)} ]{Description}";
         }
     }
 }

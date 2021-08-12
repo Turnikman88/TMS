@@ -61,8 +61,10 @@ namespace TaskManagmentSystem.Models
         {
             var sb = new StringBuilder();
             sb.Append(string.Join($"{Environment.NewLine}", eventLogs.OrderByDescending(x => x.EventTime).Select(x => x.ViewInfo())));
+            sb.AppendLine();
             sb.Append(string.Join($"{Environment.NewLine}", tasks.OrderBy(x => x.Id).Select(x => x.ViewHistory())));
-            return sb.ToString().Trim();
+            sb.AppendLine();
+            return sb.ToString();
         }
         public override string ToString()
         {

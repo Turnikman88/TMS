@@ -220,5 +220,15 @@ namespace TaskManagmentSystem.Tests.Commands
             Assert.AreEqual(expected, sut.Execute());
             Assert.AreEqual("Root", sutUser.Role.ToString());
         }
+
+        [TestMethod]
+        public void ChangeRole_ShouldThrowException()
+        {
+            this.user.ChangeRole();
+
+            ChangeRole sut = new ChangeRole(new List<string> { user.Name }, this.repository);
+
+            Assert.ThrowsException<UserInputException>(() => sut.Execute());
+        }
     }
 }

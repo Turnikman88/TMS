@@ -30,6 +30,7 @@ namespace TaskManagmentSystem.Core
             this.modelsClassTypes = GetModelsClassTypes();
             CreateAdmin(); // ToDo: Maybe in static constructor
         }
+
         public IList Users
             => new List<IMember>(users);
         public IList Teams
@@ -88,7 +89,7 @@ namespace TaskManagmentSystem.Core
                     break;
                 case nameof(Story):
                     task = Activator.CreateInstance(type, ++nextId, title, description) as IBoardItem;
-                    break;                
+                    break;
             }
             board.AddTask(task);
             tasks.Add(task);
@@ -106,34 +107,41 @@ namespace TaskManagmentSystem.Core
             return this.tasks.FirstOrDefault(x => x.Id == id)
                 ?? throw new UserInputException(string.Format(Constants.TASK_DOESNT_EXSIST, $"with Id: {id}"));
         }
+
         public ITeam FindTeamById(int id)
         {
             return this.teams.FirstOrDefault(x => x.Id == id);
         }
+
         public ITeam FindTeamByName(string name)
         {
             return this.teams.FirstOrDefault(x => x.Name == name);
         }
+
         public IMember FindUserById(int id)
         {
             return this.users.FirstOrDefault(x => x.Id == id);
         }
+
         public IMember FindUserByName(string name)
         {
             return this.users.FirstOrDefault(x => x.Name == name);
         }
+
         public IBoard FindBoardById(int Id, IList<ITeam> teamsUserIsMember)
         {
             var team = teamsUserIsMember.FirstOrDefault(x => x.Boards.Any(i => i.Id == Id))
                 ?? throw new UserInputException(string.Format(Constants.BOARD_DOESNT_EXSIST, $"with Id: {Id}"));
             return team.Boards.FirstOrDefault(x => x.Id == Id);
         }
+
         public IBoard FindBoardByName(string name, IList<ITeam> teamsUserIsMember)
         {
             var team = teamsUserIsMember.FirstOrDefault(x => x.Boards.Any(i => i.Name == name))
                 ?? throw new UserInputException(string.Format(Constants.BOARD_DOESNT_EXSIST, name));
             return team.Boards.FirstOrDefault(x => x.Name == name);
         }
+
         public bool IsTeamMember(ITeam team, IMember user)
         {
             if (team.Members.Any(x => x.Name == user.Name))
@@ -142,6 +150,7 @@ namespace TaskManagmentSystem.Core
             }
             return false;
         }
+
         public IMember GetUser(string userIdentificator)
         {
             IMember user;
@@ -176,6 +185,7 @@ namespace TaskManagmentSystem.Core
 
             return team;
         }
+
         public IBoard GetBoard(string boardIdentificator)
         {
             var teamsUserIsMember = this.teams.Where(x => x.Members.Any(i => i.Id == this.LoggedUser.Id)).ToList();
@@ -202,6 +212,7 @@ namespace TaskManagmentSystem.Core
             return this.tasks.FirstOrDefault(x => x.Id == id)
                 ?? throw new UserInputException(string.Format(Constants.TASK_DOESNT_EXSIST, $"with Id: {id}"));
         }
+
         private static List<Type> GetCoreCommandTypes()
         {
             return Assembly.GetExecutingAssembly()
@@ -219,6 +230,7 @@ namespace TaskManagmentSystem.Core
                 .Where(x => x.FullName.Contains(Constants.MODELS_ASSEMBLY_KEY)
                          && x.BaseType == typeof(BoardItem)).ToList();
         }
+
         public Type GetModelTypeByName(string taskType)
         {
             return this.ModelsClassTypes.FirstOrDefault(x => x.Name.ToLower() == taskType.ToLower())
@@ -235,6 +247,7 @@ namespace TaskManagmentSystem.Core
             this.exsitingNames.RemoveAll(x => x == team.Name);
             this.teams.Remove(team);
         }
+
         public void RemoveTask(IBoardItem task)
         {
             this.tasks.Remove(task);

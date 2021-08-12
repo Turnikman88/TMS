@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using TaskManagmentSystem.Core.Contracts;
 using TaskManagmentSystem.Models.Common;
 
@@ -23,6 +21,11 @@ namespace TaskManagmentSystem.Core.Commands
             string userIdentificator = CommandParameters[0];
 
             var user = this.Repository.GetUser(userIdentificator);
+
+            if (this.Repository.LoggedUser == user)
+            {
+                throw new UserInputException(Constants.CANNOT_CHANGE_OWN_ROLE_ERR);
+            }
 
             user.ChangeRole();
 

@@ -31,6 +31,7 @@ namespace TaskManagmentSystem.Core.Commands
             {
                 throw new UserInputException(Constants.NAME_MUST_BE_UNIQUE);
             }
+
             var board = this.Repository.CreateBoard(boardName);
 
             team.AddBoard(board);

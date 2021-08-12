@@ -5,6 +5,7 @@
 
         //==================ERRORS===================//
 
+        public const string CANNOT_CHANGE_OWN_ROLE_ERR = "You cannot change your own role";
         public const string STRING_LENGHT_ERR = "{0} must be between {1} and {2} symbols long!";
         public const string ITEM_NULL_ERR = "{0} cannot be null or empty!";
         public const string NAME_UNIQUE_ERR = "The name {0} already exists!";

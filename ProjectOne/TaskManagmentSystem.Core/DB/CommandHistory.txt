@@ -1,11 +1,18 @@
-createuser fon4o P@s$W0Rd
-login fon4o P@s$W0Rd
-createteam fon4oPrezident
-createboard fon4oboard fon4oPrezident
-createtask feedback fon4oboard feedbackTitleTest feedbackDescription 10
-createtask bug fon4oboard bugTitleTest bugDescription List Of bugs to recreate. This is test.
-createtask story fon4oboard storyTitleTest storyDescription
+createuser testsuer P@s$W0Rd
+login testsuer P@s$W0Rd
+createteam testuserTeam
+createboard testBoard testuserTeam
+createtask feedback testBoard feedbackTitleTest feedbackDescription 10
+createtask bug testBoard bugTitleTest bugDescription List Of bugs to recreate. This is test.
+createtask story testBoard storyTitleTest storyDescription
 createuser kalin k@L1N0123
-teamjoin kalin fon4oPrezident
-createtask bug fon4oboard  KaraiVnimatelno PodavaiMigachi Ne Karash Vnimatelno
-assign fon4oPrezident kalin 8
+teamjoin kalin testuserTeam
+createtask bug testBoard KaraiVnimatelno PodavaiMigachi Ne Karash Vnimatelno
+assign testuserTeam kalin 8
+logout
+login kalin k@L1N0123
+logout
+createuser newUser u$3R1234
+login newUser u$3R1234
+createteam newuserTeam
+createboard otherBoard newuserTeam

@@ -32,7 +32,7 @@
 		showteamboards............[teamname/id] - shows all boards in team
 		showuseractivity..........[teamname/id] [username/id] - shows user activity		
 		showalltasks..............[teamname/id] (keyword)[filter/sort] [titleName] - shows all tasks in team sort/filtered by title
-		showtaskbytype............[teamid / name][typeoftask] (keyword)[1.filter / 2.sort][1.status / assignee][2.title / priority / severity / size / rating]
+		showtaskbytype............[typeoftask] (keyword)[1.filter/2.sort] [1.status/assignee] [1. StatusType/assigneeName] [2. title/priority/severity/size/rating]
 		showassigneedtasks........[teamid/name] [boardid/name] - shows tasks in board that has assignee
 		showallteams..............No parameters needed (root only)
 		showallusers..............No parameters needed (root only)
@@ -41,6 +41,6 @@
 		erasehistory..............No parameters needed - deletes database (root only)
 
 		help......................No parameters needed
-		login.....................[username] [password] - Login
+		login.....................[username] [password]
 		logout....................No parameters needed
 		exit......................Closes the application

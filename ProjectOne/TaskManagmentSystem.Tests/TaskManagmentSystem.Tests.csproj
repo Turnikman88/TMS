@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ProjectOne\TaskManagmentSystem.CLI.csproj" />
+    <ProjectReference Include="..\TaskManagmentSystem.CLI\TaskManagmentSystem.CLI.csproj" />
     <ProjectReference Include="..\TaskManagmentSystem.Core\TaskManagmentSystem.Core.csproj" />
   </ItemGroup>
 

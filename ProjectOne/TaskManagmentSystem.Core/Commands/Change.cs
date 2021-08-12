@@ -8,7 +8,7 @@ namespace TaskManagmentSystem.Core.Commands
     public class Change : BaseCommand
     {
         private readonly int numberOfParameters;
-        //advance teamname 42 priority
+        //advance teamname [itemID] [statustype]
         public Change(IList<string> commandParameters, IRepository repository)
             : base(commandParameters, repository)
         {

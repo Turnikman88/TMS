@@ -94,13 +94,12 @@ namespace TaskManagmentSystem.Tests
         public void ShouldThrowException_WhenAlreadyLogedOut()
         {
             //Arrange
-
             this.repository.LoggedUser = user;
 
+            //Act and Assert
             LogOut logout = new LogOut(new List<string>(), this.repository);
             logout.Execute();
 
-            //Act and Assert
             Assert.ThrowsException<UserInputException>(() => logout.Execute());
         }
     }

@@ -20,13 +20,13 @@
 		createteam................[teamname] - Creates new team
 		createuser................[username] [password] - Creates new user
 
-		removeboard...............[boardname/id] [teamname/id] - Removes new board from team
+		removeboard...............[boardname/id] [teamname/id] - Removes board from team
 		removecomment.............[teamname/id] [task id] [unique comment content] - Removes comment from task
 		removetask................[boardname/id] [task id] - Removes task from given board
 		removeuser................[username/id] - Removes user from the application (root only)
 		removeteam................[teamname/id] - Removes team from the application (root only)
 
-		showallteammembers........[teamname] - shows all team members
+		showallteammembers........[teamname/id] - shows all team members
 		showboardactivity.........[teamname/id] [boardname/id] - shows board activity
 		showteamactivity..........[teamname/id] - shows team activity
 		showteamboards............[teamname/id] - shows all boards in team

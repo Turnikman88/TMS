@@ -13,9 +13,6 @@ namespace TaskManagmentSystem.Tests.Commands
         private const string USER = "TestUser";
         private const string PASSWORD = "S7r0nGP@$$Word";
         private const string TEAM = "TestTeam";
-        private const string adminName = "superuser";
-        private const string adminPass = "th1$i$4dmiN";
-        private readonly IList<string> parametersUser = new List<string> { USER, PASSWORD };
 
         private IMember user;
         private ITeam team;
@@ -50,6 +47,7 @@ namespace TaskManagmentSystem.Tests.Commands
             TeamJoin sut = new TeamJoin(parametersTeam, this.repository);
 
             Assert.AreEqual(expected, sut.Execute());
+            Assert.AreEqual(2, team.Members.Count);
         }
 
         [TestMethod]

@@ -185,9 +185,7 @@ namespace TaskManagmentSystem.Tests.Commands
             this.repository.LoggedUser = this.repository.CreateUser("UserNotInTeam", PASSWORD);
             ShowAssigneedTasks sut = new ShowAssigneedTasks(new List<string> { TEAM, $"{board.Id}" }, this.repository);
 
-
             Assert.ThrowsException<UserInputException>(() => sut.Execute());
-
         }
 
         [TestMethod]
@@ -256,25 +254,39 @@ namespace TaskManagmentSystem.Tests.Commands
         {
             ShowTaskByType sut = new ShowTaskByType(new List<string> { "feedback", "sort", "title" }, this.repository);
 
-
             Assert.IsTrue(sut.Execute().Contains($"Feedback: {taskFeedback.Title}"));
             Assert.IsFalse(sut.Execute().Contains($"Story: {taskStory.Title}"));
             Assert.IsFalse(sut.Execute().Contains($"Bug: {taskBug.Title}"));
         }
-        //[TestMethod] TODO:Fix filter by assignee function
-        //public void ShowTaskByType_FilterBugsByAssignee()
-        //{
-        //    ShowTaskByType sut = new ShowTaskByType(new List<string> { "Bug", /"filter", /"assignee", USER }, this.repository);
-        //
-        //    var task = taskBug as Bug;
-        //    task.AddAssignee(user);
-        //    user.AddTask(task);
-        //
-        //    Assert.AreEqual("asd", sut.Execute());
-        //    Assert.IsTrue(sut.Execute().Contains($"Bug: TestTitleBug"));
-        //    Assert.IsTrue(sut.Execute().Contains($"Status: Active"));
-        //    Assert.IsTrue(sut.Execute().Contains($"Assignee: {USER}"));
-        //
-        //}
+
+        [TestMethod]
+        public void ShowTaskByType_FilterBugsByAssignee()
+        {
+            ShowTaskByType sut = new ShowTaskByType(new List<string> { "Bug", "filter", "assignee", USER }, this.repository);
+
+            var task = taskBug as Bug;
+            task.AddAssignee(user);
+            user.AddTask(task);
+
+            Assert.IsTrue(sut.Execute().Contains($"Bug: TestTitleBug"));
+            Assert.IsTrue(sut.Execute().Contains($"Status: Active"));
+            Assert.IsTrue(sut.Execute().Contains($"Assignee {USER}"));
+        }
+
+        [TestMethod]
+        public void ShowTaskByType_SortShouldThrowException_WhenSortingByInvalidParameters()
+        {
+            ShowTaskByType sut = new ShowTaskByType(new List<string> { "feedback", "sort", "size" }, this.repository);
+
+            Assert.ThrowsException<UserInputException>(() => sut.Execute());
+        }
+
+        [TestMethod]
+        public void ShowTaskByType_FilterShouldThrowException_WhenFilteringByInvalidParameters()
+        {
+            ShowTaskByType sut = new ShowTaskByType(new List<string> { "feedback", "filter", "size", "notdone" }, this.repository);
+
+            Assert.ThrowsException<UserInputException>(() => sut.Execute());
+        }
     }
 }

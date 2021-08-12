@@ -37,12 +37,11 @@ namespace TaskManagmentSystem.Core.Commands
             var listTask = this.Repository.GetTasks();
             var filteredList = GetOnlyOneTypeOfTasks(listTask, typeOfTask);
 
-
-            if (action == "filter") //TODO: not working with assignee
+            if (action == "filter")
             {
                 Validator.ValidateParametersCount(numberOfParameters + 1, CommandParameters.Count);
 
-                string parameter2 = CommandParameters[3].ToLower();
+                string parameter2 = CommandParameters[3];
                 filteredList = FilterBy(typeOfTask, parameter, parameter2, filteredList);
             }
             else if (action == "sort")
@@ -85,15 +84,15 @@ namespace TaskManagmentSystem.Core.Commands
                 switch (typeOfTask)
                 {
                     case "bug":
-                        return list.Select(x => x as Bug).Where(x => x.Assignee.Name == parameter2);
+                        return list.Select(x => x as Bug).Where(x => x.Assignee?.Name == parameter2);
                     case "story":
-                        return list.Select(x => x as Story).Where(x => x.Assignee.Name == parameter2);
+                        return list.Select(x => x as Story).Where(x => x.Assignee?.Name == parameter2);
                     default:
                         throw new UserInputException($"Name {parameter2} does not have any tasks assigneed");
                 }
             }
 
-            switch (typeOfTask, parameter, parameter2)
+            switch (typeOfTask, parameter, parameter2.ToLower())
             {
                 case ("bug", "status", "active"):
                     return list.Select(x => x as Bug).Where(x => x.Status == Models.Enums.Bug.Status.Active);

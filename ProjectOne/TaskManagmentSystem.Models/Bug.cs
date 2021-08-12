@@ -11,7 +11,6 @@ namespace TaskManagmentSystem.Models
     {
         private Priority priority;
         private Severity severity;
-
         private Status status;
         private readonly IList<string> steps = new List<string>();
 
@@ -23,6 +22,7 @@ namespace TaskManagmentSystem.Models
             this.Severity = Severity.Minor;
             this.steps = steps;
         }
+
         public Priority Priority
         {
             get => this.priority;
@@ -62,32 +62,38 @@ namespace TaskManagmentSystem.Models
             _ = this.priority != Priority.High ? priority++ : priority = Priority.Low;
             AddEvent(new EventLog($"Priority for ID {this.Id} {this.Title} was changed to {this.Priority}"));
         }
+
         public void ChangeSeverity()
         {
             _ = severity != Severity.Critical ? severity++ : severity = Severity.Minor;
 
             AddEvent(new EventLog($"Severity for ID {this.Id} {this.Title} was changed to {this.Severity}"));
         }
+
         public override void ChangeStatus()
         {
             this.status = this.status == Status.Active ? Status.Fixed : Status.Active;
             AddEvent(new EventLog($"Status for ID {this.Id} {this.Title} was changed to {this.Status}"));
         }
+
         public void AddAssignee(IMember assignee)
         {
             Validator.ValidateObjectIsNotNULL(assignee, string.Format(Constants.ITEM_NULL_ERR, "Assignee"));
             this.Assignee = assignee;
             AddEvent(new EventLog($"Bug with Id: {this.Id} was assigned to {assignee.Name}"));
         }
+
         public void RemoveAssignee()
         {
             this.Assignee = null;
             AddEvent(new EventLog($"{this.GetType().Name} with Id: {this.Id} was unassigned!"));
         }
+
         public override string ToString()
         {
             return "Bug: " + base.ToString();
         }
+
         protected override string AddAdditionalInfo()
         {
             var assignee = this.Assignee is null ? "No assignee" : this.Assignee.Name;

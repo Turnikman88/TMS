@@ -24,7 +24,9 @@ namespace TaskManagmentSystem.Models
             this.Role = Role.Normal;
             AddEvent(new EventLog(string.Format(Constants.MEMBER_WAS_CREATED, "Member", id)));
         }
+
         public int Id { get; }
+
         public string Name
         {
             get => this.name;
@@ -35,6 +37,7 @@ namespace TaskManagmentSystem.Models
                 this.name = value;
             }
         }
+
         public string Password
         {
             get => this.password;
@@ -53,6 +56,7 @@ namespace TaskManagmentSystem.Models
                 this.role = value;
             }
         }
+
         public IList<IEventLog> EventLogs
             => new List<IEventLog>(this.eventLogs);
 
@@ -60,39 +64,47 @@ namespace TaskManagmentSystem.Models
         {
             get => new List<IBoardItem>(this.tasks);
         }
+
         protected void AddEvent(IEventLog eventLog)
         {
             this.eventLogs.Add(eventLog);
         }
+
         public void AddTask(IBoardItem task)
         {
             Validator.ValidateObjectIsNotNULL(task, string.Format(Constants.ITEM_NULL_ERR, "Task"));
             this.tasks.Add(task);
             AddEvent(new EventLog($"{task.GetType().Name} '{task.Title}' with ID: {task.Id} was assigned on '{this.Name}'"));
         }
+
         public void RemoveTask(IBoardItem task)
         {
             Validator.ValidateObjectIsNotNULL(task, string.Format(Constants.ITEM_NULL_ERR, "Task"));
             this.tasks.Remove(task);
             AddEvent(new EventLog($"{task.GetType().Name} '{task.Title}' with ID: {task.Id} was unassigned from '{this.Name}'"));
         }
+
         public void ChangePass(string newPass)
         {
             this.Password = newPass;
         }
+
         public void ChangeRole()
         {
             this.role = this.role == Role.Normal ? Role.Root : Role.Normal;
             AddEvent(new EventLog($"User {this.Name} with ID: {this.Id} changed his role to {this.Role}"));
         }
+
         public string ViewHistory()
         {
             return string.Join($"{Environment.NewLine}", eventLogs.OrderByDescending(x => x.EventTime).Select(x => x.ViewInfo()));
         }
+
         public override string ToString()
         {
             var sb = new StringBuilder();
             sb.Append($"Name: {this.Name}, ID: {this.Id}, Role: {this.Role} user, Number of assigned tasks: {this.Tasks.Count}");
+
             return sb.ToString();
         }
     }

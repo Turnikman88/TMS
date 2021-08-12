@@ -9,6 +9,7 @@ namespace TaskManagmentSystem.Models
     {
         private int rating;
         private Status status;
+
         public Feedback(int id, string title, string description, int rating)
             : base(id, title, description, "Feedback")
         {
@@ -34,11 +35,13 @@ namespace TaskManagmentSystem.Models
                 this.status = value;
             }
         }
+
         public override void ChangeStatus()
         {
             _ = this.status != Status.Done ? status++ : status = Status.New;
             AddEvent(new EventLog($"Status for ID {this.Id} {this.Title} was changed to {this.Status}"));
         }
+
         public void ChangeRating(string number)
         {
             this.Rating = Validator.ParseIntParameter(number);

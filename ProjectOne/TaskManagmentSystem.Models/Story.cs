@@ -55,6 +55,7 @@ namespace TaskManagmentSystem.Models
             this.Assignee = assignee;
             AddEvent(new EventLog($"Story with ID: {this.Id} was assigned to {assignee.Name}"));
         }
+
         public void RemoveAssignee()
         {
             this.Assignee = null;
@@ -83,10 +84,13 @@ namespace TaskManagmentSystem.Models
         {
             return "Story: " + base.ToString();
         }
+
         protected override string AddAdditionalInfo()
         {
             var assignee = this.Assignee is null ? "No assignee" : this.Assignee.Name;
-            return $"Assignee {assignee} {Environment.NewLine} Status: {this.Status} {Environment.NewLine} Priority: {this.Priority} {Environment.NewLine} Size: {this.Size} ";
+
+            return $"Assignee {assignee} {Environment.NewLine} Status: {this.Status} {Environment.NewLine} " +
+                $"Priority: {this.Priority} {Environment.NewLine} Size: {this.Size} ";
         }
     }
 }

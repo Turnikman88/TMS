@@ -44,6 +44,7 @@ namespace TaskManagmentSystem.Models
             this.tasks.Add(task);
             AddEvent(new EventLog($"{task.GetType().Name} '{task.Title}' with ID: {task.Id} was pinned to board '{this.Name}'"));
         }
+
         public void RemoveTask(IBoardItem task)
         {
             if (task is null)
@@ -53,10 +54,12 @@ namespace TaskManagmentSystem.Models
             this.tasks.Remove(task);
             AddEvent(new EventLog($"{task.GetType().Name} '{task.Title}' with ID: {task.Id} was unpinned from board '{this.Name}'"));
         }
+
         protected void AddEvent(IEventLog eventLog)
         {
             this.eventLogs.Add(eventLog);
         }
+
         public string ViewHistory()
         {
             var sb = new StringBuilder();
@@ -66,10 +69,12 @@ namespace TaskManagmentSystem.Models
             sb.AppendLine();
             return sb.ToString();
         }
+
         public override string ToString()
         {
             var tasks = this.Tasks.Count == 0 ? "No tasks" :
                 $"{this.Tasks.Count}\n" + string.Join(Environment.NewLine, this.Tasks.OrderBy(x => x.Id).Select(x => x.ToString()));
+
             return $"Name: {this.Name}, ID: {this.Id}, Number of tasks: {tasks}";
         }
     }

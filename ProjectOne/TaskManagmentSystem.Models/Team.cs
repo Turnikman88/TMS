@@ -15,7 +15,6 @@ namespace TaskManagmentSystem.Models
         private IList<IMember> administrators = new List<IMember>();
         private IList<IEventLog> eventLogs = new List<IEventLog>();
 
-
         public Team(int id, string name)
         {
             this.Id = id;
@@ -72,7 +71,6 @@ namespace TaskManagmentSystem.Models
             sb.AppendLine();
             return sb.ToString();
         }
-
         public override string ToString()
         {
             var members = this.Members.Count == 0 ? "There are no members!" :

@@ -34,6 +34,7 @@ namespace TaskManagmentSystem.Models
                 this.author = value;
             }
         }
+
         public override string ToString()
         {
             return $"{Constants.PRINT_INFO_SEPARATOR}"

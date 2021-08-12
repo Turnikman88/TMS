@@ -8,7 +8,7 @@ namespace TaskManagmentSystem.Models
     {
         public static string GenerateLogo()
         {
-            Console.SetWindowSize(170, 35);
+            Console.SetWindowSize(175, 35);
             Console.ForegroundColor = ConsoleColor.Magenta;
             string end = "Type 'help' to see list of all commands...";
             var logo = File.ReadAllText(Constants.PATH_TO_DATABASE + "logos.txt").Split(',');

@@ -74,7 +74,7 @@ namespace TaskManagmentSystem.Core
         }
         private string ExtractName(string[] arguments)
         {
-            string nameOfCommand = arguments[0];
+            string nameOfCommand = arguments[0].ToLower();
             return nameOfCommand;
         }
         private void CheckPremissionToExecute(string commandName)

@@ -18,7 +18,6 @@ namespace TaskManagmentSystem.Core.Commands
 
         public override string Execute()
         {
-            CheckIsRoot();
             Validator.ValidateParametersCount(numberOfParameters, CommandParameters.Count);
 
             string teamIdentifier = this.CommandParameters[0];

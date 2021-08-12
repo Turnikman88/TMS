@@ -157,5 +157,124 @@ namespace TaskManagmentSystem.Tests.Commands
             Assert.ThrowsException<UserInputException>(() => sut.Execute());
         }
 
+        [TestMethod]
+        public void ShowAssigneedTasks_ShouldReturnOnlyAsigneedTasks()
+        {
+            var task = taskBug as Bug;
+            task.AddAssignee(user);
+            user.AddTask(task);
+
+            ShowAssigneedTasks sut = new ShowAssigneedTasks(new List<string> { TEAM, $"{board.Id}" }, this.repository);
+
+            Assert.IsTrue(sut.Execute().Contains($"Bug: {taskBug.Title}"));
+            Assert.IsFalse(sut.Execute().Contains($"Story: "));
+            Assert.AreEqual(1, user.Tasks.Count);
+
+            var task2 = taskStory as Story;
+            task2.AddAssignee(user);
+            user.AddTask(task2);
+
+            Assert.IsTrue(sut.Execute().Contains($"Story: {taskStory.Title}"));
+            Assert.AreEqual(2, user.Tasks.Count);
+
+        }
+
+        [TestMethod]
+        public void ShowAssigneedTasks_ShouldThrowException()
+        {
+            this.repository.LoggedUser = this.repository.CreateUser("UserNotInTeam", PASSWORD);
+            ShowAssigneedTasks sut = new ShowAssigneedTasks(new List<string> { TEAM, $"{board.Id}" }, this.repository);
+
+
+            Assert.ThrowsException<UserInputException>(() => sut.Execute());
+
+        }
+
+        [TestMethod]
+        public void ShowBoardActivitty_ShouldShowEvents()
+        {
+            ShowBoardActivity sut = new ShowBoardActivity(new List<string> { $"{team.Id}", $"{board.Id}" }, this.repository);
+
+            Assert.IsTrue(sut.Execute().Contains($"was pinned to board 'TestBoard'"));
+            Assert.IsTrue(sut.Execute().Contains($"was created!"));
+        }
+
+        [TestMethod]
+        public void ShowBoardActivitty_ShouldThrowException()
+        {
+            this.repository.LoggedUser = this.repository.CreateUser("UserNotInTeam", PASSWORD);
+            ShowBoardActivity sut = new ShowBoardActivity(new List<string> { $"{team.Id}", $"{board.Id}" }, this.repository);
+
+            Assert.ThrowsException<UserInputException>(() => sut.Execute());
+        }
+
+        [TestMethod]
+        public void ShowTeamActivity_ShouldShowEvents()
+        {
+            ShowTeamActivity sut = new ShowTeamActivity(new List<string> { $"{team.Id}" }, this.repository);
+
+            Assert.IsTrue(sut.Execute().Contains($"ID: 1 is admin of team TestTeam!"));
+            Assert.IsTrue(sut.Execute().Contains($"Member with ID: 1 was created!"));
+        }
+
+        [TestMethod]
+        public void ShowTeamActivity_ShouldThrowException()
+        {
+            this.repository.LoggedUser = this.repository.CreateUser("UserNotInTeam", PASSWORD);
+            ShowTeamActivity sut = new ShowTeamActivity(new List<string> { $"{team.Id}" }, this.repository);
+
+            Assert.ThrowsException<UserInputException>(() => sut.Execute());
+        }
+
+        [TestMethod]
+        public void ShowTaskByType_FilterBugsByStatusActive()
+        {
+            ShowTaskByType sut = new ShowTaskByType(new List<string> { "Bug", "filter", "status", "active" }, this.repository);
+
+            Assert.IsTrue(sut.Execute().Contains($"Bug: {taskBug.Title}"));
+            Assert.IsTrue(sut.Execute().Contains($"Status: Active"));
+        }
+        [TestMethod]
+        public void ShowTaskByType_FilterStoryByStatusActive()
+        {
+            ShowTaskByType sut = new ShowTaskByType(new List<string> { "Story", "filter", "status", "notdone" }, this.repository);
+
+            Assert.IsTrue(sut.Execute().Contains($"Story: {taskStory.Title}"));
+            Assert.IsTrue(sut.Execute().Contains($"Status: NotDone"));
+        }
+        [TestMethod]
+        public void ShowTaskByType_FilterFeedbackByStatusActive()
+        {
+            ShowTaskByType sut = new ShowTaskByType(new List<string> { "feedback", "filter", "status", "New" }, this.repository);
+
+            Assert.IsTrue(sut.Execute().Contains($"Feedback: {taskFeedback.Title}"));
+            Assert.IsTrue(sut.Execute().Contains($"Status: New"));
+        }
+
+        [TestMethod]
+        public void ShowTaskByType_SortByTitle()
+        {
+            ShowTaskByType sut = new ShowTaskByType(new List<string> { "feedback", "sort", "title" }, this.repository);
+
+
+            Assert.IsTrue(sut.Execute().Contains($"Feedback: {taskFeedback.Title}"));
+            Assert.IsFalse(sut.Execute().Contains($"Story: {taskStory.Title}"));
+            Assert.IsFalse(sut.Execute().Contains($"Bug: {taskBug.Title}"));
+        }
+        //[TestMethod] TODO:Fix filter by assignee function
+        //public void ShowTaskByType_FilterBugsByAssignee()
+        //{
+        //    ShowTaskByType sut = new ShowTaskByType(new List<string> { "Bug", /"filter", /"assignee", USER }, this.repository);
+        //
+        //    var task = taskBug as Bug;
+        //    task.AddAssignee(user);
+        //    user.AddTask(task);
+        //
+        //    Assert.AreEqual("asd", sut.Execute());
+        //    Assert.IsTrue(sut.Execute().Contains($"Bug: TestTitleBug"));
+        //    Assert.IsTrue(sut.Execute().Contains($"Status: Active"));
+        //    Assert.IsTrue(sut.Execute().Contains($"Assignee: {USER}"));
+        //
+        //}
     }
 }

@@ -56,7 +56,9 @@ namespace TaskManagmentSystem.Tests.Commands
             Change sut = new Change(new List<string> { TEAM, "4", "Status" }, this.repository);
 
             //Assert
+            Assert.IsTrue(taskBug.ToString().Contains("Active"));
             Assert.AreEqual(expected, sut.Execute());
+            Assert.IsTrue(taskBug.ToString().Contains("Fixed"));
         }
 
         [TestMethod]
@@ -69,8 +71,9 @@ namespace TaskManagmentSystem.Tests.Commands
             Change sut = new Change(new List<string> { TEAM, "4", "Priority" }, this.repository);
 
             //Assert
+            Assert.IsTrue(taskBug.ToString().Contains("Low"));
             Assert.AreEqual(expected, sut.Execute());
-
+            Assert.IsTrue(taskBug.ToString().Contains("Medium"));
         }
 
         [TestMethod]
@@ -83,8 +86,11 @@ namespace TaskManagmentSystem.Tests.Commands
             Change sut = new Change(new List<string> { TEAM, "4", "Severity" }, this.repository);
 
             //Assert
+            Assert.IsTrue(taskBug.ToString().Contains("Minor"));
             Assert.AreEqual(expected, sut.Execute());
-
+            Assert.IsTrue(taskBug.ToString().Contains("Major"));
+            Assert.AreEqual(expected, sut.Execute());
+            Assert.IsTrue(taskBug.ToString().Contains("Critical"));
         }
 
         [TestMethod]
@@ -97,8 +103,9 @@ namespace TaskManagmentSystem.Tests.Commands
             Change sut = new Change(new List<string> { TEAM, "5", "Status" }, this.repository);
 
             //Assert
+            Assert.IsTrue(taskFeedback.ToString().Contains("New"));
             Assert.AreEqual(expected, sut.Execute());
-
+            Assert.IsTrue(taskFeedback.ToString().Contains("Unscheduled"));
         }
 
         [TestMethod] //TODO: change rating?
@@ -126,6 +133,7 @@ namespace TaskManagmentSystem.Tests.Commands
             Change sut = new Change(new List<string> { TEAM, "6", "Status" }, this.repository);
 
             //Assert
+            Assert.IsTrue(taskStory.ToString().Contains("NotDone"));
             Assert.AreEqual(expected, sut.Execute());
             Assert.AreEqual(true, taskStory.ToString().Contains("Status: InProgress"));
         }
@@ -140,8 +148,9 @@ namespace TaskManagmentSystem.Tests.Commands
             Change sut = new Change(new List<string> { TEAM, "6", "Size" }, this.repository);
 
             //Assert
+            Assert.IsTrue(taskStory.ToString().Contains("Small"));
             Assert.AreEqual(expected, sut.Execute());
-
+            Assert.IsTrue(taskStory.ToString().Contains("Medium"));
         }
         [TestMethod]
         public void ShouldChangePrioritySuccessfullyForStoryTasks()
@@ -153,8 +162,9 @@ namespace TaskManagmentSystem.Tests.Commands
             Change sut = new Change(new List<string> { TEAM, "6", "Priority" }, this.repository);
 
             //Assert
+            Assert.IsTrue(taskStory.ToString().Contains("Low"));
             Assert.AreEqual(expected, sut.Execute());
-
+            Assert.IsTrue(taskStory.ToString().Contains("Medium"));
         }
 
         [TestMethod]
@@ -182,6 +192,7 @@ namespace TaskManagmentSystem.Tests.Commands
 
             //Assert
             Assert.AreEqual(expected, sut.Execute());
+            Assert.AreEqual(newpass, this.repository.LoggedUser.Password);
         }
 
         [TestMethod]

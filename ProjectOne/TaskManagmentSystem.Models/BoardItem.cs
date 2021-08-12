@@ -97,7 +97,7 @@ namespace TaskManagmentSystem.Models
                 sb.AppendLine("No comments");
             }
 
-            return sb.ToString().TrimEnd();
+            return sb.ToString();
         }
 
     }

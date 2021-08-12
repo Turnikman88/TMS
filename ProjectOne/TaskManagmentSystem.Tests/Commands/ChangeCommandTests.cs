@@ -108,7 +108,7 @@ namespace TaskManagmentSystem.Tests.Commands
             Assert.IsTrue(taskFeedback.ToString().Contains("Unscheduled"));
         }
 
-        [TestMethod] //TODO: change rating?
+        [TestMethod]
         public void ShouldChangeRatingSuccessfullyForFeedbackTasks()
         {
             //Arrange

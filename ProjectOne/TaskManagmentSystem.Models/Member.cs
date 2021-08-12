@@ -8,7 +8,7 @@ using TaskManagmentSystem.Models.Enums;
 
 namespace TaskManagmentSystem.Models
 {
-    public class Member : IMember, IActivityLog   //ToDo: Ask Kalin
+    public class Member : IMember, IActivityLog   
     {
         private string name;
         private IList<IEventLog> eventLogs = new List<IEventLog>();

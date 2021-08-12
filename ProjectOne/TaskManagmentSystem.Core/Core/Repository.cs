@@ -28,7 +28,7 @@ namespace TaskManagmentSystem.Core
             this.nextId = 0;
             this.coreClassTypes = GetCoreCommandTypes();
             this.modelsClassTypes = GetModelsClassTypes();
-            CreateAdmin(); // ToDo: Maybe in static constructor
+            CreateAdmin();
         }
 
         public IList Users

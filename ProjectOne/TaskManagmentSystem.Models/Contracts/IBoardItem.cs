@@ -1,6 +1,6 @@
 ﻿namespace TaskManagmentSystem.Models.Contracts
 {
-    public interface IBoardItem : ICommentable, IHasId //ToDO: Maybe we need to add something
+    public interface IBoardItem : ICommentable, IHasId 
     {
         string Title { get; }
         string Description { get; }

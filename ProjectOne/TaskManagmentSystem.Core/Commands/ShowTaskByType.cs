@@ -19,7 +19,6 @@ namespace TaskManagmentSystem.Core.Commands
         //Filter by status and/or assignee  
         //Sort by title/priority/severity/size/rating (depending on the task type)
 
-
         public ShowTaskByType(IList<string> commandParameters, IRepository repository) : base(commandParameters, repository)
         {
         }

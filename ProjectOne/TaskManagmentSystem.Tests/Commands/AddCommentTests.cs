@@ -51,6 +51,7 @@ namespace TaskManagmentSystem.Tests.Commands
 
             //Assert
             Assert.AreEqual(expected, sut.Execute());
+            Assert.IsTrue(task.ViewHistory().Contains($"New comment was added, Author: {user.Name}"));
         }
 
         [TestMethod]

@@ -31,14 +31,20 @@ namespace TaskManagmentSystem.Tests.Commands
             this.repository = new Repository();
             user = this.repository.CreateUser(USER, PASSWORD);
         }
+
         [TestMethod]
         public void CreateUser_ShouldCreateUser()
         {
+            //Arrange
             string sutUser = "newUsername";
             string expected = $"User with username {sutUser}, ID: 2 was created";
-            CreateUser sut = new CreateUser(new List<string> { sutUser, PASSWORD }, this.repository);
+
             //Act and Assert
+            CreateUser sut = new CreateUser(new List<string> { sutUser, PASSWORD }, this.repository);
+
             Assert.AreEqual(expected, sut.Execute());
+            Assert.AreEqual(3, this.repository.Users.Count);
+
         }
 
         [TestMethod]
@@ -92,7 +98,6 @@ namespace TaskManagmentSystem.Tests.Commands
         {
             //Arrange
             var result = $"Team with name {TEAM}, ID: 2 was created";
-
             IList<string> parameters = new List<string> { TEAM };
 
             //Act and Assert
@@ -100,6 +105,7 @@ namespace TaskManagmentSystem.Tests.Commands
 
             var sut = new CreateTeam(parameters, this.repository);
             Assert.AreEqual(result, sut.Execute());
+            Assert.AreEqual(1, repository.Teams.Count);
         }
 
         [TestMethod]
@@ -122,7 +128,6 @@ namespace TaskManagmentSystem.Tests.Commands
 
             //Act and Assert
             this.repository.LoggedUser = user;
-
             this.repository.CreateTeam(TEAM);
 
             var sut = new CreateTeam(parameters, this.repository);
@@ -134,12 +139,10 @@ namespace TaskManagmentSystem.Tests.Commands
         {
             //Arrange
             string team = "TeamNameIsTooLongToTest";
-
             IList<string> parameters = new List<string> { team };
 
             //Act and Assert
             this.repository.LoggedUser = user;
-
 
             var sut = new CreateTeam(parameters, this.repository);
             Assert.ThrowsException<UserInputException>(() => sut.Execute());
@@ -175,6 +178,7 @@ namespace TaskManagmentSystem.Tests.Commands
             var sut = new CreateBoard(parametersBoard, this.repository);
 
             Assert.AreEqual(result, sut.Execute());
+            Assert.AreEqual(1, this.repository.GetTeam(TEAM).Boards.Count);
         }
 
         [TestMethod]
@@ -266,23 +270,21 @@ namespace TaskManagmentSystem.Tests.Commands
             this.repository.LoggedUser = user;
             var team = this.repository.CreateTeam(TEAM);
             var board = this.repository.CreateBoard(BOARD);
-
             team.AddBoard(board);
 
             var sut = new CreateTask(parametersTask, this.repository);
 
             Assert.AreEqual(result, sut.Execute());
+            Assert.AreEqual(1, repository.GetBoard(BOARD).Tasks.Count);
         }
         [TestMethod]
         public void CreateTask_ShouldCreateStory()
         {
+            //Arrange            
             var result = $"Story {TASK_TITLE}, ID: 4 was created!";
 
-            //Arrange            
-
-            IList<string> parametersTask = new List<string> { "story", BOARD, TASK_TITLE, TASK_DESCRIPTION };
-
             //Act and Assert
+            IList<string> parametersTask = new List<string> { "story", BOARD, TASK_TITLE, TASK_DESCRIPTION };
             this.repository.LoggedUser = user;
             var team = this.repository.CreateTeam(TEAM);
             var board = this.repository.CreateBoard(BOARD);
@@ -292,17 +294,16 @@ namespace TaskManagmentSystem.Tests.Commands
             var sut = new CreateTask(parametersTask, this.repository);
 
             Assert.AreEqual(result, sut.Execute());
+            Assert.AreEqual(1, repository.GetBoard(BOARD).Tasks.Count);
         }
         [TestMethod]
         public void CreateTask_ShouldCreateFeedback()
         {
+            //Arrange            
             var result = $"Feedback {TASK_TITLE}, ID: 4 was created!";
 
-            //Arrange            
-
-            IList<string> parametersTask = new List<string> { "feedback", BOARD, TASK_TITLE, TASK_DESCRIPTION, "100" };
-
             //Act and Assert
+            IList<string> parametersTask = new List<string> { "feedback", BOARD, TASK_TITLE, TASK_DESCRIPTION, "100" };
             this.repository.LoggedUser = user;
             var team = this.repository.CreateTeam(TEAM);
             var board = this.repository.CreateBoard(BOARD);
@@ -312,13 +313,12 @@ namespace TaskManagmentSystem.Tests.Commands
             var sut = new CreateTask(parametersTask, this.repository);
 
             Assert.AreEqual(result, sut.Execute());
+            Assert.AreEqual(1, repository.GetBoard(BOARD).Tasks.Count);
         }
         [TestMethod]
-        public void CreateTask__ShouldThrowError_WhenTypeIsWrong()
+        public void CreateTask_ShouldThrowError_WhenTypeIsWrong()
         {
-
             //Arrange            
-
             IList<string> parametersTask = new List<string> { "type", BOARD, TASK_TITLE, TASK_DESCRIPTION };
 
             //Act and Assert
@@ -337,7 +337,6 @@ namespace TaskManagmentSystem.Tests.Commands
         {
 
             //Arrange            
-
             IList<string> parametersTask = new List<string> { "type", BOARD, TASK_TITLE };
 
             //Act and Assert
@@ -357,7 +356,6 @@ namespace TaskManagmentSystem.Tests.Commands
             var result = $"Story {TASK_TITLE}, ID: 4 was created!";
 
             //Arrange            
-
             IList<string> parametersTask = new List<string> { "story", BOARD, "t", TASK_DESCRIPTION };
 
             //Act and Assert
@@ -374,7 +372,6 @@ namespace TaskManagmentSystem.Tests.Commands
         [TestMethod]
         public void CreateTask__ShouldThrowError_WhenDescriptionIsShort()
         {
-
             //Arrange            
 
             IList<string> parametersTask = new List<string> { "story", BOARD, TASK_TITLE, "d" };
@@ -393,7 +390,6 @@ namespace TaskManagmentSystem.Tests.Commands
         [TestMethod]
         public void CreateTask__ShouldThrowError_WhenRatingIsBelowMinimum()
         {
-
             //Arrange            
 
             IList<string> parametersTask = new List<string> { "feedback", BOARD, TASK_TITLE, TASK_DESCRIPTION, "-1" };
@@ -412,7 +408,6 @@ namespace TaskManagmentSystem.Tests.Commands
         [TestMethod]
         public void CreateTask__ShouldThrowError_WhenRatingIsAboveMaximum()
         {
-
             //Arrange            
 
             IList<string> parametersTask = new List<string> { "feedback", BOARD, TASK_TITLE, TASK_DESCRIPTION, "101" };
@@ -431,7 +426,6 @@ namespace TaskManagmentSystem.Tests.Commands
         [TestMethod]
         public void CreateTask__ShouldThrowError_WhenRatingIsNotNumber()
         {
-
             //Arrange            
 
             IList<string> parametersTask = new List<string> { "feedback", BOARD, TASK_TITLE, TASK_DESCRIPTION, "h" };

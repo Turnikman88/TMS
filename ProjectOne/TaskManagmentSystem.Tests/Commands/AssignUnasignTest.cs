@@ -57,6 +57,7 @@ namespace TaskManagmentSystem.Tests.Commands
 
             //Assert
             Assert.AreEqual(expected, sut.Execute());
+            Assert.AreEqual(1, user.Tasks.Count);
         }
 
         [TestMethod]
@@ -70,10 +71,12 @@ namespace TaskManagmentSystem.Tests.Commands
 
             //Assert
             Assert.AreEqual(expected, sut.Execute());
+            Assert.AreEqual(1, user.Tasks.Count);
+
         }
 
         [TestMethod]
-        public void AssignTask_ShouldThrowException_WhenFeedbackTypeOfTaskAlreadyExsists()
+        public void AssignTask_ShouldThrowException_WhenFeedbackTypeOfTask()
         {
             //Arrange
             this.repository.CreateTask(typeof(Feedback), TASKTITLE_FEEDBACK, TASKDESCRIPTION_FEEDBACK, this.board, "11");
@@ -136,7 +139,9 @@ namespace TaskManagmentSystem.Tests.Commands
             UnAssign sut = new UnAssign(new List<string> { TEAM, "6" }, this.repository);
 
             //Assert
+            Assert.AreEqual(1, user.Tasks.Count);
             Assert.AreEqual(expect, sut.Execute());
+            Assert.AreEqual(0, user.Tasks.Count);
         }
 
         [TestMethod]

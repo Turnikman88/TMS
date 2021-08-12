@@ -39,7 +39,7 @@ namespace TaskManagmentSystem.Core.Commands
             var filteredList = GetOnlyOneTypeOfTasks(listTask, typeOfTask);
 
 
-            if (action == "filter")
+            if (action == "filter") //TODO: not working with assignee
             {
                 Validator.ValidateParametersCount(numberOfParameters + 1, CommandParameters.Count);
 
@@ -62,7 +62,6 @@ namespace TaskManagmentSystem.Core.Commands
                 sb.Append(item.ToString());
             }
             return sb.ToString().Trim();
-
         }
 
         private IEnumerable<IBoardItem> GetOnlyOneTypeOfTasks(IList<IBoardItem> list, string taskType)
@@ -70,11 +69,11 @@ namespace TaskManagmentSystem.Core.Commands
             switch (taskType)
             {
                 case "bug":
-                    return list.Where(x => x.GetType() == typeof(Bug));
+                    return list.Where(x => x.GetType() == typeof(Bug)).ToList();
                 case "story":
-                    return list.Where(x => x.GetType() == typeof(Story));
+                    return list.Where(x => x.GetType() == typeof(Story)).ToList();
                 case "feedback":
-                    return list.Where(x => x.GetType() == typeof(Feedback));
+                    return list.Where(x => x.GetType() == typeof(Feedback)).ToList();
                 default:
                     throw new UserInputException("No Search results match the specified criteria.");
             }

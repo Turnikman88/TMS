@@ -69,7 +69,7 @@ namespace TaskManagmentSystem.Models
 
         public void ChangePriority()
         {
-            this.priority = this.priority != Priority.High ? priority++ : Priority.Low;
+            this.priority = this.priority != Priority.High ? Priority.Medium : Priority.Low;
             AddEvent(new EventLog($"Priority for ID: {this.Id} {this.Title} was changed to {this.Priority}"));
         }
 
